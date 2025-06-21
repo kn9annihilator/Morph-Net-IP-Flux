@@ -1,0 +1,6 @@
+2025-06-21 23:11:58,644 - INFO - Rotating IP: Removing 192.168.1.100, Assigning 192.168.1.101
+2025-06-21 23:14:16,988 - INFO - Rotating IP: Removing 192.168.1.100, Assigning 192.168.1.101
+2025-06-21 23:15:06,906 - INFO - Rotating IP: Removing 192.168.1.100, Assigning 192.168.1.101
+2025-06-21 23:15:06,933 - INFO - Flushed IP 192.168.1.100 from interface eth0.
+2025-06-21 23:15:06,957 - INFO - Assigned IP 192.168.1.101 to interface eth0.
+2025-06-21 23:15:06,957 - INFO - Successfully rotated IP from 192.168.1.100 to 192.168.1.101.
