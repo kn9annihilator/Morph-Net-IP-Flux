@@ -12,3 +12,9 @@
 2025-06-22 02:15:46,984 - INFO - Flushed IP 192.168.1.100 from interface eth0.
 2025-06-22 02:15:47,046 - INFO - Assigned IP 192.168.1.101 to interface eth0.
 2025-06-22 02:15:47,046 - INFO - Successfully rotated IP from 192.168.1.100 to 192.168.1.101.
+2025-06-22 23:02:25,536 - INFO - Rotating IP: Removing 192.168.1.100, Assigning 192.168.1.101
+2025-06-22 23:02:26 - INFO - IP 192.168.1.100 not found on eth0. No action taken.
+2025-06-22 23:02:26,575 - INFO - Flushed IP 192.168.1.100 from interface eth0.
+2025-06-22 23:02:27 - ERROR - Failed to assign 192.168.1.101 to eth0
+2025-06-22 23:02:27,041 - ERROR - Failed to assign IP 192.168.1.101: Command '['bash', 'd:\\Projects\\Morph Net IP Flux\\shell\\assign_ip.sh', '192.168.1.101', 'eth0']' returned non-zero exit status 1.
+2025-06-22 23:02:27,041 - ERROR - IP rotation failed: 192.168.1.100 -> 192.168.1.101
