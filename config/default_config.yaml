@@ -1,1 +1,9 @@
- 
+ rotation:
+  base_interval: 300        # in seconds
+  jitter_range: 60          # ±60 seconds
+  interface: eth0
+  ip_pool:
+    - 192.168.56.101
+    - 192.168.56.102
+    - 192.168.56.103
+

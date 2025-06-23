@@ -7,87 +7,85 @@ Loads IP pool from config, selects new IPs, and invokes the IP rotation logic.
 Can be extended to integrate with DNS, logging services, and decoy infrastructure.
 """
 
+# core/scheduler.py
+
 import time
 import random
-import yaml
 import logging
-import os
+import yaml
 from datetime import datetime
 from core.ip_manager import rotate_ip
 
-# Define project base and config paths
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CONFIG_PATH = os.path.join(BASE_DIR, "config", "default_config.yaml")
-LOG_FILE = os.path.join(BASE_DIR, "logs", "rotation.log")
+# ---------------------------
+# Load Configuration
+# ---------------------------
+def load_config(path="config/default_config.yaml"):
+    with open(path, "r") as file:
+        return yaml.safe_load(file)
 
-# Configure logging
-logging.basicConfig(
-    filename=LOG_FILE,
-    level=logging.INFO,
-    format="%(asctime)s - %(levelname)s - %(message)s"
-)
+# ---------------------------
+# Setup Logging
+# ---------------------------
+def setup_logger():
+    logging.basicConfig(
+        filename="logs/rotation.log",
+        level=logging.INFO,
+        format="%(asctime)s [%(levelname)s] %(message)s"
+    )
 
-def load_ip_pool(config_path: str = CONFIG_PATH) -> dict:
-    """
-    Loads IP rotation pool and settings from YAML configuration file.
+# ---------------------------
+# Pick Next IP Address
+# ---------------------------
+def choose_new_ip(ip_pool, current_ip):
+    candidates = [ip for ip in ip_pool if ip != current_ip]
+    return random.choice(candidates) if candidates else current_ip
 
-    Returns:
-        dict: Configuration data including IP pool and timing settings.
-    """
-    try:
-        with open(config_path, 'r') as f:
-            config = yaml.safe_load(f)
-            return config
-    except Exception as e:
-        logging.error(f"Failed to load configuration: {e}")
-        return {}
+# ---------------------------
+# Rotation Task
+# ---------------------------
+def perform_rotation(config, current_ip):
+    ip_pool = config["rotation"]["ip_pool"]
+    interface = config["rotation"]["interface"]
 
-def jittered_interval(min_sec: int, max_sec: int) -> int:
-    """
-    Returns a random interval between two bounds.
+    new_ip = choose_new_ip(ip_pool, current_ip)
+    success = rotate_ip(current_ip, new_ip, interface)
 
-    Args:
-        min_sec (int): Minimum interval in seconds.
-        max_sec (int): Maximum interval in seconds.
+    if success:
+        logging.info(f"IP rotation successful: {current_ip} ➜ {new_ip}")
+        return new_ip
+    else:
+        logging.warning("IP rotation failed.")
+        return current_ip
 
-    Returns:
-        int: Random interval in seconds.
-    """
-    return random.randint(min_sec, max_sec)
+# ---------------------------
+# Main Scheduler Logic
+# ---------------------------
+def scheduler_loop():
+    setup_logger()
+    config = load_config()
+    base_interval = config["rotation"]["base_interval"]
+    jitter_range = config["rotation"]["jitter_range"]
+    ip_pool = config["rotation"]["ip_pool"]
+    current_ip = ip_pool[0]  # Starting IP
 
-def run_rotation_loop():
-    """
-    Main loop that rotates IPs at randomized intervals.
-    """
-    config = load_ip_pool()
-    
-    ip_list = config.get("ip_pool", [])
-    interface = config.get("network_interface", "eth0")
-    interval_range = config.get("rotation_interval", {"min": 300, "max": 600})
-
-    if len(ip_list) < 2:
-        logging.warning("IP pool must contain at least 2 IPs to rotate.")
-        return
-
-    logging.info("Starting IP rotation scheduler...")
-    current_ip = ip_list[0]  # Start with the first IP
+    logging.info("Scheduler started.")
 
     while True:
-        # Pick a new IP different from the current one
-        new_ip = random.choice([ip for ip in ip_list if ip != current_ip])
+        # Perform IP rotation
+        current_ip = perform_rotation(config, current_ip)
 
-        logging.info(f"[ROTATE] {current_ip} -> {new_ip} on interface {interface}")
-        success = rotate_ip(old_ip=current_ip, new_ip=new_ip, interface=interface)
+        # Calculate next wait time with jitter
+        jitter = random.randint(-jitter_range, jitter_range)
+        wait_time = max(10, base_interval + jitter)  # Avoid negative or too short intervals
 
-        if success:
-            current_ip = new_ip
-        else:
-            logging.warning(f"Rotation failed from {current_ip} to {new_ip}")
-
-        # Wait for a jittered/random interval before next rotation
-        wait_time = jittered_interval(interval_range["min"], interval_range["max"])
-        logging.info(f"Next rotation in {wait_time} seconds...")
+        logging.info(f"Next rotation in {wait_time} seconds")
         time.sleep(wait_time)
 
+# ---------------------------
+# Entry Point
+# ---------------------------
 if __name__ == "__main__":
-    run_rotation_loop()
+    try:
+        scheduler_loop()
+    except KeyboardInterrupt:
+        logging.info("Scheduler stopped by user.")
