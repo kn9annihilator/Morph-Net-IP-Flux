@@ -1,9 +1,15 @@
- rotation:
-  base_interval: 300        # in seconds
-  jitter_range: 60          # ±60 seconds
+rotation:
+  base_interval: 300
+  jitter_range: 60
   interface: eth0
   ip_pool:
     - 192.168.56.101
     - 192.168.56.102
     - 192.168.56.103
 
+dns:
+  provider: cloudflare
+  zone_id: "your_zone_id_here"
+  api_token: "your_cloudflare_api_token"
+  record_name: "server.example.com"
+  ttl: 60
