@@ -15,6 +15,10 @@ import logging
 import yaml
 from datetime import datetime
 from core.ip_manager import rotate_ip
+from core.tls_manager import rotate_tls_cert
+
+cert_path, key_path = rotate_tls_cert(label="rotated_tls", cn="myserver.local")
+
 
 # ---------------------------
 # Load Configuration
