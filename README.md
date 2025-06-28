@@ -51,40 +51,108 @@ This project was built to **break the attacker's kill chain at the earliest poss
 
 ## Architecture
 
-+------------------------+
-| Scheduler Engine |
-+------------------------+
-|
-+------------------+
-| IP Manager |
-+------------------+
-| |
-Flush IP Assign IP
-| |
-+--------+ +--------+
-|System | |Network |
-+--------+ +--------+
+│
+├── core/ # Core logic modules (IP, DNS, Scheduler)
+│ ├── ip_manager.py
+│ ├── scheduler.py
+│ ├── port_manager.py
+│ ├── dns_controller.py
+│ ├── honeypot_deployer.py
+│ └── tls_manager.py
+│
+├── config/ # Config files
+│ ├── default_config.yaml
+│ ├── cloud_config.yaml
+│ └── secrets.env
+│
+├── shell/ # Shell scripts for IP management
+│ ├── assign_ip.sh
+│ ├── flush_ip.sh
+│ ├── port_knock.sh
+│ └── rotate_tls.sh
+│
+├── deploy/ # Docker/Kubernetes/Cloud deploy scripts
+│ ├── Dockerfile
+│ ├── docker-compose.yaml
+│ ├── k8s.yaml
+│ └── cloud_init.sh
+│
+├── integrations/ # Cloud/Proxy/API integrations
+│ ├── cloudflare_api.py
+│ ├── proxy_sync.py
+│ └── ELK_logger.py
+│
+├── redteam_sim/ # Red team recon simulation tools
+│ ├── scanner_emulator.py
+│ ├── behavior_recon.py
+│ └── nmap_scan.sh
+│
+├── docs/ # Documentation
+│ ├── README.md
+│ ├── threat_model.md
+│ ├── architecture.md
+│ └── research_refs.md
+│
+├── logs/ # Runtime logs
+│ ├── rotation.log
+│ ├── attack_trace.log
+│ └── honeypot_hits.json
+│
+├── tests/ # Unit & functional tests
+│ ├── test_ip_rotation.py
+│ ├── test_dns_behavior.py
+│ └── test_tls_rotation.py
+│
+├── main.py # Central entry point
+├── requirements.txt # Python dependencies
+├── setup.py # Packaging
+└── .gitignore
 
-+----------------------------+
-| DNS Controller (Cloudflare)|
-+----------------------------+
 
-+---------------------+
-| TLS Cert Generator |
-+---------------------+
 
-+------------------------+
-| Honeypot Deployer |
-+------------------------+
-
-+------------------------+
-| Red Team Simulators |
-+------------------------+
-
+## Installation and Setup
 
 ---
 
-## Installation
+## ⚙️ Installation & Setup
+
+### Prerequisites
+
+| Tool               | Version/Details        |
+|--------------------|------------------------|
+| Python             | 3.7+                   |
+| Git                | Latest                 |
+| Bash Shell         | WSL / Git Bash / Linux |
+| Tools              | iproute2, curl, openssl|
+| OS                 | Linux / WSL2 (Windows) |
+
+---
+
+### Step-by-Step Guide
+
+#### 1. Clone the Repository
+
+```bash
+git clone https://github.com/your-username/MorphNetIPFlux.git
+cd MorphNetIPFlux
+
+####2. Create a Virtual Environment
+Linux / WSL:
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+
+Windows CMD:
+```bash
+python -m venv .venv
+.venv\Scripts\activate
+
+#### 3. Install Dependencies
+''' bash
+pip install -r requirements.txt
+
+
+
 
 ### Prerequisites
 
@@ -94,22 +162,60 @@ Flush IP Assign IP
 - `iproute2`, `openssl`, `curl` for shell functionality
 - Virtual environment recommended
 
-### Setup
+Running the Project
+Run the full system using:
 
-```bash
-git clone https://github.com/yourusername/MorphNetIPFlux.git
-cd MorphNetIPFlux
-python -m venv .venv
-source .venv/bin/activate  # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
-
-
-Usage
+bash
 python main.py
-IP rotation begins.
+You will see output such as:
 
-DNS record is updated.
+[+] Morph Net IP Flux — Dynamic Defense Engine Starting...
+[+] Rotating IP from 192.168.1.100 to 192.168.1.101...
+[✓] DNS record updated for example.com ➜ 192.168.1.101
+[✓] Honeypots running on decoy ports.
+[✓] Scheduler launched.
+All activity will be logged in logs/rotation.log.
 
-Honeypots are deployed.
+Usage Scenarios
+Simulating evasive Command & Control (C2) networks
 
-Logs are stored in logs/.
+Teaching real-world Red vs Blue strategies
+
+Research on MTD (Moving Target Defense)
+
+Obfuscating traffic to hide high-value APIs
+
+Defending critical infrastructure from advanced recon
+
+Testing
+Run unit tests:
+
+bash
+pytest tests/
+You may also test shell integrations separately:
+
+bash
+bash redteam_sim/nmap_scan.sh
+License
+This project is licensed under the MIT License.
+See LICENSE for more details.
+
+References
+NIST Special Publication 800-160: Developing Cyber Resilient Systems
+
+JA3 TLS Fingerprinting: https://github.com/salesforce/ja3
+
+DHS Moving Target Defense Research
+
+Cloudflare API Docs
+
+OWASP C2 Guidance
+
+Contributing
+This is an evolving research project. Contributions, forks, and academic usage are welcome. Please raise issues or submit pull requests.
+
+Author
+Aman Ahmad Khan
+B.Tech (CSE – Cybersecurity & Digital Forensics)
+Sharda University, Greater Noida
+LinkedIn | GitHub
