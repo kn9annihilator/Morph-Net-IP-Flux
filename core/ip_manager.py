@@ -2,97 +2,126 @@
 Module: core/ip_manager.py
 
 Purpose:
-Handles the assignment and removal of IP addresses on the system's network interface
-by interacting with shell scripts and managing stateful logs. It is responsible for
-initiating IP changes as part of the broader Moving Target Defense (MTD) strategy.
+Handles dynamic IP assignment and removal for Moving Target Defense (MTD) 
+by invoking platform-agnostic shell scripts. Ensures logging and interface detection.
 """
 
 import subprocess
 import logging
 import os
-import sys
+import psutil
 from datetime import datetime
 
-# Load configuration paths
+# ---------------------------
+# Path Setup (POSIX-compliant)
+# ---------------------------
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SHELL_DIR = os.path.join(BASE_DIR, "shell")
-LOG_FILE = os.path.join(BASE_DIR, "logs", "rotation.log")
+SHELL_DIR = os.path.join(BASE_DIR, "shell").replace("\\", "/")  # Safe for Bash
+LOG_DIR = os.path.join(BASE_DIR, "logs").replace("\\", "/")
 
-# Configure logging
+# Ensure log directory exists
+os.makedirs(LOG_DIR, exist_ok=True)
+
+LOG_FILE = os.path.join(LOG_DIR, "rotation.log")
+
+# ---------------------------
+# Logging Configuration
+# ---------------------------
 logging.basicConfig(
     filename=LOG_FILE,
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s"
 )
 
-def assign_ip(ip_address: str, interface: str = "eth0") -> bool:
+# ---------------------------
+# Interface Detection
+# ---------------------------
+def detect_interface() -> str:
     """
-    Assigns a new IP address to the specified network interface using shell script.
+    Auto-detects the first non-loopback interface (e.g., eth0, ens33).
+    Returns:
+        str: Detected interface name.
+    """
+    interfaces = psutil.net_if_addrs().keys()
+    for iface in interfaces:
+        if iface != "lo":
+            return iface
+    return "eth0"
+
+# ---------------------------
+# Assign IP
+# ---------------------------
+def assign_ip(ip_address: str, interface: str = None) -> bool:
+    """
+    Assigns a new IP to the specified interface using shell script.
+    """
+    interface = interface or detect_interface()
+    script_path = os.path.join(SHELL_DIR, "assign_ip.sh").replace("\\", "/")
+
+    try:
+        result = subprocess.run(
+            ["bash", script_path, ip_address, interface],
+            check=True, capture_output=True, text=True
+        )
+        logging.info(f"[ASSIGN] IP {ip_address} assigned to {interface}")
+        logging.debug(result.stdout)
+        return True
+    except subprocess.CalledProcessError as e:
+        logging.error(f"[ASSIGN] Failed to assign IP {ip_address}: {e.stderr}")
+        return False
+    except FileNotFoundError:
+        logging.critical(f"[ASSIGN] Script not found: {script_path}")
+        return False
+
+# ---------------------------
+# Flush IP
+# ---------------------------
+def flush_ip(ip_address: str, interface: str = None) -> bool:
+    """
+    Removes an IP from the interface using shell script.
+    """
+    interface = interface or detect_interface()
+    script_path = os.path.join(SHELL_DIR, "flush_ip.sh").replace("\\", "/")
+
+    try:
+        result = subprocess.run(
+            ["bash", script_path, ip_address, interface],
+            check=True, capture_output=True, text=True
+        )
+        logging.info(f"[FLUSH] IP {ip_address} flushed from {interface}")
+        logging.debug(result.stdout)
+        return True
+    except subprocess.CalledProcessError as e:
+        logging.error(f"[FLUSH] Failed to flush IP {ip_address}: {e.stderr}")
+        return False
+    except FileNotFoundError:
+        logging.critical(f"[FLUSH] Script not found: {script_path}")
+        return False
+
+# ---------------------------
+# Rotate IP
+# ---------------------------
+def rotate_ip(old_ip: str, new_ip: str, interface: str = None) -> bool:
+    """
+    Atomically rotates IP: flushes old and assigns new.
+    """
+    interface = interface or detect_interface()
+    logging.info(f"[ROTATE] Starting rotation: {old_ip} → {new_ip} on {interface}")
     
-    Args:
-        ip_address (str): IP address to assign.
-        interface (str): Network interface (default is eth0).
-
-    Returns:
-        bool: True if successful, False otherwise.
-    """
-    script_path = os.path.join(SHELL_DIR, "assign_ip.sh")
-    try:
-        result = subprocess.run(["bash", script_path, ip_address, interface], check=True)
-        logging.info(f"Assigned IP {ip_address} to interface {interface}.")
-        return True
-    except subprocess.CalledProcessError as e:
-        logging.error(f"Failed to assign IP {ip_address}: {str(e)}")
-        return False
-
-def flush_ip(ip_address: str, interface: str = "eth0") -> bool:
-    """
-    Removes the given IP address from the network interface.
-
-    Args:
-        ip_address (str): IP address to remove.
-        interface (str): Network interface (default is eth0).
-
-    Returns:
-        bool: True if successful, False otherwise.
-    """
-    script_path = os.path.join(SHELL_DIR, "flush_ip.sh")
-    try:
-        result = subprocess.run(["bash", script_path, ip_address, interface], check=True)
-        logging.info(f"Flushed IP {ip_address} from interface {interface}.")
-        return True
-    except subprocess.CalledProcessError as e:
-        logging.error(f"Failed to flush IP {ip_address}: {str(e)}")
-        return False
-
-def rotate_ip(old_ip: str, new_ip: str, interface: str = "eth0") -> bool:
-    """
-    Atomically rotates the IP from old to new.
-
-    Args:
-        old_ip (str): IP to remove.
-        new_ip (str): IP to assign.
-        interface (str): Network interface.
-
-    Returns:
-        bool: True if both flush and assign succeed.
-    """
-    logging.info(f"Rotating IP: Removing {old_ip}, Assigning {new_ip}")
     flushed = flush_ip(old_ip, interface)
     assigned = assign_ip(new_ip, interface)
+
     if flushed and assigned:
-        logging.info(f"Successfully rotated IP from {old_ip} to {new_ip}.")
+        logging.info(f"[ROTATE] Successfully rotated IP from {old_ip} to {new_ip}")
         return True
     else:
-        logging.error(f"IP rotation failed: {old_ip} -> {new_ip}")
+        logging.error(f"[ROTATE] IP rotation failed: {old_ip} → {new_ip}")
         return False
 
+# ---------------------------
+# Manual Test Execution
+# ---------------------------
 if __name__ == "__main__":
-    # Simple test run when executing the module directly
-    # Replace these IPs with dummy/test IPs as needed
+    # ⚠️ Replace these with safe dummy IPs in your local testbed
     success = rotate_ip("192.168.1.100", "192.168.1.101")
-    if success:
-        print("IP rotation succeeded.")
-    else:
-        print("IP rotation failed.")
-
+    print("IP rotation succeeded." if success else "IP rotation failed.")

@@ -72,7 +72,7 @@ def update_cloudflare_dns(zone_id, api_token, record_name, new_ip, ttl):
 # ---------------------------
 # Public Function to Rotate DNS
 # ---------------------------
-def rotate_dns_record(new_ip, config_path="config/default_config.yaml"):
+def update_dns_record(new_ip, config_path="config/default_config.yaml"):
     setup_logger()
     dns_config = load_dns_config(config_path)
 
@@ -93,5 +93,5 @@ def rotate_dns_record(new_ip, config_path="config/default_config.yaml"):
 if __name__ == "__main__":
     test_ip = "192.168.56.102"
     result = rotate_dns_record(test_ip)
-    print("Success" if result else "Failed")
+    print("Complete Success " if result else "Failed")
 

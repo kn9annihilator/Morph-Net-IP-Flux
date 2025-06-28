@@ -64,7 +64,7 @@ def perform_rotation(config, current_ip):
 # ---------------------------
 # Main Scheduler Logic
 # ---------------------------
-def scheduler_loop():
+def start_scheduler():
     setup_logger()
     config = load_config()
     base_interval = config["rotation"]["base_interval"]

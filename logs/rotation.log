@@ -18,3 +18,40 @@
 2025-06-22 23:02:27 - ERROR - Failed to assign 192.168.1.101 to eth0
 2025-06-22 23:02:27,041 - ERROR - Failed to assign IP 192.168.1.101: Command '['bash', 'd:\\Projects\\Morph Net IP Flux\\shell\\assign_ip.sh', '192.168.1.101', 'eth0']' returned non-zero exit status 1.
 2025-06-22 23:02:27,041 - ERROR - IP rotation failed: 192.168.1.100 -> 192.168.1.101
+2025-06-28 12:04:55,374 - INFO - Generated new TLS cert: certs\rotated_tls_cert.pem, expires on 2025-06-30 06:34:55
+2025-06-28 12:06:36,580 - INFO - Generated new TLS cert: certs\rotated_tls_cert.pem, expires on 2025-06-30 06:36:36
+2025-06-28 12:08:51,579 - INFO - Generated new TLS cert: certs\rotated_tls_cert.pem, expires on 2025-06-30 06:38:51
+2025-06-28 12:08:52,365 - INFO - Rotating IP: Removing 192.168.1.100, Assigning 192.168.1.101
+2025-06-28 12:08:58,272 - ERROR - Failed to flush IP 192.168.1.100: Command '['bash', 'D:\\Projects\\Morph Net IP Flux\\shell\\flush_ip.sh', '192.168.1.100', 'eth0']' returned non-zero exit status 127.
+2025-06-28 12:08:58,515 - ERROR - Failed to assign IP 192.168.1.101: Command '['bash', 'D:\\Projects\\Morph Net IP Flux\\shell\\assign_ip.sh', '192.168.1.101', 'eth0']' returned non-zero exit status 127.
+2025-06-28 12:08:58,516 - ERROR - IP rotation failed: 192.168.1.100 -> 192.168.1.101
+2025-06-28 12:14:10,753 - INFO - [ROTATE] Starting rotation: 192.168.1.100 \u2192 192.168.1.101 on Radmin VPN
+2025-06-28 12:14:16,311 - ERROR - [FLUSH] Failed to flush IP 192.168.1.100: /bin/bash: D:/Projects/Morph Net IP Flux/shell/flush_ip.sh: No such file or directory
+
+2025-06-28 12:14:16,435 - ERROR - [ASSIGN] Failed to assign IP 192.168.1.101: /bin/bash: D:/Projects/Morph Net IP Flux/shell/assign_ip.sh: No such file or directory
+
+2025-06-28 12:14:16,435 - ERROR - [ROTATE] IP rotation failed: 192.168.1.100 \u2192 192.168.1.101
+2025-06-28 12:14:50,800 - INFO - Generated new TLS cert: certs\rotated_tls_cert.pem, expires on 2025-06-30 06:44:50
+2025-06-28 12:14:51,440 - INFO - [ROTATE] Starting rotation: 192.168.1.100 \u2192 192.168.1.101 on Radmin VPN
+2025-06-28 12:14:54,031 - ERROR - [FLUSH] Failed to flush IP 192.168.1.100: /bin/bash: D:/Projects/Morph Net IP Flux/shell/flush_ip.sh: No such file or directory
+
+2025-06-28 12:14:54,144 - ERROR - [ASSIGN] Failed to assign IP 192.168.1.101: /bin/bash: D:/Projects/Morph Net IP Flux/shell/assign_ip.sh: No such file or directory
+
+2025-06-28 12:14:54,144 - ERROR - [ROTATE] IP rotation failed: 192.168.1.100 \u2192 192.168.1.101
+2025-06-28 12:16:52,226 - INFO - Generated new TLS cert: certs\rotated_tls_cert.pem, expires on 2025-06-30 06:46:52
+2025-06-28 12:16:52,791 - INFO - [ROTATE] Starting rotation: 192.168.1.100 \u2192 192.168.1.101 on Radmin VPN
+2025-06-28 12:16:58,191 - ERROR - [FLUSH] Failed to flush IP 192.168.1.100: /bin/bash: D:/Projects/Morph Net IP Flux/shell/flush_ip.sh: No such file or directory
+
+2025-06-28 12:16:58,321 - ERROR - [ASSIGN] Failed to assign IP 192.168.1.101: /bin/bash: D:/Projects/Morph Net IP Flux/shell/assign_ip.sh: No such file or directory
+
+2025-06-28 12:16:58,321 - ERROR - [ROTATE] IP rotation failed: 192.168.1.100 \u2192 192.168.1.101
+2025-06-28 12:16:58,719 - ERROR - Failed to fetch DNS record ID.
+2025-06-28 12:16:58,723 - INFO - Scheduler started.
+2025-06-28 12:16:58,723 - INFO - [ROTATE] Starting rotation: 192.168.56.101 \u2192 192.168.56.103 on eth0
+2025-06-28 12:16:58,840 - ERROR - [FLUSH] Failed to flush IP 192.168.56.101: /bin/bash: D:/Projects/Morph Net IP Flux/shell/flush_ip.sh: No such file or directory
+
+2025-06-28 12:16:58,986 - ERROR - [ASSIGN] Failed to assign IP 192.168.56.103: /bin/bash: D:/Projects/Morph Net IP Flux/shell/assign_ip.sh: No such file or directory
+
+2025-06-28 12:16:58,986 - ERROR - [ROTATE] IP rotation failed: 192.168.56.101 \u2192 192.168.56.103
+2025-06-28 12:16:58,986 - WARNING - IP rotation failed.
+2025-06-28 12:16:58,986 - INFO - Next rotation in 325 seconds
