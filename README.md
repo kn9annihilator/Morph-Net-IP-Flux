@@ -1,72 +1,115 @@
-"# Morph Net IP Flux" 
-"WIP: README reset after conflict" 
+# Morph Net IP Flux  
+**Dynamic Moving Target Defense using Virtualized IP Rotation**
 
-
-We’ve outlined detailed attack vectors and how this project defends against them in our [Threat Model](Impt_Docs/threat_model.md).
-
-- IP address rotation using randomized intervals
-- Shell-level control over assignment and flushing
-- Configurable via YAML
-- Integration-ready with DNS, proxies, and honeypots
-- Logging and monitoring support
-- Modular Python design for extensibility
-
----
-
-##  Getting Started
-
-1. Clone the repository
-2. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-3. Configure `default_config.yaml` under `config/`
-4. Make shell scripts executable:
-   ```bash
-   chmod +x shell/*.sh
-   ```
-5. Run the scheduler:
-   ```bash
-   python core/scheduler.py
-   ```
+## Table of Contents
+- [Overview](#overview)
+- [Motivation](#motivation)
+- [Key Features](#key-features)
+- [Architecture](#architecture)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Configuration](#configuration)
+- [Technical Components](#technical-components)
+- [Security & Threat Model](#security--threat-model)
+- [Project Structure](#project-structure)
+- [Testbed Setup](#testbed-setup)
+- [Research & Industry Relevance](#research--industry-relevance)
+- [License](#license)
+- [Author](#author)
 
 ---
 
-## Example Config (config/default_config.yaml)
-```yaml
-ip_pool:
-  - 192.168.1.100
-  - 192.168.1.101
-  - 192.168.1.102
+## Overview
 
-network_interface: eth0
-
-rotation_interval:
-  min: 300
-  max: 600
-```
+**Morph Net IP Flux** is a Python and Shell-based cybersecurity framework that leverages **Moving Target Defense (MTD)** to safeguard web servers and cloud systems from enumeration, reconnaissance, and targeted attacks. It achieves this by dynamically rotating public-facing IP addresses, deploying honeypots, and spoofing attacker reconnaissance through behavioral obfuscation.
 
 ---
 
-##  Future Modules
-- DNS update automation
-- TLS cert rotation
-- Port obfuscation
-- Decoy honeypots
-- Red team attack simulation
+## Motivation
+
+Traditional IP-based protections are static and predictable, making them vulnerable to:
+- Automated scanning
+- Reconnaissance by APTs
+- IP-blacklisting circumvention
+- Reverse engineering and targeting
+
+This project was built to **break the attacker's kill chain at the earliest possible phase** — reconnaissance.
 
 ---
 
-## License
-MIT License
+## Key Features
+
+- **Dynamic IP Rotation**: Randomly replaces active IP addresses at configurable intervals.
+- **Honeypot Deployment**: Launches lightweight HTTP and SSH decoy services to mislead attackers.
+- **TLS Certificate Rotation**: Auto-generates and rotates TLS certificates to defeat JA3 fingerprinting.
+- **Cloudflare DNS API Integration**: Seamless DNS record updates.
+- **Jitter-based Scheduler**: Obfuscates timing patterns to resist statistical detection.
+- **Multi-log System**: Logs every event (IP change, honeypot hit, attacker behavior, etc.)
+- **Pluggable Modules**: Modular architecture to plug in future network defenses.
 
 ---
 
-##  Author
-Maintained by [Krishna Narula](https://github.com/kn9annihilator)
+## Architecture
+
++------------------------+
+| Scheduler Engine |
++------------------------+
+|
++------------------+
+| IP Manager |
++------------------+
+| |
+Flush IP Assign IP
+| |
++--------+ +--------+
+|System | |Network |
++--------+ +--------+
+
++----------------------------+
+| DNS Controller (Cloudflare)|
++----------------------------+
+
++---------------------+
+| TLS Cert Generator |
++---------------------+
+
++------------------------+
+| Honeypot Deployer |
++------------------------+
+
++------------------------+
+| Red Team Simulators |
++------------------------+
+
 
 ---
 
-## Project Status
-Project is under active development.
-Shell scripts and rotation scheduler functional.
+## Installation
+
+### Prerequisites
+
+- Python 3.7+
+- Linux/WSL (IP tools must be available)
+- Git, Bash
+- `iproute2`, `openssl`, `curl` for shell functionality
+- Virtual environment recommended
+
+### Setup
+
+```bash
+git clone https://github.com/yourusername/MorphNetIPFlux.git
+cd MorphNetIPFlux
+python -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+
+
+Usage
+python main.py
+IP rotation begins.
+
+DNS record is updated.
+
+Honeypots are deployed.
+
+Logs are stored in logs/.
