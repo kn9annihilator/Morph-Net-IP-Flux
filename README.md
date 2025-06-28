@@ -6,16 +6,12 @@
 - [Motivation](#motivation)
 - [Key Features](#key-features)
 - [Architecture](#architecture)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Configuration](#configuration)
-- [Technical Components](#technical-components)
+- [Installation & Setup](#️-installation--setup)
+- [Usage Scenarios](#usage-scenarios)
 - [Security & Threat Model](#security--threat-model)
-- [Project Structure](#project-structure)
-- [Testbed Setup](#testbed-setup)
-- [Research & Industry Relevance](#research--industry-relevance)
 - [License](#license)
-- [Author](#author)
+- [References](#references)
+- [Contributing](#contributing)
 
 ---
 
@@ -124,27 +120,29 @@ pip install -r requirements.txt
 Running the Project
 Run the full system using:
 
-bash
+``` bash
 python main.py
+```
 You will see output such as:
-
+``` bash
 [+] Morph Net IP Flux — Dynamic Defense Engine Starting...
 [+] Rotating IP from 192.168.1.100 to 192.168.1.101...
 [✓] DNS record updated for example.com ➜ 192.168.1.101
 [✓] Honeypots running on decoy ports.
 [✓] Scheduler launched.
 All activity will be logged in logs/rotation.log.
+```
 
 ### Usage Scenarios
-Simulating evasive Command & Control (C2) networks
+-Simulating evasive Command & Control (C2) networks
 
-Teaching real-world Red vs Blue strategies
+-Teaching real-world Red vs Blue strategies
 
-Research on MTD (Moving Target Defense)
+-Research on MTD (Moving Target Defense)
 
-Obfuscating traffic to hide high-value APIs
+-Obfuscating traffic to hide high-value APIs
 
-Defending critical infrastructure from advanced recon
+-Defending critical infrastructure from advanced recon
 
 ### Testing
 Run unit tests:
@@ -176,6 +174,6 @@ OWASP C2 Guidance
 ## Contributing
 This is an evolving research project. Contributions, forks, and academic usage are welcome. Please raise issues or submit pull requests.
 
-Author
-Krishna Narula
-[LinkedIn](#linkedin.com/krishnanarula)
+Author|
+Krishna Narula |
+[LinkedIn](#https://www.linkedin.com/in/krishnanarula/)
