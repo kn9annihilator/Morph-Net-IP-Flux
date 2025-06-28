@@ -51,70 +51,26 @@ This project was built to **break the attacker's kill chain at the earliest poss
 
 ## Architecture
 
-│
-├── core/ # Core logic modules (IP, DNS, Scheduler)
-│ ├── ip_manager.py
-│ ├── scheduler.py
-│ ├── port_manager.py
-│ ├── dns_controller.py
-│ ├── honeypot_deployer.py
-│ └── tls_manager.py
-│
-├── config/ # Config files
-│ ├── default_config.yaml
-│ ├── cloud_config.yaml
-│ └── secrets.env
-│
-├── shell/ # Shell scripts for IP management
-│ ├── assign_ip.sh
-│ ├── flush_ip.sh
-│ ├── port_knock.sh
-│ └── rotate_tls.sh
-│
-├── deploy/ # Docker/Kubernetes/Cloud deploy scripts
-│ ├── Dockerfile
-│ ├── docker-compose.yaml
-│ ├── k8s.yaml
-│ └── cloud_init.sh
-│
-├── integrations/ # Cloud/Proxy/API integrations
-│ ├── cloudflare_api.py
-│ ├── proxy_sync.py
-│ └── ELK_logger.py
-│
-├── redteam_sim/ # Red team recon simulation tools
-│ ├── scanner_emulator.py
-│ ├── behavior_recon.py
-│ └── nmap_scan.sh
-│
-├── docs/ # Documentation
-│ ├── README.md
-│ ├── threat_model.md
-│ ├── architecture.md
-│ └── research_refs.md
-│
-├── logs/ # Runtime logs
-│ ├── rotation.log
-│ ├── attack_trace.log
-│ └── honeypot_hits.json
-│
-├── tests/ # Unit & functional tests
-│ ├── test_ip_rotation.py
-│ ├── test_dns_behavior.py
-│ └── test_tls_rotation.py
-│
-├── main.py # Central entry point
-├── requirements.txt # Python dependencies
-├── setup.py # Packaging
-└── .gitignore
+ | Tool              | Version/Details                                             |
+|--------------------|-------------------------------------------------------------|
+| core/	             | Core logic modules for IP rotation, DNS, scheduler, etc.    |
+| config/	         | Configuration files and environment variables.              |
+| shell/             | Bash scripts for IP operations and TLS rotation.            |
+| deploy/            | Deployment scripts for Docker, Kubernetes, and cloud init.  |
+| integrations/	     | API integrations for DNS, proxies, and logging systems.     |
+| redteam_sim/	     | Red-team simulation tools for scanning and recon.           |
+| logs/	             | Stores runtime logs for IP changes, honeypot hits, etc.     |
+| tests/	         | Unit and functional test scripts.                           |
+| main.py	         | Entry point for launching the full system                   |
+| setup.py	         | Python setup script for packaging.                          |
+| .gitignore	     | Standard Git ignore rules.                                  |
 
-
-
-## Installation and Setup
 
 ---
 
+
 ## ⚙️ Installation & Setup
+ This section guides you through setting up Morph Net IP Flux on a compatible system.
 
 ### Prerequisites
 
@@ -132,28 +88,29 @@ This project was built to **break the attacker's kill chain at the earliest poss
 
 #### 1. Clone the Repository
 
-`code`	
+``` bash
 git clone https://github.com/your-username/MorphNetIPFlux.git
 cd MorphNetIPFlux
+```
 
 #### 2. Create a Virtual Environment
 Linux / WSL:
 
-`code`	
+``` bash	
 python3 -m venv .venv
 source .venv/bin/activate
-
+```
 
 Windows CMD:
-`code`	
+``` bash
 python -m venv .venv
 .venv\Scripts\activate
+```
 
 #### 3. Install Dependencies
-''' bash
+``` bash
 pip install -r requirements.txt
-
-
+```
 
 
 ### Prerequisites
@@ -192,12 +149,14 @@ Defending critical infrastructure from advanced recon
 ### Testing
 Run unit tests:
 
-`code`
+``` bash
 pytest tests/
+```
 You may also test shell integrations separately:
 
-`code`	
+``` bash
 redteam_sim/nmap_scan.sh
+```
 
 ### License
 This project is licensed under the MIT License.
