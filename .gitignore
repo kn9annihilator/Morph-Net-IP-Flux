@@ -1,2 +1,5 @@
+# TLS keys and certs
 rotated_tls_cert.pem
 rotated_tls_key.pem
+*.pem
+*.key

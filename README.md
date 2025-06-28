@@ -132,18 +132,20 @@ This project was built to **break the attacker's kill chain at the earliest poss
 
 #### 1. Clone the Repository
 
-```bash
+`code`	
 git clone https://github.com/your-username/MorphNetIPFlux.git
 cd MorphNetIPFlux
 
-####2. Create a Virtual Environment
+#### 2. Create a Virtual Environment
 Linux / WSL:
-```bash
+
+`code`	
 python3 -m venv .venv
 source .venv/bin/activate
 
+
 Windows CMD:
-```bash
+`code`	
 python -m venv .venv
 .venv\Scripts\activate
 
@@ -176,7 +178,7 @@ You will see output such as:
 [✓] Scheduler launched.
 All activity will be logged in logs/rotation.log.
 
-Usage Scenarios
+### Usage Scenarios
 Simulating evasive Command & Control (C2) networks
 
 Teaching real-world Red vs Blue strategies
@@ -187,20 +189,21 @@ Obfuscating traffic to hide high-value APIs
 
 Defending critical infrastructure from advanced recon
 
-Testing
+### Testing
 Run unit tests:
 
-bash
+`code`
 pytest tests/
 You may also test shell integrations separately:
 
-bash
-bash redteam_sim/nmap_scan.sh
-License
-This project is licensed under the MIT License.
-See LICENSE for more details.
+`code`	
+redteam_sim/nmap_scan.sh
 
-References
+### License
+This project is licensed under the MIT License.
+See [LICENSE](#license) for more details.
+
+### References
 NIST Special Publication 800-160: Developing Cyber Resilient Systems
 
 JA3 TLS Fingerprinting: https://github.com/salesforce/ja3
@@ -211,11 +214,9 @@ Cloudflare API Docs
 
 OWASP C2 Guidance
 
-Contributing
+## Contributing
 This is an evolving research project. Contributions, forks, and academic usage are welcome. Please raise issues or submit pull requests.
 
 Author
-Aman Ahmad Khan
-B.Tech (CSE – Cybersecurity & Digital Forensics)
-Sharda University, Greater Noida
-LinkedIn | GitHub
+Krishna Narula
+[LinkedIn](#linkedin.com/krishnanarula)
