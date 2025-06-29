@@ -176,4 +176,5 @@ This is an evolving research project. Contributions, forks, and academic usage a
 
 Author|
 Krishna Narula |
-[LinkedIn](#https://www.linkedin.com/in/krishnanarula/)
+## Connect with me
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Krishna%20Narula-blue?logo=linkedin&style=for-the-badge)](https://www.linkedin.com/in/krishnanarula/)
