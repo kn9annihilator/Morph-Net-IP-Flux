@@ -7,8 +7,6 @@ Loads IP pool from config, selects new IPs, and invokes the IP rotation logic.
 Can be extended to integrate with DNS, logging services, and decoy infrastructure.
 """
 
-# core/scheduler.py
-
 import time
 import random
 import logging
@@ -16,8 +14,6 @@ import yaml
 from datetime import datetime
 from core.ip_manager import rotate_ip
 from core.tls_manager import rotate_tls_cert
-
-cert_path, key_path = rotate_tls_cert(label="rotated_tls", cn="myserver.local")
 
 
 # ---------------------------
@@ -62,9 +58,9 @@ def perform_rotation(config, current_ip):
         return current_ip
 
 # ---------------------------
-# Main Scheduler Logic
+# Main Scheduler Loop
 # ---------------------------
-def start_scheduler():
+def scheduler_loop():
     setup_logger()
     config = load_config()
     base_interval = config["rotation"]["base_interval"]
@@ -74,19 +70,31 @@ def start_scheduler():
 
     logging.info("Scheduler started.")
 
+    # Rotate TLS cert at startup
+    try:
+        cert_path, key_path = rotate_tls_cert()
+        logging.info(f"TLS certificate rotated at startup. Paths: {cert_path}, {key_path}")
+    except Exception as e:
+        logging.error(f"Failed to rotate TLS certificate at startup: {e}")
+
     while True:
-        # Perform IP rotation
         current_ip = perform_rotation(config, current_ip)
 
-        # Calculate next wait time with jitter
         jitter = random.randint(-jitter_range, jitter_range)
-        wait_time = max(10, base_interval + jitter)  # Avoid negative or too short intervals
-
+        wait_time = max(10, base_interval + jitter)
         logging.info(f"Next rotation in {wait_time} seconds")
         time.sleep(wait_time)
 
 # ---------------------------
-# Entry Point
+# Start in Thread (for main.py)
+# ---------------------------
+def start_scheduler():
+    import threading
+    thread = threading.Thread(target=scheduler_loop, daemon=True)
+    thread.start()
+
+# ---------------------------
+# Entry Point (for testing only)
 # ---------------------------
 if __name__ == "__main__":
     try:

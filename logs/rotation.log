@@ -55,3 +55,185 @@
 2025-06-28 12:16:58,986 - ERROR - [ROTATE] IP rotation failed: 192.168.56.101 \u2192 192.168.56.103
 2025-06-28 12:16:58,986 - WARNING - IP rotation failed.
 2025-06-28 12:16:58,986 - INFO - Next rotation in 325 seconds
+2025-06-29 12:35:03,301 - INFO - Generated new TLS cert: certs\rotated_tls_cert.pem, expires on 2025-07-01 07:05:03
+2025-06-29 12:35:03,869 - INFO - [ROTATE] Starting rotation: 192.168.1.100 \u2192 192.168.1.101 on Radmin VPN
+2025-06-29 12:35:08,216 - ERROR - [FLUSH] Failed to flush IP 192.168.1.100: /bin/bash: D:/Projects/Morph Net IP Flux/shell/flush_ip.sh: No such file or directory
+
+2025-06-29 12:35:08,309 - ERROR - [ASSIGN] Failed to assign IP 192.168.1.101: /bin/bash: D:/Projects/Morph Net IP Flux/shell/assign_ip.sh: No such file or directory
+
+2025-06-29 12:35:08,309 - ERROR - [ROTATE] IP rotation failed: 192.168.1.100 \u2192 192.168.1.101
+2025-06-29 12:35:09,305 - ERROR - Failed to fetch DNS record ID.
+2025-06-29 12:35:09,308 - INFO - Scheduler started.
+2025-06-29 12:35:09,308 - INFO - [ROTATE] Starting rotation: 192.168.56.101 \u2192 192.168.56.102 on eth0
+2025-06-29 12:35:09,395 - ERROR - [FLUSH] Failed to flush IP 192.168.56.101: /bin/bash: D:/Projects/Morph Net IP Flux/shell/flush_ip.sh: No such file or directory
+
+2025-06-29 12:35:09,473 - ERROR - [ASSIGN] Failed to assign IP 192.168.56.102: /bin/bash: D:/Projects/Morph Net IP Flux/shell/assign_ip.sh: No such file or directory
+
+2025-06-29 12:35:09,473 - ERROR - [ROTATE] IP rotation failed: 192.168.56.101 \u2192 192.168.56.102
+2025-06-29 12:35:09,473 - WARNING - IP rotation failed.
+2025-06-29 12:35:09,473 - INFO - Next rotation in 358 seconds
+2025-06-29 12:36:18 - INFO - IP 192.168.1.100 not found on eth0. No action taken.
+2025-06-29 12:42:33,790 [WARNING] Certificate file not found, assuming expired.
+2025-06-29 12:42:33,790 [INFO] TLS cert is missing or expired. Rotating...
+2025-06-29 12:42:33,830 [INFO] New TLS cert and key written to disk: rotated_tls_cert.pem, rotated_tls_key.pem
+2025-06-29 12:42:33,830 [INFO] TLS certificate rotated successfully.
+2025-06-29 12:46:08,839 - INFO - TLS certificate is still valid. No rotation needed.
+2025-06-29 12:47:29,933 - INFO - Generated TLS certificate at .\rotated_tls_cert.pem (expires on 2026-06-29 07:17:29+00:00)
+2025-06-29 12:47:30,454 - INFO - [ROTATE] Starting rotation: 192.168.1.100 \u2192 192.168.1.101 on Radmin VPN
+2025-06-29 12:47:34,290 - ERROR - [FLUSH] Failed to flush IP 192.168.1.100: /bin/bash: D:/Projects/Morph Net IP Flux/shell/flush_ip.sh: No such file or directory
+
+2025-06-29 12:47:34,379 - ERROR - [ASSIGN] Failed to assign IP 192.168.1.101: /bin/bash: D:/Projects/Morph Net IP Flux/shell/assign_ip.sh: No such file or directory
+
+2025-06-29 12:47:34,380 - ERROR - [ROTATE] IP rotation failed: 192.168.1.100 \u2192 192.168.1.101
+2025-06-29 12:47:34,524 - ERROR - Failed to fetch DNS record ID.
+2025-06-29 12:47:34,526 - INFO - Scheduler started.
+2025-06-29 12:47:34,527 - INFO - [ROTATE] Starting rotation: 192.168.56.101 \u2192 192.168.56.103 on eth0
+2025-06-29 12:47:34,617 - ERROR - [FLUSH] Failed to flush IP 192.168.56.101: /bin/bash: D:/Projects/Morph Net IP Flux/shell/flush_ip.sh: No such file or directory
+
+2025-06-29 12:47:34,702 - ERROR - [ASSIGN] Failed to assign IP 192.168.56.103: /bin/bash: D:/Projects/Morph Net IP Flux/shell/assign_ip.sh: No such file or directory
+
+2025-06-29 12:47:34,703 - ERROR - [ROTATE] IP rotation failed: 192.168.56.101 \u2192 192.168.56.103
+2025-06-29 12:47:34,703 - WARNING - IP rotation failed.
+2025-06-29 12:47:34,703 - INFO - Next rotation in 337 seconds
+2025-06-29 12:50:36 - INFO - IP 192.168.1.100 not found on eth0. No action taken.
+2025-06-29 12:53:54,889 - INFO - Generated TLS certificate at .\rotated_tls_cert.pem (expires on 2026-06-29 07:23:54+00:00)
+2025-06-29 12:53:55,267 - INFO - Rotating IP: 192.168.1.100 \u2192 192.168.1.101
+2025-06-29 12:53:58,807 - ERROR - Failed to flush IP 192.168.1.100 from eth0: Command '['bash', 'D:\\Projects\\Morph Net IP Flux\\shell\\flush_ip.sh', '192.168.1.100', 'eth0']' returned non-zero exit status 127.
+2025-06-29 12:53:58,934 - ERROR - Failed to assign IP 192.168.1.101 to eth0: Command '['bash', 'D:\\Projects\\Morph Net IP Flux\\shell\\assign_ip.sh', '192.168.1.101', 'eth0']' returned non-zero exit status 127.
+2025-06-29 12:53:58,934 - ERROR - IP rotation failed: 192.168.1.100 \u2192 192.168.1.101
+2025-06-29 12:53:59,233 - ERROR - Failed to fetch DNS record ID.
+2025-06-29 12:53:59,238 - INFO - Scheduler started.
+2025-06-29 12:53:59,238 - INFO - Rotating IP: 192.168.56.101 \u2192 192.168.56.102
+2025-06-29 12:53:59,364 - ERROR - Failed to flush IP 192.168.56.101 from eth0: Command '['bash', 'D:\\Projects\\Morph Net IP Flux\\shell\\flush_ip.sh', '192.168.56.101', 'eth0']' returned non-zero exit status 127.
+2025-06-29 12:53:59,484 - ERROR - Failed to assign IP 192.168.56.102 to eth0: Command '['bash', 'D:\\Projects\\Morph Net IP Flux\\shell\\assign_ip.sh', '192.168.56.102', 'eth0']' returned non-zero exit status 127.
+2025-06-29 12:53:59,484 - ERROR - IP rotation failed: 192.168.56.101 \u2192 192.168.56.102
+2025-06-29 12:53:59,484 - WARNING - IP rotation failed.
+2025-06-29 12:53:59,484 - INFO - Next rotation in 337 seconds
+2025-06-29 12:56:04,571 - INFO - Generated TLS certificate at .\rotated_tls_cert.pem (expires on 2026-06-29 07:26:04+00:00)
+2025-06-29 12:56:04,919 - INFO - Rotating IP: 192.168.1.100 \u2192 192.168.1.101
+2025-06-29 12:56:08,108 - ERROR - Failed to flush IP 192.168.1.100 from eth0: Command '['bash', 'D:\\Projects\\Morph Net IP Flux\\shell\\flush_ip.sh', '192.168.1.100', 'eth0']' returned non-zero exit status 127.
+2025-06-29 12:56:08,266 - ERROR - Failed to assign IP 192.168.1.101 to eth0: Command '['bash', 'D:\\Projects\\Morph Net IP Flux\\shell\\assign_ip.sh', '192.168.1.101', 'eth0']' returned non-zero exit status 127.
+2025-06-29 12:56:08,266 - ERROR - IP rotation failed: 192.168.1.100 \u2192 192.168.1.101
+2025-06-29 12:56:08,598 - ERROR - Failed to fetch DNS record ID.
+2025-06-29 12:56:08,601 - INFO - Scheduler started.
+2025-06-29 12:56:08,601 - INFO - Rotating IP: 192.168.56.101 \u2192 192.168.56.102
+2025-06-29 12:56:08,747 - ERROR - Failed to flush IP 192.168.56.101 from eth0: Command '['bash', 'D:\\Projects\\Morph Net IP Flux\\shell\\flush_ip.sh', '192.168.56.101', 'eth0']' returned non-zero exit status 127.
+2025-06-29 12:56:08,886 - ERROR - Failed to assign IP 192.168.56.102 to eth0: Command '['bash', 'D:\\Projects\\Morph Net IP Flux\\shell\\assign_ip.sh', '192.168.56.102', 'eth0']' returned non-zero exit status 127.
+2025-06-29 12:56:08,887 - ERROR - IP rotation failed: 192.168.56.101 \u2192 192.168.56.102
+2025-06-29 12:56:08,887 - WARNING - IP rotation failed.
+2025-06-29 12:56:08,887 - INFO - Next rotation in 355 seconds
+2025-06-29 12:57:53,329 - INFO - Generated TLS certificate at .\rotated_tls_cert.pem (expires on 2026-06-29 07:27:53+00:00)
+2025-06-29 12:57:53,644 - INFO - Rotating IP: 192.168.1.100 \u2192 192.168.1.101
+2025-06-29 12:57:56,674 - ERROR - Failed to flush IP 192.168.1.100 from eth0: Command '['bash', 'D:/Projects/Morph Net IP Flux/shell/flush_ip.sh', '192.168.1.100', 'eth0']' returned non-zero exit status 127.
+2025-06-29 12:57:56,772 - ERROR - Failed to assign IP 192.168.1.101 to eth0: Command '['bash', 'D:/Projects/Morph Net IP Flux/shell/assign_ip.sh', '192.168.1.101', 'eth0']' returned non-zero exit status 127.
+2025-06-29 12:57:56,772 - ERROR - IP rotation failed: 192.168.1.100 \u2192 192.168.1.101
+2025-06-29 12:57:56,888 - ERROR - Failed to fetch DNS record ID.
+2025-06-29 12:57:56,891 - INFO - Scheduler started.
+2025-06-29 12:57:56,891 - INFO - Rotating IP: 192.168.56.101 \u2192 192.168.56.102
+2025-06-29 12:57:56,983 - ERROR - Failed to flush IP 192.168.56.101 from eth0: Command '['bash', 'D:/Projects/Morph Net IP Flux/shell/flush_ip.sh', '192.168.56.101', 'eth0']' returned non-zero exit status 127.
+2025-06-29 12:57:57,072 - ERROR - Failed to assign IP 192.168.56.102 to eth0: Command '['bash', 'D:/Projects/Morph Net IP Flux/shell/assign_ip.sh', '192.168.56.102', 'eth0']' returned non-zero exit status 127.
+2025-06-29 12:57:57,072 - ERROR - IP rotation failed: 192.168.56.101 \u2192 192.168.56.102
+2025-06-29 12:57:57,072 - WARNING - IP rotation failed.
+2025-06-29 12:57:57,072 - INFO - Next rotation in 295 seconds
+2025-06-29 12:59:57,980 - INFO - Generated TLS certificate at .\rotated_tls_cert.pem (expires on 2026-06-29 07:29:57+00:00)
+2025-06-29 12:59:58,293 - INFO - Rotating IP: 192.168.1.100 \u2192 192.168.1.101
+2025-06-29 13:00:01,721 - ERROR - Failed to flush IP 192.168.1.100 from eth0: Command '['bash', 'D:/Projects/Morph Net IP Flux/shell/flush_ip.sh', '192.168.1.100', 'eth0']' returned non-zero exit status 127.
+2025-06-29 13:00:01,816 - ERROR - Failed to assign IP 192.168.1.101 to eth0: Command '['bash', 'D:/Projects/Morph Net IP Flux/shell/assign_ip.sh', '192.168.1.101', 'eth0']' returned non-zero exit status 127.
+2025-06-29 13:00:01,816 - ERROR - IP rotation failed: 192.168.1.100 \u2192 192.168.1.101
+2025-06-29 13:00:01,946 - ERROR - Failed to fetch DNS record ID.
+2025-06-29 13:00:01,950 - INFO - Scheduler started.
+2025-06-29 13:00:01,950 - INFO - Rotating IP: 192.168.56.101 \u2192 192.168.56.102
+2025-06-29 13:00:02,049 - ERROR - Failed to flush IP 192.168.56.101 from eth0: Command '['bash', 'D:/Projects/Morph Net IP Flux/shell/flush_ip.sh', '192.168.56.101', 'eth0']' returned non-zero exit status 127.
+2025-06-29 13:00:02,139 - ERROR - Failed to assign IP 192.168.56.102 to eth0: Command '['bash', 'D:/Projects/Morph Net IP Flux/shell/assign_ip.sh', '192.168.56.102', 'eth0']' returned non-zero exit status 127.
+2025-06-29 13:00:02,139 - ERROR - IP rotation failed: 192.168.56.101 \u2192 192.168.56.102
+2025-06-29 13:00:02,139 - WARNING - IP rotation failed.
+2025-06-29 13:00:02,139 - INFO - Next rotation in 307 seconds
+2025-06-29 13:00:39,208 - INFO - Generated TLS certificate at .\rotated_tls_cert.pem (expires on 2026-06-29 07:30:39+00:00)
+2025-06-29 13:00:39,557 - INFO - Rotating IP: 192.168.1.100 \u2192 192.168.1.101
+2025-06-29 13:00:41,536 - ERROR - Failed to flush IP 192.168.1.100 from eth0: Command '['bash', 'D:/Projects/Morph Net IP Flux/shell/flush_ip.sh', '192.168.1.100', 'eth0']' returned non-zero exit status 127.
+2025-06-29 13:00:41,640 - ERROR - Failed to assign IP 192.168.1.101 to eth0: Command '['bash', 'D:/Projects/Morph Net IP Flux/shell/assign_ip.sh', '192.168.1.101', 'eth0']' returned non-zero exit status 127.
+2025-06-29 13:00:41,640 - ERROR - IP rotation failed: 192.168.1.100 \u2192 192.168.1.101
+2025-06-29 13:00:41,771 - ERROR - Failed to fetch DNS record ID.
+2025-06-29 13:00:41,776 - INFO - Scheduler started.
+2025-06-29 13:00:41,776 - INFO - Rotating IP: 192.168.56.101 \u2192 192.168.56.102
+2025-06-29 13:00:41,900 - ERROR - Failed to flush IP 192.168.56.101 from eth0: Command '['bash', 'D:/Projects/Morph Net IP Flux/shell/flush_ip.sh', '192.168.56.101', 'eth0']' returned non-zero exit status 127.
+2025-06-29 13:00:41,995 - ERROR - Failed to assign IP 192.168.56.102 to eth0: Command '['bash', 'D:/Projects/Morph Net IP Flux/shell/assign_ip.sh', '192.168.56.102', 'eth0']' returned non-zero exit status 127.
+2025-06-29 13:00:41,995 - ERROR - IP rotation failed: 192.168.56.101 \u2192 192.168.56.102
+2025-06-29 13:00:41,995 - WARNING - IP rotation failed.
+2025-06-29 13:00:41,995 - INFO - Next rotation in 350 seconds
+2025-06-29 13:05:11,845 - INFO - Rotating IP: 192.168.1.100 \u2192 192.168.1.101
+2025-06-29 13:05:15,348 - ERROR - Failed to flush IP 192.168.1.100 from eth0: Command '['bash', 'D:/Projects/Morph Net IP Flux/shell/flush_ip.sh', '192.168.1.100', 'eth0']' returned non-zero exit status 127.
+2025-06-29 13:05:15,455 - ERROR - Failed to assign IP 192.168.1.101 to eth0: Command '['bash', 'D:/Projects/Morph Net IP Flux/shell/assign_ip.sh', '192.168.1.101', 'eth0']' returned non-zero exit status 127.
+2025-06-29 13:05:15,456 - ERROR - IP rotation failed: 192.168.1.100 \u2192 192.168.1.101
+2025-06-29 13:05:15,617 - ERROR - Failed to fetch DNS record ID.
+2025-06-29 13:05:15,621 - INFO - Scheduler started.
+2025-06-29 13:05:15,649 - INFO - Generated TLS certificate at .\rotated_tls_cert.pem (expires on 2026-06-29 07:35:15+00:00)
+2025-06-29 13:05:15,649 - INFO - TLS certificate rotated at startup. Paths: .\rotated_tls_cert.pem, .\rotated_tls_key.pem
+2025-06-29 13:05:15,649 - INFO - Rotating IP: 192.168.56.101 \u2192 192.168.56.102
+2025-06-29 13:05:15,740 - ERROR - Failed to flush IP 192.168.56.101 from eth0: Command '['bash', 'D:/Projects/Morph Net IP Flux/shell/flush_ip.sh', '192.168.56.101', 'eth0']' returned non-zero exit status 127.
+2025-06-29 13:05:15,823 - ERROR - Failed to assign IP 192.168.56.102 to eth0: Command '['bash', 'D:/Projects/Morph Net IP Flux/shell/assign_ip.sh', '192.168.56.102', 'eth0']' returned non-zero exit status 127.
+2025-06-29 13:05:15,824 - ERROR - IP rotation failed: 192.168.56.101 \u2192 192.168.56.102
+2025-06-29 13:05:15,824 - WARNING - IP rotation failed.
+2025-06-29 13:05:15,824 - INFO - Next rotation in 266 seconds
+2025-06-29 13:09:41,849 - INFO - Rotating IP: 192.168.56.101 \u2192 192.168.56.103
+2025-06-29 13:09:45,647 - ERROR - Failed to flush IP 192.168.56.101 from eth0: Command '['bash', 'D:/Projects/Morph Net IP Flux/shell/flush_ip.sh', '192.168.56.101', 'eth0']' returned non-zero exit status 127.
+2025-06-29 13:09:45,799 - ERROR - Failed to assign IP 192.168.56.103 to eth0: Command '['bash', 'D:/Projects/Morph Net IP Flux/shell/assign_ip.sh', '192.168.56.103', 'eth0']' returned non-zero exit status 127.
+2025-06-29 13:09:45,799 - ERROR - IP rotation failed: 192.168.56.101 \u2192 192.168.56.103
+2025-06-29 13:09:45,800 - WARNING - IP rotation failed.
+2025-06-29 13:09:45,800 - INFO - Next rotation in 348 seconds
+2025-06-29 13:11:23,887 - INFO - Rotating IP: 192.168.1.100 \u2192 192.168.1.101
+2025-06-29 13:11:27,280 - ERROR - Failed to flush IP 192.168.1.100 from eth0: Command '['bash', 'D:/Projects/Morph Net IP Flux/shell/flush_ip.sh', '192.168.1.100', 'eth0']' returned non-zero exit status 127.
+2025-06-29 13:11:27,376 - ERROR - Failed to assign IP 192.168.1.101 to eth0: Command '['bash', 'D:/Projects/Morph Net IP Flux/shell/assign_ip.sh', '192.168.1.101', 'eth0']' returned non-zero exit status 127.
+2025-06-29 13:11:27,377 - ERROR - IP rotation failed: 192.168.1.100 \u2192 192.168.1.101
+2025-06-29 13:11:27,583 - ERROR - Failed to fetch DNS record ID.
+2025-06-29 13:11:27,586 - INFO - Scheduler started.
+2025-06-29 13:11:27,690 - INFO - Generated TLS certificate at .\rotated_tls_cert.pem (expires on 2026-06-29 07:41:27+00:00)
+2025-06-29 13:11:27,690 - INFO - TLS certificate rotated at startup. Paths: .\rotated_tls_cert.pem, .\rotated_tls_key.pem
+2025-06-29 13:11:27,690 - INFO - Rotating IP: 192.168.56.101 \u2192 192.168.56.102
+2025-06-29 13:11:27,780 - ERROR - Failed to flush IP 192.168.56.101 from eth0: Command '['bash', 'D:/Projects/Morph Net IP Flux/shell/flush_ip.sh', '192.168.56.101', 'eth0']' returned non-zero exit status 127.
+2025-06-29 13:11:27,860 - ERROR - Failed to assign IP 192.168.56.102 to eth0: Command '['bash', 'D:/Projects/Morph Net IP Flux/shell/assign_ip.sh', '192.168.56.102', 'eth0']' returned non-zero exit status 127.
+2025-06-29 13:11:27,860 - ERROR - IP rotation failed: 192.168.56.101 \u2192 192.168.56.102
+2025-06-29 13:11:27,860 - WARNING - IP rotation failed.
+2025-06-29 13:11:27,860 - INFO - Next rotation in 341 seconds
+2025-06-29 13:19:37,417 - INFO - Rotating IP: 192.168.1.100 \u2192 192.168.1.101
+2025-06-29 13:19:40,907 - ERROR - Failed to flush IP 192.168.1.100 from eth0: Command '['bash', 'D:/Projects/Morph Net IP Flux/shell/flush_ip.sh', '192.168.1.100', 'eth0']' returned non-zero exit status 127.
+2025-06-29 13:19:41,036 - ERROR - Failed to assign IP 192.168.1.101 to eth0: Command '['bash', 'D:/Projects/Morph Net IP Flux/shell/assign_ip.sh', '192.168.1.101', 'eth0']' returned non-zero exit status 127.
+2025-06-29 13:19:41,036 - ERROR - IP rotation failed: 192.168.1.100 \u2192 192.168.1.101
+2025-06-29 13:19:41,171 - ERROR - Failed to fetch DNS record ID.
+2025-06-29 13:19:41,174 - INFO - Scheduler started.
+2025-06-29 13:19:41,246 - INFO - Generated TLS cert: certs\rotated_tls_cert.pem (expires: 2026-06-29 07:49:41+00:00)
+2025-06-29 13:19:41,246 - INFO - TLS certificate rotated at startup. Paths: certs\rotated_tls_cert.pem, certs\rotated_tls_key.pem
+2025-06-29 13:19:41,246 - INFO - Rotating IP: 192.168.56.101 \u2192 192.168.56.102
+2025-06-29 13:19:41,335 - ERROR - Failed to flush IP 192.168.56.101 from eth0: Command '['bash', 'D:/Projects/Morph Net IP Flux/shell/flush_ip.sh', '192.168.56.101', 'eth0']' returned non-zero exit status 127.
+2025-06-29 13:19:41,424 - ERROR - Failed to assign IP 192.168.56.102 to eth0: Command '['bash', 'D:/Projects/Morph Net IP Flux/shell/assign_ip.sh', '192.168.56.102', 'eth0']' returned non-zero exit status 127.
+2025-06-29 13:19:41,424 - ERROR - IP rotation failed: 192.168.56.101 \u2192 192.168.56.102
+2025-06-29 13:19:41,424 - WARNING - IP rotation failed.
+2025-06-29 13:19:41,424 - INFO - Next rotation in 338 seconds
+2025-06-29 13:21:21,669 - INFO - Rotating IP: 192.168.1.100 \u2192 192.168.1.101
+2025-06-29 13:21:25,023 - ERROR - Failed to flush IP 192.168.1.100 from eth0: Command '['bash', 'D:/Projects/Morph Net IP Flux/shell/flush_ip.sh', '192.168.1.100', 'eth0']' returned non-zero exit status 127.
+2025-06-29 13:21:25,152 - ERROR - Failed to assign IP 192.168.1.101 to eth0: Command '['bash', 'D:/Projects/Morph Net IP Flux/shell/assign_ip.sh', '192.168.1.101', 'eth0']' returned non-zero exit status 127.
+2025-06-29 13:21:25,153 - ERROR - IP rotation failed: 192.168.1.100 \u2192 192.168.1.101
+2025-06-29 13:21:25,306 - ERROR - Failed to fetch DNS record ID.
+2025-06-29 13:21:25,310 - INFO - Scheduler started.
+2025-06-29 13:21:25,337 - INFO - Generated TLS cert: certs\rotated_tls_cert.pem (expires: 2026-06-29 07:51:25+00:00)
+2025-06-29 13:21:25,337 - INFO - TLS certificate rotated at startup. Paths: certs\rotated_tls_cert.pem, certs\rotated_tls_key.pem
+2025-06-29 13:21:25,337 - INFO - Rotating IP: 192.168.56.101 \u2192 192.168.56.103
+2025-06-29 13:21:25,430 - ERROR - Failed to flush IP 192.168.56.101 from eth0: Command '['bash', 'D:/Projects/Morph Net IP Flux/shell/flush_ip.sh', '192.168.56.101', 'eth0']' returned non-zero exit status 127.
+2025-06-29 13:21:25,518 - ERROR - Failed to assign IP 192.168.56.103 to eth0: Command '['bash', 'D:/Projects/Morph Net IP Flux/shell/assign_ip.sh', '192.168.56.103', 'eth0']' returned non-zero exit status 127.
+2025-06-29 13:21:25,519 - ERROR - IP rotation failed: 192.168.56.101 \u2192 192.168.56.103
+2025-06-29 13:21:25,519 - WARNING - IP rotation failed.
+2025-06-29 13:21:25,519 - INFO - Next rotation in 264 seconds
+2025-06-29 13:24:07,674 - INFO - Rotating IP: 192.168.1.100 \u2192 192.168.1.101
+2025-06-29 13:24:11,397 - ERROR - Failed to flush IP 192.168.1.100 from eth0: Command '['bash', 'D:/Projects/Morph Net IP Flux/shell/flush_ip.sh', '192.168.1.100', 'eth0']' returned non-zero exit status 127.
+2025-06-29 13:24:11,493 - ERROR - Failed to assign IP 192.168.1.101 to eth0: Command '['bash', 'D:/Projects/Morph Net IP Flux/shell/assign_ip.sh', '192.168.1.101', 'eth0']' returned non-zero exit status 127.
+2025-06-29 13:24:11,493 - ERROR - IP rotation failed: 192.168.1.100 \u2192 192.168.1.101
+2025-06-29 13:24:11,611 - ERROR - Failed to fetch DNS record ID.
+2025-06-29 13:24:11,615 - INFO - Scheduler started.
+2025-06-29 13:24:11,676 - INFO - Generated TLS cert: certs\rotated_tls_cert.pem (expires: 2026-06-29 07:54:11+00:00)
+2025-06-29 13:24:11,676 - INFO - TLS certificate rotated at startup. Paths: certs\rotated_tls_cert.pem, certs\rotated_tls_key.pem
+2025-06-29 13:24:11,676 - INFO - Rotating IP: 192.168.56.101 \u2192 192.168.56.102
+2025-06-29 13:24:11,784 - ERROR - Failed to flush IP 192.168.56.101 from eth0: Command '['bash', 'D:/Projects/Morph Net IP Flux/shell/flush_ip.sh', '192.168.56.101', 'eth0']' returned non-zero exit status 127.
+2025-06-29 13:24:11,869 - ERROR - Failed to assign IP 192.168.56.102 to eth0: Command '['bash', 'D:/Projects/Morph Net IP Flux/shell/assign_ip.sh', '192.168.56.102', 'eth0']' returned non-zero exit status 127.
+2025-06-29 13:24:11,870 - ERROR - IP rotation failed: 192.168.56.101 \u2192 192.168.56.102
+2025-06-29 13:24:11,870 - WARNING - IP rotation failed.
+2025-06-29 13:24:11,870 - INFO - Next rotation in 331 seconds

@@ -174,7 +174,7 @@ OWASP C2 Guidance
 ## Contributing
 This is an evolving research project. Contributions, forks, and academic usage are welcome. Please raise issues or submit pull requests.
 
-Author|
-Krishna Narula |
+Author |
+Krishna Narula
 ## Connect with me
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Krishna%20Narula-blue?logo=linkedin&style=for-the-badge)](https://www.linkedin.com/in/krishnanarula/)
