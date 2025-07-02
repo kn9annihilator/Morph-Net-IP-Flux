@@ -5,6 +5,8 @@ import yaml
 import dotenv
 import threading
 import time
+from core.port_randomizer import randomize_ports
+
 
 # Import project modules
 from core.ip_manager import rotate_ip
@@ -86,6 +88,10 @@ def init_honeypots():
 
 def main():
     print("\n[+] Morph Net IP Flux — Dynamic Defense Engine Starting...\n")
+
+    port_map = randomize_ports()
+    print(f"[✓] Ports randomized: {port_map}")
+
 
     try:
         config = load_config()
