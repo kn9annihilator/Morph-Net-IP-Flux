@@ -237,3 +237,25 @@
 2025-06-29 13:24:11,870 - ERROR - IP rotation failed: 192.168.56.101 \u2192 192.168.56.102
 2025-06-29 13:24:11,870 - WARNING - IP rotation failed.
 2025-06-29 13:24:11,870 - INFO - Next rotation in 331 seconds
+2025-07-01 20:28:36,611 - INFO - Rotating IP: 192.168.1.100 \u2192 192.168.1.101
+2025-07-01 20:28:36,888 - ERROR - Flush IP stderr: /mnt/d/Projects/Morph Net IP Flux/shell/flush_ip.sh: line 2: $'\r': command not found
+/mnt/d/Projects/Morph Net IP Flux/shell/flush_ip.sh: line 8: $'\r': command not found
+/mnt/d/Projects/Morph Net IP Flux/shell/flush_ip.sh: line 9: set: pipefail
+: invalid option name
+2025-07-01 20:28:36,889 - ERROR - Failed to flush IP 192.168.1.100 from eth0: Command '['bash', '/mnt/d/Projects/Morph Net IP Flux/shell/flush_ip.sh', '192.168.1.100', 'eth0']' returned non-zero exit status 2.
+2025-07-01 20:28:37,087 - ERROR - Failed to assign IP 192.168.1.101 to eth0: Command '['bash', '/mnt/d/Projects/Morph Net IP Flux/shell/assign_ip.sh', '192.168.1.101', 'eth0']' returned non-zero exit status 2.
+2025-07-01 20:28:37,088 - ERROR - IP rotation failed: 192.168.1.100 \u2192 192.168.1.101
+2025-07-01 20:28:45,880 - ERROR - Failed to fetch DNS record ID.
+2025-07-01 20:28:45,884 - INFO - Scheduler started.
+2025-07-01 20:28:45,949 - INFO - Generated TLS cert: certs\rotated_tls_cert.pem (expires: 2026-07-01 14:58:45+00:00)
+2025-07-01 20:28:45,949 - INFO - TLS certificate rotated at startup. Paths: certs\rotated_tls_cert.pem, certs\rotated_tls_key.pem
+2025-07-01 20:28:45,949 - INFO - Rotating IP: 192.168.56.101 \u2192 192.168.56.102
+2025-07-01 20:28:46,139 - ERROR - Flush IP stderr: /mnt/d/Projects/Morph Net IP Flux/shell/flush_ip.sh: line 2: $'\r': command not found
+/mnt/d/Projects/Morph Net IP Flux/shell/flush_ip.sh: line 8: $'\r': command not found
+/mnt/d/Projects/Morph Net IP Flux/shell/flush_ip.sh: line 9: set: pipefail
+: invalid option name
+2025-07-01 20:28:46,139 - ERROR - Failed to flush IP 192.168.56.101 from eth0: Command '['bash', '/mnt/d/Projects/Morph Net IP Flux/shell/flush_ip.sh', '192.168.56.101', 'eth0']' returned non-zero exit status 2.
+2025-07-01 20:28:46,342 - ERROR - Failed to assign IP 192.168.56.102 to eth0: Command '['bash', '/mnt/d/Projects/Morph Net IP Flux/shell/assign_ip.sh', '192.168.56.102', 'eth0']' returned non-zero exit status 2.
+2025-07-01 20:28:46,343 - ERROR - IP rotation failed: 192.168.56.101 \u2192 192.168.56.102
+2025-07-01 20:28:46,343 - WARNING - IP rotation failed.
+2025-07-01 20:28:46,343 - INFO - Next rotation in 350 seconds

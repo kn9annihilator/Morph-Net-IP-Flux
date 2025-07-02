@@ -9,7 +9,8 @@ rotation:
 
 dns:
   provider: cloudflare
-  zone_id: "your_zone_id_here"
-  api_token: "your_cloudflare_api_token"
-  record_name: "server.example.com"
-  ttl: 60
+  api_token: YOUR_CLOUDFLARE_API_TOKEN
+  zone_id: YOUR_CLOUDFLARE_ZONE_ID
+  record_name: your.domain.com
+  proxied: false
+

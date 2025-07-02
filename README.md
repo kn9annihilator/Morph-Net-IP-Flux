@@ -6,12 +6,16 @@
 - [Motivation](#motivation)
 - [Key Features](#key-features)
 - [Architecture](#architecture)
-- [Installation & Setup](#️-installation--setup)
-- [Usage Scenarios](#usage-scenarios)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Configuration](#configuration)
+- [Technical Components](#technical-components)
 - [Security & Threat Model](#security--threat-model)
+- [Project Structure](#project-structure)
+- [Testbed Setup](#testbed-setup)
+- [Research & Industry Relevance](#research--industry-relevance)
 - [License](#license)
-- [References](#references)
-- [Contributing](#contributing)
+- [Author](#author)
 
 ---
 
@@ -47,26 +51,70 @@ This project was built to **break the attacker's kill chain at the earliest poss
 
 ## Architecture
 
- | Tool              | Version/Details                                             |
-|--------------------|-------------------------------------------------------------|
-| core/	             | Core logic modules for IP rotation, DNS, scheduler, etc.    |
-| config/	         | Configuration files and environment variables.              |
-| shell/             | Bash scripts for IP operations and TLS rotation.            |
-| deploy/            | Deployment scripts for Docker, Kubernetes, and cloud init.  |
-| integrations/	     | API integrations for DNS, proxies, and logging systems.     |
-| redteam_sim/	     | Red-team simulation tools for scanning and recon.           |
-| logs/	             | Stores runtime logs for IP changes, honeypot hits, etc.     |
-| tests/	         | Unit and functional test scripts.                           |
-| main.py	         | Entry point for launching the full system                   |
-| setup.py	         | Python setup script for packaging.                          |
-| .gitignore	     | Standard Git ignore rules.                                  |
+│
+├── core/ # Core logic modules (IP, DNS, Scheduler)
+│ ├── ip_manager.py
+│ ├── scheduler.py
+│ ├── port_manager.py
+│ ├── dns_controller.py
+│ ├── honeypot_deployer.py
+│ └── tls_manager.py
+│
+├── config/ # Config files
+│ ├── default_config.yaml
+│ ├── cloud_config.yaml
+│ └── secrets.env
+│
+├── shell/ # Shell scripts for IP management
+│ ├── assign_ip.sh
+│ ├── flush_ip.sh
+│ ├── port_knock.sh
+│ └── rotate_tls.sh
+│
+├── deploy/ # Docker/Kubernetes/Cloud deploy scripts
+│ ├── Dockerfile
+│ ├── docker-compose.yaml
+│ ├── k8s.yaml
+│ └── cloud_init.sh
+│
+├── integrations/ # Cloud/Proxy/API integrations
+│ ├── cloudflare_api.py
+│ ├── proxy_sync.py
+│ └── ELK_logger.py
+│
+├── redteam_sim/ # Red team recon simulation tools
+│ ├── scanner_emulator.py
+│ ├── behavior_recon.py
+│ └── nmap_scan.sh
+│
+├── docs/ # Documentation
+│ ├── README.md
+│ ├── threat_model.md
+│ ├── architecture.md
+│ └── research_refs.md
+│
+├── logs/ # Runtime logs
+│ ├── rotation.log
+│ ├── attack_trace.log
+│ └── honeypot_hits.json
+│
+├── tests/ # Unit & functional tests
+│ ├── test_ip_rotation.py
+│ ├── test_dns_behavior.py
+│ └── test_tls_rotation.py
+│
+├── main.py # Central entry point
+├── requirements.txt # Python dependencies
+├── setup.py # Packaging
+└── .gitignore
 
+
+
+## Installation and Setup
 
 ---
 
-
 ## ⚙️ Installation & Setup
- This section guides you through setting up Morph Net IP Flux on a compatible system.
 
 ### Prerequisites
 
@@ -84,29 +132,28 @@ This project was built to **break the attacker's kill chain at the earliest poss
 
 #### 1. Clone the Repository
 
-``` bash
+```bash
 git clone https://github.com/your-username/MorphNetIPFlux.git
 cd MorphNetIPFlux
-```
 
-#### 2. Create a Virtual Environment
+---
+
+2. Create a Virtual Environment
 Linux / WSL:
-
-``` bash	
+```bash
 python3 -m venv .venv
 source .venv/bin/activate
-```
 
 Windows CMD:
-``` bash
+```bash
 python -m venv .venv
 .venv\Scripts\activate
-```
 
 #### 3. Install Dependencies
-``` bash
+''' bash
 pip install -r requirements.txt
-```
+
+
 
 
 ### Prerequisites
@@ -120,47 +167,42 @@ pip install -r requirements.txt
 Running the Project
 Run the full system using:
 
-``` bash
+bash
 python main.py
-```
 You will see output such as:
-``` bash
+
 [+] Morph Net IP Flux — Dynamic Defense Engine Starting...
 [+] Rotating IP from 192.168.1.100 to 192.168.1.101...
 [✓] DNS record updated for example.com ➜ 192.168.1.101
 [✓] Honeypots running on decoy ports.
 [✓] Scheduler launched.
 All activity will be logged in logs/rotation.log.
-```
 
-### Usage Scenarios
--Simulating evasive Command & Control (C2) networks
+Usage Scenarios
+Simulating evasive Command & Control (C2) networks
 
--Teaching real-world Red vs Blue strategies
+Teaching real-world Red vs Blue strategies
 
--Research on MTD (Moving Target Defense)
+Research on MTD (Moving Target Defense)
 
--Obfuscating traffic to hide high-value APIs
+Obfuscating traffic to hide high-value APIs
 
--Defending critical infrastructure from advanced recon
+Defending critical infrastructure from advanced recon
 
-### Testing
+Testing
 Run unit tests:
 
-``` bash
+bash
 pytest tests/
-```
 You may also test shell integrations separately:
 
-``` bash
-redteam_sim/nmap_scan.sh
-```
-
-### License
+bash
+bash redteam_sim/nmap_scan.sh
+License
 This project is licensed under the MIT License.
-See [LICENSE](#license) for more details.
+See LICENSE for more details.
 
-### References
+References
 NIST Special Publication 800-160: Developing Cyber Resilient Systems
 
 JA3 TLS Fingerprinting: https://github.com/salesforce/ja3
@@ -171,10 +213,11 @@ Cloudflare API Docs
 
 OWASP C2 Guidance
 
-## Contributing
+Contributing
 This is an evolving research project. Contributions, forks, and academic usage are welcome. Please raise issues or submit pull requests.
 
-Author |
-Krishna Narula
-## Connect with me
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Krishna%20Narula-blue?logo=linkedin&style=for-the-badge)](https://www.linkedin.com/in/krishnanarula/)
+Author
+Aman Ahmad Khan
+B.Tech (CSE – Cybersecurity & Digital Forensics)
+Sharda University, Greater Noida
+LinkedIn | GitHub

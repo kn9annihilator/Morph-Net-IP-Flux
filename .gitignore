@@ -3,3 +3,7 @@ rotated_tls_cert.pem
 rotated_tls_key.pem
 *.pem
 *.key
+rotated_tls_*.*
+logs/
+__pycache__/
+.env

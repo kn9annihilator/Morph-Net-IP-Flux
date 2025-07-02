@@ -11,6 +11,9 @@ from core.ip_manager import rotate_ip
 from core.scheduler import start_scheduler
 from core.dns_controller import update_dns_record
 from core.honeypot_deployer import launch_honeypots
+from core.tls_manager import rotate_tls_cert
+
+
 
 # -----------------------------
 # Step 1: Load Configurations
