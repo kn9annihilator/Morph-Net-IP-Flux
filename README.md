@@ -50,6 +50,7 @@ This project was built to **break the attacker's kill chain at the earliest poss
 ---
 
 ## Architecture
+``` js
 
 │
 ├── core/ # Core logic modules (IP, DNS, Scheduler)
@@ -108,13 +109,11 @@ This project was built to **break the attacker's kill chain at the earliest poss
 ├── setup.py # Packaging
 └── .gitignore
 
+```
 
-
-## Installation and Setup
-
----
 
 ## ⚙️ Installation & Setup
+
 
 ### Prerequisites
 
@@ -135,7 +134,7 @@ This project was built to **break the attacker's kill chain at the earliest poss
 ```bash
 git clone https://github.com/your-username/MorphNetIPFlux.git
 cd MorphNetIPFlux
-
+```
 ---
 
 2. Create a Virtual Environment
@@ -143,66 +142,65 @@ Linux / WSL:
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
+```
 
 Windows CMD:
 ```bash
 python -m venv .venv
 .venv\Scripts\activate
+```
 
 #### 3. Install Dependencies
-''' bash
+
+``` bash
 pip install -r requirements.txt
+```
 
 
 
-
-### Prerequisites
-
-- Python 3.7+
-- Linux/WSL (IP tools must be available)
-- Git, Bash
-- `iproute2`, `openssl`, `curl` for shell functionality
-- Virtual environment recommended
-
-Running the Project
+## Running the Project
 Run the full system using:
 
-bash
+``` bash
 python main.py
+```
 You will see output such as:
 
+``` js
 [+] Morph Net IP Flux — Dynamic Defense Engine Starting...
 [+] Rotating IP from 192.168.1.100 to 192.168.1.101...
 [✓] DNS record updated for example.com ➜ 192.168.1.101
 [✓] Honeypots running on decoy ports.
 [✓] Scheduler launched.
 All activity will be logged in logs/rotation.log.
+```
 
-Usage Scenarios
-Simulating evasive Command & Control (C2) networks
+### Usage Scenarios
+-Simulating evasive Command & Control (C2) networks
 
-Teaching real-world Red vs Blue strategies
+-Teaching real-world Red vs Blue strategies
 
-Research on MTD (Moving Target Defense)
+-Research on MTD (Moving Target Defense)
 
-Obfuscating traffic to hide high-value APIs
+-Obfuscating traffic to hide high-value APIs
 
-Defending critical infrastructure from advanced recon
+-Defending critical infrastructure from advanced recon
 
 Testing
 Run unit tests:
 
-bash
+```bash
 pytest tests/
+```
+
 You may also test shell integrations separately:
 
-bash
+```bash
 bash redteam_sim/nmap_scan.sh
-License
-This project is licensed under the MIT License.
-See LICENSE for more details.
+```
 
-References
+
+## References
 NIST Special Publication 800-160: Developing Cyber Resilient Systems
 
 JA3 TLS Fingerprinting: https://github.com/salesforce/ja3
@@ -213,11 +211,17 @@ Cloudflare API Docs
 
 OWASP C2 Guidance
 
-Contributing
+### Contributing
 This is an evolving research project. Contributions, forks, and academic usage are welcome. Please raise issues or submit pull requests.
 
-Author
-Aman Ahmad Khan
-B.Tech (CSE – Cybersecurity & Digital Forensics)
-Sharda University, Greater Noida
-LinkedIn | GitHub
+### License
+This project is licensed under the MIT License.
+See [LICENSE](#license) for more details. 
+
+
+Author | Krishna Narula
+## Connect with me
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Krishna%20Narula-blue?logo=linkedin&style=for-the-badge)](https://www.linkedin.com/in/krishnanarula/)
+
+
+
