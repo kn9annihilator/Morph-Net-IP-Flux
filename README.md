@@ -7,13 +7,10 @@
 - [Key Features](#key-features)
 - [Architecture](#architecture)
 - [Installation](#installation)
+- [Step by Step guide](#step-by-step-guide)
 - [Usage](#usage)
-- [Configuration](#configuration)
-- [Technical Components](#technical-components)
-- [Security & Threat Model](#security--threat-model)
-- [Project Structure](#project-structure)
-- [Testbed Setup](#testbed-setup)
-- [Research & Industry Relevance](#research--industry-relevance)
+- [Running the project](#running-the-project)
+- [Current Progress](#current-project-progress)
 - [License](#license)
 - [Author](#author)
 
@@ -199,6 +196,12 @@ You may also test shell integrations separately:
 bash redteam_sim/nmap_scan.sh
 ```
 
+
+## Current Project Progress
+This section shows the files that are working and also the part of the project which is having errors.
+The project is still under progress and woould be completed soom.
+
+![alt text](image.png)
 
 ## References
 NIST Special Publication 800-160: Developing Cyber Resilient Systems
