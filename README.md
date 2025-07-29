@@ -1,4 +1,4 @@
-![Latest Commits](https://img.shields.io/github/commits-since/:user/:repo/latest)
+![Latest Commits](https://img.shields.io/github/commits-since/kn9annihilator/Morph-Net-IP-Flux.git)
 
 
 <div align="center">
