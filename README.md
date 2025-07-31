@@ -1,5 +1,5 @@
-![Latest Commits](https://img.shields.io/github/commits-since/kn9annihilator/Morph-Net-IP-Flux.git)
-
+![Status](https://img.shields.io/badge/status-in%20development-orange.svg)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 <div align="center">
 

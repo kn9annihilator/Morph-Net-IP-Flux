@@ -280,3 +280,45 @@
 2025-07-24 00:18:24,681 [ERROR] IP rotation failed: 192.168.56.101 \u2192 192.168.56.102
 2025-07-24 00:18:24,681 [WARNING] IP rotation failed.
 2025-07-24 00:18:24,681 [INFO] Next rotation in 288 seconds
+2025-08-01 00:17:08,404 [INFO] Saved randomized port map: {'http': 8887, 'ssh': 2694}
+2025-08-01 00:17:08,412 [INFO] Rotating IP: 192.168.1.100 \u2192 192.168.1.101
+2025-08-01 00:17:08,637 [ERROR] Flush IP stderr: /mnt/d/Projects/Morph Net IP Flux/shell/flush_ip.sh: line 2: $'\r': command not found
+/mnt/d/Projects/Morph Net IP Flux/shell/flush_ip.sh: line 8: $'\r': command not found
+/mnt/d/Projects/Morph Net IP Flux/shell/flush_ip.sh: line 9: set: pipefail: invalid option name
+2025-08-01 00:17:08,637 [ERROR] Failed to flush IP 192.168.1.100 from eth0: Command '['bash', '/mnt/d/Projects/Morph Net IP Flux/shell/flush_ip.sh', '192.168.1.100', 'eth0']' returned non-zero exit status 2.
+2025-08-01 00:17:08,822 [ERROR] Failed to assign IP 192.168.1.101 to eth0: Command '['bash', '/mnt/d/Projects/Morph Net IP Flux/shell/assign_ip.sh', '192.168.1.101', 'eth0']' returned non-zero exit status 2.
+2025-08-01 00:17:08,822 [ERROR] IP rotation failed: 192.168.1.100 \u2192 192.168.1.101
+2025-08-01 00:17:09,290 [ERROR] Failed to fetch DNS record ID.
+2025-08-01 00:17:09,293 [INFO] Scheduler started.
+2025-08-01 00:17:09,349 [INFO] Generated TLS cert: certs\rotated_tls_cert.pem (expires: 2026-07-31 18:47:09+00:00)
+2025-08-01 00:17:09,349 [INFO] TLS certificate rotated at startup. Paths: certs\rotated_tls_cert.pem, certs\rotated_tls_key.pem
+2025-08-01 00:17:09,349 [INFO] Rotating IP: 192.168.56.101 \u2192 192.168.56.103
+2025-08-01 00:17:09,542 [ERROR] Flush IP stderr: /mnt/d/Projects/Morph Net IP Flux/shell/flush_ip.sh: line 2: $'\r': command not found
+/mnt/d/Projects/Morph Net IP Flux/shell/flush_ip.sh: line 8: $'\r': command not found
+/mnt/d/Projects/Morph Net IP Flux/shell/flush_ip.sh: line 9: set: pipefail: invalid option name
+2025-08-01 00:17:09,543 [ERROR] Failed to flush IP 192.168.56.101 from eth0: Command '['bash', '/mnt/d/Projects/Morph Net IP Flux/shell/flush_ip.sh', '192.168.56.101', 'eth0']' returned non-zero exit status 2.
+2025-08-01 00:17:09,735 [ERROR] Failed to assign IP 192.168.56.103 to eth0: Command '['bash', '/mnt/d/Projects/Morph Net IP Flux/shell/assign_ip.sh', '192.168.56.103', 'eth0']' returned non-zero exit status 2.
+2025-08-01 00:17:09,735 [ERROR] IP rotation failed: 192.168.56.101 \u2192 192.168.56.103
+2025-08-01 00:17:09,736 [WARNING] IP rotation failed.
+2025-08-01 00:17:09,737 [INFO] Next rotation in 252 seconds
+2025-08-01 00:18:48,697 [INFO] Saved randomized port map: {'http': 8105, 'ssh': 2719}
+2025-08-01 00:18:48,698 [INFO] Rotating IP: 192.168.1.100 \u2192 192.168.1.101
+2025-07-31 18:48:48 - INFO - IP 192.168.1.100 not found on eth0. No action taken.
+2025-08-01 00:18:48,789 [INFO] Flushed IP 192.168.1.100 from interface eth0
+2025-07-31 18:48:55 - INFO - Successfully assigned 192.168.1.101 to eth0
+2025-08-01 00:18:56,075 [INFO] Assigned IP 192.168.1.101 to interface eth0
+2025-08-01 00:18:56,076 [INFO] IP rotation successful: 192.168.1.100 \u2192 192.168.1.101
+2025-08-01 00:18:56,138 [ERROR] Failed to fetch DNS record ID.
+2025-08-01 00:18:56,219 [ERROR] Failed to fetch DNS record ID.
+2025-08-01 00:18:56,222 [INFO] Scheduler started.
+2025-08-01 00:18:56,301 [INFO] Generated TLS cert: certs\rotated_tls_cert.pem (expires: 2026-07-31 18:48:56+00:00)
+2025-08-01 00:18:56,301 [INFO] TLS certificate rotated at startup. Paths: certs\rotated_tls_cert.pem, certs\rotated_tls_key.pem
+2025-08-01 00:18:56,301 [INFO] Rotating IP: 192.168.56.101 \u2192 192.168.56.103
+2025-07-31 18:48:55 - INFO - IP 192.168.56.101 not found on eth0. No action taken.
+2025-08-01 00:18:56,381 [INFO] Flushed IP 192.168.56.101 from interface eth0
+2025-07-31 18:49:00 - INFO - Successfully assigned 192.168.56.103 to eth0
+2025-08-01 00:19:00,996 [INFO] Assigned IP 192.168.56.103 to interface eth0
+2025-08-01 00:19:00,997 [INFO] IP rotation successful: 192.168.56.101 \u2192 192.168.56.103
+2025-08-01 00:19:01,049 [ERROR] Failed to fetch DNS record ID.
+2025-08-01 00:19:01,049 [INFO] IP rotation successful: 192.168.56.101 \u279c 192.168.56.103
+2025-08-01 00:19:01,049 [INFO] Next rotation in 342 seconds
