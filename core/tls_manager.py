@@ -3,41 +3,37 @@
 import os
 import logging
 import datetime
-from pathlib import Path
+import random
 from cryptography import x509
 from cryptography.x509.oid import NameOID
 from cryptography.hazmat.primitives import serialization, hashes
 from cryptography.hazmat.primitives.asymmetric import rsa
-from cryptography.hazmat.backends import default_backend
 
-
-def rotate_tls_cert(label="rotated_tls", cn="myserver.local", cert_dir="certs", validity_days=365):
-    """
-    Generate a self-signed TLS certificate and private key.
-
-    Args:
-        label (str): Base name for certificate and key files.
-        cn (str): Common Name for the certificate.
-        cert_dir (str): Directory to save cert and key.
-        validity_days (int): Validity period of certificate.
-
-    Returns:
-        tuple: (cert_file_path, key_file_path)
-    """
+def rotate_tls_cert(config: dict):
+    """Generates a self-signed TLS certificate with randomized attributes from the config."""
     try:
-        os.makedirs(cert_dir, exist_ok=True)
+        tls_config = config.get("tls", {})
+        cert_dir = tls_config.get("cert_dir", "certs")
+        validity_days = tls_config.get("validity_days", 90)
+        
+        # Randomize certificate attributes for better fingerprint evasion
+        cn = random.choice(tls_config.get("common_names", ["fallback.local"]))
+        org = random.choice(tls_config.get("organization_names", ["Fallback Inc."]))
 
-        cert_path = os.path.join(cert_dir, f"{label}_cert.pem")
-        key_path = os.path.join(cert_dir, f"{label}_key.pem")
+        os.makedirs(cert_dir, exist_ok=True)
+        # Use fixed filenames. The randomness is inside the certificate itself.
+        cert_path = os.path.join(cert_dir, "rotated_cert.pem")
+        key_path = os.path.join(cert_dir, "rotated_key.pem")
 
         key = rsa.generate_private_key(
             public_exponent=65537,
             key_size=2048,
-            backend=default_backend()
         )
 
         subject = issuer = x509.Name([
-            x509.NameAttribute(NameOID.COMMON_NAME, cn)
+            x509.NameAttribute(NameOID.COUNTRY_NAME, "US"),
+            x509.NameAttribute(NameOID.ORGANIZATION_NAME, org),
+            x509.NameAttribute(NameOID.COMMON_NAME, cn),
         ])
 
         cert = (
@@ -46,44 +42,28 @@ def rotate_tls_cert(label="rotated_tls", cn="myserver.local", cert_dir="certs", 
             .issuer_name(issuer)
             .public_key(key.public_key())
             .serial_number(x509.random_serial_number())
-            .not_valid_before(datetime.datetime.utcnow())
-            .not_valid_after(datetime.datetime.utcnow() + datetime.timedelta(days=validity_days))
-            .add_extension(
-                x509.SubjectAlternativeName([x509.DNSName(cn)]),
-                critical=False,
-            )
-            .sign(key, hashes.SHA256(), default_backend())
+            .not_valid_before(datetime.datetime.now(datetime.timezone.utc))
+            .not_valid_after(datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(days=validity_days))
+            .add_extension(x509.SubjectAlternativeName([x509.DNSName(cn)]), critical=False)
+            .sign(key, hashes.SHA256())
         )
 
-        # Save the key
-        with open(key_path, "wb") as kf:
-            kf.write(
+        with open(key_path, "wb") as f:
+            f.write(
                 key.private_bytes(
                     encoding=serialization.Encoding.PEM,
                     format=serialization.PrivateFormat.TraditionalOpenSSL,
-                    encryption_algorithm=serialization.NoEncryption()
+                    encryption_algorithm=serialization.NoEncryption(),
                 )
             )
 
-        # Save the cert
-        with open(cert_path, "wb") as cf:
-            cf.write(cert.public_bytes(serialization.Encoding.PEM))
+        with open(cert_path, "wb") as f:
+            f.write(cert.public_bytes(serialization.Encoding.PEM))
 
-        expiry = cert.not_valid_after.replace(tzinfo=datetime.timezone.utc)
-        logging.info(f"Generated TLS cert: {cert_path} (expires: {expiry})")
-
+        expiry = cert.not_valid_after_utc
+        logging.info(f"[OK] Generated new TLS cert (CN={cn}). Expires: {expiry.strftime('%Y-%m-%d')}")
         return cert_path, key_path
 
     except Exception as e:
-        logging.error(f"TLS certificate generation failed: {e}")
+        logging.error(f"TLS certificate generation failed: {e}", exc_info=True)
         return None, None
-
-
-if __name__ == "__main__":
-    logging.basicConfig(
-        filename="logs/rotation.log",
-        level=logging.INFO,
-        format="%(asctime)s [%(levelname)s] %(message)s"
-    )
-    cert_path, key_path = rotate_tls_cert()
-    print(f"Cert: {cert_path}\nKey: {key_path}")

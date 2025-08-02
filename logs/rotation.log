@@ -475,3 +475,186 @@
 2025-08-02 17:20:12,954 [CRITICAL] - [!] CRITICAL: Rollback FAILED. Network interface may be unconfigured!
 2025-08-02 17:20:12,954 [ERROR] - IP rotation failed. System state remains on the old IP.
 2025-08-02 17:20:12,954 [INFO] - --- Next rotation cycle in 339 seconds ---
+2025-08-02 17:22:28,845 [INFO] - --- Morph Net IP Flux Engine Starting ---
+2025-08-02 17:22:28,847 [WARNING] - API_TOKEN not found or not set in secrets.env. DNS updates will fail.
+2025-08-02 17:22:28,847 [INFO] - Configuration loaded successfully.
+2025-08-02 17:22:28,847 [INFO] - Deploying honeypot services...
+2025-08-02 17:22:28,848 [INFO] - Honeypot services launched in background.
+2025-08-02 17:22:28,848 [INFO] - Starting the main MTD scheduler...
+2025-08-02 17:22:28,848 [INFO] - Initializing scheduler thread...
+2025-08-02 17:22:28,848 [INFO] - [SSH] Honeypot now listening on port 2645
+2025-08-02 17:22:28,848 [INFO] - [HTTP] Honeypot now listening on port 8888
+2025-08-02 17:22:28,848 [INFO] - Scheduler started. Initial IP is assumed to be 192.168.56.101.
+2025-08-02 17:22:28,849 [INFO] - Scheduler is running in the background.
+2025-08-02 17:22:28,849 [INFO] - --- Starting IP Rotation: 192.168.56.101 -> 192.168.56.102 ---
+2025-08-02 17:22:28,849 [INFO] - --- All services initialized. Monitoring in progress... ---
+2025-08-02 17:22:28,849 [INFO] - [IP] Attempting to flush IP 192.168.56.101 from interface eth0...
+2025-08-02 17:22:28,960 [INFO] - Output from flush_ip.sh: INFO: IP 192.168.56.101 not found on eth0. No action taken.
+2025-08-02 17:22:28,961 [INFO] - [OK] Successfully flushed IP 192.168.56.101.
+2025-08-02 17:22:28,961 [INFO] - [IP] Attempting to assign IP 192.168.56.102 to interface eth0...
+2025-08-02 17:22:29,061 [ERROR] - Error executing assign_ip.sh. Stderr: RTNETLINK answers: Operation not permitted
+RTNETLINK answers: Operation not permitted
+ERROR: Failed to assign 192.168.56.102 to eth0
+2025-08-02 17:22:29,061 [ERROR] - [!] Failed to assign IP 192.168.56.102.
+2025-08-02 17:22:29,061 [ERROR] - Rotation failed at 'assign' step. Initiating rollback...
+2025-08-02 17:22:29,062 [INFO] - [IP] Attempting to assign IP 192.168.56.101 to interface eth0...
+2025-08-02 17:22:29,158 [ERROR] - Error executing assign_ip.sh. Stderr: RTNETLINK answers: Operation not permitted
+RTNETLINK answers: Operation not permitted
+ERROR: Failed to assign 192.168.56.101 to eth0
+2025-08-02 17:22:29,159 [ERROR] - [!] Failed to assign IP 192.168.56.101.
+2025-08-02 17:22:29,159 [CRITICAL] - [!] CRITICAL: Rollback FAILED. Network interface may be unconfigured!
+2025-08-02 17:22:29,159 [ERROR] - IP rotation failed. System state remains on the old IP.
+2025-08-02 17:22:29,159 [INFO] - --- Next rotation cycle in 261 seconds ---
+2025-08-02 17:26:50,162 [INFO] - --- Starting IP Rotation: 192.168.56.101 -> 192.168.56.102 ---
+2025-08-02 17:26:50,164 [INFO] - [IP] Attempting to flush IP 192.168.56.101 from interface eth0...
+2025-08-02 17:26:50,305 [INFO] - Output from flush_ip.sh: INFO: IP 192.168.56.101 not found on eth0. No action taken.
+2025-08-02 17:26:50,305 [INFO] - [OK] Successfully flushed IP 192.168.56.101.
+2025-08-02 17:26:50,305 [INFO] - [IP] Attempting to assign IP 192.168.56.102 to interface eth0...
+2025-08-02 17:26:50,416 [ERROR] - Error executing assign_ip.sh. Stderr: RTNETLINK answers: Operation not permitted
+RTNETLINK answers: Operation not permitted
+ERROR: Failed to assign 192.168.56.102 to eth0
+2025-08-02 17:26:50,416 [ERROR] - [!] Failed to assign IP 192.168.56.102.
+2025-08-02 17:26:50,417 [ERROR] - Rotation failed at 'assign' step. Initiating rollback...
+2025-08-02 17:26:50,417 [INFO] - [IP] Attempting to assign IP 192.168.56.101 to interface eth0...
+2025-08-02 17:26:50,522 [ERROR] - Error executing assign_ip.sh. Stderr: RTNETLINK answers: Operation not permitted
+RTNETLINK answers: Operation not permitted
+ERROR: Failed to assign 192.168.56.101 to eth0
+2025-08-02 17:26:50,522 [ERROR] - [!] Failed to assign IP 192.168.56.101.
+2025-08-02 17:26:50,522 [CRITICAL] - [!] CRITICAL: Rollback FAILED. Network interface may be unconfigured!
+2025-08-02 17:26:50,523 [ERROR] - IP rotation failed. System state remains on the old IP.
+2025-08-02 17:26:50,523 [INFO] - --- Next rotation cycle in 348 seconds ---
+2025-08-02 17:27:23,217 [INFO] - --- Morph Net IP Flux Engine Starting ---
+2025-08-02 17:27:23,219 [WARNING] - API_TOKEN not found or not set in secrets.env. DNS updates will fail.
+2025-08-02 17:27:23,219 [INFO] - Configuration loaded successfully.
+2025-08-02 17:27:23,219 [INFO] - Deploying honeypot services...
+2025-08-02 17:27:23,220 [INFO] - Honeypot services launched in background.
+2025-08-02 17:27:23,221 [INFO] - [SSH] Honeypot now listening on port 2593
+2025-08-02 17:27:23,221 [INFO] - [HTTP] Honeypot now listening on port 8718
+2025-08-02 17:27:23,221 [INFO] - Starting the main MTD scheduler...
+2025-08-02 17:27:23,221 [INFO] - Initializing scheduler thread...
+2025-08-02 17:27:23,221 [INFO] - Scheduler started. Initial IP is assumed to be 192.168.56.101.
+2025-08-02 17:27:23,221 [INFO] - Scheduler is running in the background.
+2025-08-02 17:27:23,221 [INFO] - --- [SIMULATION MODE] Starting IP Rotation: 192.168.56.101 -> 192.168.56.102 ---
+2025-08-02 17:27:23,222 [INFO] - --- All services initialized. Monitoring in progress... ---
+2025-08-02 17:27:23,222 [INFO] - [SIMULATING] Flush IP 192.168.56.101 on interface eth0...
+2025-08-02 17:27:23,422 [INFO] - [OK] Simulated Flush of IP 192.168.56.101.
+2025-08-02 17:27:23,423 [INFO] - [SIMULATING] Assign IP 192.168.56.102 on interface eth0...
+2025-08-02 17:27:23,623 [INFO] - [OK] Simulated Assign of IP 192.168.56.102.
+2025-08-02 17:27:23,624 [INFO] - --- [OK] Simulated IP Rotation successful. New IP is 192.168.56.102 ---
+2025-08-02 17:27:23,624 [INFO] - IP rotation successful. New active IP is 192.168.56.102.
+2025-08-02 17:27:23,624 [INFO] - Updating DNS record for your.domain.com to point to 192.168.56.102...
+2025-08-02 17:28:36,645 [INFO] - --- Morph Net IP Flux Engine Shutting Down ---
+2025-08-02 17:32:35,921 [INFO] - --- Morph Net IP Flux Engine Starting ---
+2025-08-02 17:32:35,923 [WARNING] - API_TOKEN not found or not set in secrets.env. DNS updates will fail.
+2025-08-02 17:32:35,923 [INFO] - Configuration loaded successfully.
+2025-08-02 17:32:35,923 [INFO] - Deploying honeypot services...
+2025-08-02 17:32:35,924 [INFO] - Honeypot services launched in background.
+2025-08-02 17:32:35,924 [INFO] - [HTTP] Honeypot now listening on port 8784
+2025-08-02 17:32:35,924 [INFO] - [SSH] Honeypot now listening on port 2938
+2025-08-02 17:32:35,924 [INFO] - Starting the main MTD scheduler...
+2025-08-02 17:32:35,925 [INFO] - Initializing scheduler thread...
+2025-08-02 17:32:35,925 [INFO] - Scheduler started. Initial IP is assumed to be 192.168.56.101.
+2025-08-02 17:32:35,925 [INFO] - Scheduler is running in the background.
+2025-08-02 17:32:35,925 [INFO] - --- [SIMULATION MODE] Starting IP Rotation: 192.168.56.101 -> 192.168.56.103 ---
+2025-08-02 17:32:35,925 [INFO] - --- All services initialized. Monitoring in progress... ---
+2025-08-02 17:32:35,925 [INFO] - [SIMULATING] Flush IP 192.168.56.101 on interface eth0...
+2025-08-02 17:32:36,126 [INFO] - [OK] Simulated Flush of IP 192.168.56.101.
+2025-08-02 17:32:36,126 [INFO] - [SIMULATING] Assign IP 192.168.56.103 on interface eth0...
+2025-08-02 17:32:36,327 [INFO] - [OK] Simulated Assign of IP 192.168.56.103.
+2025-08-02 17:32:36,327 [INFO] - --- [OK] Simulated IP Rotation successful. New IP is 192.168.56.103 ---
+2025-08-02 17:32:36,327 [INFO] - IP rotation successful. New active IP is 192.168.56.103.
+2025-08-02 17:32:36,327 [INFO] - Updating DNS record for your.domain.com to point to 192.168.56.103...
+2025-08-02 17:32:36,327 [WARNING] - [SIMULATING] DNS update because API token is not set.
+2025-08-02 17:32:36,327 [INFO] - [OK] Simulated DNS update: your.domain.com -> 192.168.56.103
+2025-08-02 17:32:36,328 [INFO] - Rotating TLS certificate...
+2025-08-02 17:32:36,407 [ERROR] - TLS certificate generation failed: [Errno 22] Invalid argument: "certs\\{'rotation': {'base_interval': 300, 'jitter_range': 60, 'interface': 'eth0', 'subnet_mask': '/24', 'ip_pool': ['192.168.56.101', '192.168.56.102', '192.168.56.103']}, 'dns': {'provider': 'cloudflare', 'zone_id': 'YOUR_CLOUDFLARE_ZONE_ID', 'record_name': 'your.domain.com', 'proxied': False, 'ttl': 60, 'api_token': 'YOUR_CLOUDFLARE_API_TOKEN'}, 'tls': {'cert_dir': 'certs', 'validity_days': 90, 'common_names': ['web.prod.local', 'api.internal.net', 'data.storage.server'], 'organization_names': ['Acme Corp', 'Cyberdyne Systems', 'Stark Industries']}, 'honeypot': {'http_range': [8000, 9000], 'ssh_range': [2000, 3000]}}_key.pem"
+2025-08-02 17:32:36,407 [INFO] - --- Next rotation cycle in 325 seconds ---
+2025-08-02 17:39:56,806 [INFO] - --- Morph Net IP Flux Engine Starting ---
+2025-08-02 17:39:56,809 [WARNING] - API_TOKEN not found or not set in secrets.env. DNS updates will fail.
+2025-08-02 17:39:56,809 [INFO] - Configuration loaded successfully.
+2025-08-02 17:39:56,809 [INFO] - Deploying honeypot services...
+2025-08-02 17:39:56,810 [INFO] - Honeypot services launched in background.
+2025-08-02 17:39:56,810 [INFO] - [HTTP] Honeypot now listening on port 8697
+2025-08-02 17:39:56,810 [INFO] - [SSH] Honeypot now listening on port 2493
+2025-08-02 17:39:56,810 [INFO] - Starting the main MTD scheduler...
+2025-08-02 17:39:56,810 [INFO] - Initializing scheduler thread...
+2025-08-02 17:39:56,811 [INFO] - Scheduler started. Initial IP is assumed to be 192.168.56.101.
+2025-08-02 17:39:56,811 [INFO] - Scheduler is running in the background.
+2025-08-02 17:39:56,811 [INFO] - --- [SIMULATION MODE] Starting IP Rotation: 192.168.56.101 -> 192.168.56.102 ---
+2025-08-02 17:39:56,811 [INFO] - --- All services initialized. Monitoring in progress... ---
+2025-08-02 17:39:56,811 [INFO] - [SIMULATING] Flush IP 192.168.56.101 on interface eth0...
+2025-08-02 17:39:57,011 [INFO] - [OK] Simulated Flush of IP 192.168.56.101.
+2025-08-02 17:39:57,012 [INFO] - [SIMULATING] Assign IP 192.168.56.102 on interface eth0...
+2025-08-02 17:39:57,213 [INFO] - [OK] Simulated Assign of IP 192.168.56.102.
+2025-08-02 17:39:57,216 [INFO] - --- [OK] Simulated IP Rotation successful. New IP is 192.168.56.102 ---
+2025-08-02 17:39:57,216 [INFO] - IP rotation successful. New active IP is 192.168.56.102.
+2025-08-02 17:39:57,217 [INFO] - Updating DNS record for your.domain.com to point to 192.168.56.102...
+2025-08-02 17:39:57,217 [WARNING] - [SIMULATING] DNS update because API token is not set.
+2025-08-02 17:39:57,217 [INFO] - [OK] Simulated DNS update: your.domain.com -> 192.168.56.102
+2025-08-02 17:39:57,217 [INFO] - Rotating TLS certificate...
+2025-08-02 17:39:57,275 [ERROR] - TLS certificate generation failed: [Errno 22] Invalid argument: "certs\\{'rotation': {'base_interval': 300, 'jitter_range': 60, 'interface': 'eth0', 'subnet_mask': '/24', 'ip_pool': ['192.168.56.101', '192.168.56.102', '192.168.56.103']}, 'dns': {'provider': 'cloudflare', 'zone_id': 'YOUR_CLOUDFLARE_ZONE_ID', 'record_name': 'your.domain.com', 'proxied': False, 'ttl': 60, 'api_token': 'YOUR_CLOUDFLARE_API_TOKEN'}, 'tls': {'cert_dir': 'certs', 'validity_days': 90, 'common_names': ['web.prod.local', 'api.internal.net', 'data.storage.server'], 'organization_names': ['Acme Corp', 'Cyberdyne Systems', 'Stark Industries']}, 'honeypot': {'http_range': [8000, 9000], 'ssh_range': [2000, 3000]}}_key.pem"
+2025-08-02 17:39:57,276 [INFO] - --- Next rotation cycle in 291 seconds ---
+2025-08-02 17:48:33,675 [INFO] - --- Morph Net IP Flux Engine Starting ---
+2025-08-02 17:48:33,679 [WARNING] - API_TOKEN not found or not set in secrets.env. DNS updates will fail.
+2025-08-02 17:48:33,679 [INFO] - Configuration loaded successfully.
+2025-08-02 17:48:33,679 [INFO] - Deploying honeypot services...
+2025-08-02 17:48:33,680 [INFO] - Honeypot services launched in background.
+2025-08-02 17:48:33,680 [INFO] - Starting the main MTD scheduler...
+2025-08-02 17:48:33,680 [INFO] - [SSH] Honeypot now listening on port 2692
+2025-08-02 17:48:33,680 [INFO] - [HTTP] Honeypot now listening on port 8613
+2025-08-02 17:48:33,680 [INFO] - Initializing scheduler thread...
+2025-08-02 17:48:33,681 [INFO] - Scheduler started. Initial IP is assumed to be 192.168.56.101.
+2025-08-02 17:48:33,681 [INFO] - Scheduler is running in the background.
+2025-08-02 17:48:33,682 [INFO] - --- [SIMULATION MODE] Starting IP Rotation: 192.168.56.101 -> 192.168.56.103 ---
+2025-08-02 17:48:33,682 [INFO] - --- All services initialized. Monitoring in progress... ---
+2025-08-02 17:48:33,682 [INFO] - [SIMULATING] Flush IP 192.168.56.101 on interface eth0...
+2025-08-02 17:48:33,883 [INFO] - [OK] Simulated Flush of IP 192.168.56.101.
+2025-08-02 17:48:33,883 [INFO] - [SIMULATING] Assign IP 192.168.56.103 on interface eth0...
+2025-08-02 17:48:34,084 [INFO] - [OK] Simulated Assign of IP 192.168.56.103.
+2025-08-02 17:48:34,084 [INFO] - --- [OK] Simulated IP Rotation successful. New IP is 192.168.56.103 ---
+2025-08-02 17:48:34,085 [INFO] - IP rotation successful. New active IP is 192.168.56.103.
+2025-08-02 17:48:34,085 [INFO] - Updating DNS record for your.domain.com to point to 192.168.56.103...
+2025-08-02 17:48:34,085 [WARNING] - [SIMULATING] DNS update because API token is not set.
+2025-08-02 17:48:34,086 [INFO] - [OK] Simulated DNS update: your.domain.com -> 192.168.56.103
+2025-08-02 17:48:34,086 [INFO] - Rotating TLS certificate...
+2025-08-02 17:48:34,149 [ERROR] - TLS certificate generation failed: [Errno 22] Invalid argument: "certs\\{'rotation': {'base_interval': 300, 'jitter_range': 60, 'interface': 'eth0', 'subnet_mask': '/24', 'ip_pool': ['192.168.56.101', '192.168.56.102', '192.168.56.103']}, 'dns': {'provider': 'cloudflare', 'zone_id': 'YOUR_CLOUDFLARE_ZONE_ID', 'record_name': 'your.domain.com', 'proxied': False, 'ttl': 60, 'api_token': 'YOUR_CLOUDFLARE_API_TOKEN'}, 'tls': {'cert_dir': 'certs', 'validity_days': 90, 'common_names': ['web.prod.local', 'api.internal.net', 'data.storage.server'], 'organization_names': ['Acme Corp', 'Cyberdyne Systems', 'Stark Industries']}, 'honeypot': {'http_range': [8000, 9000], 'ssh_range': [2000, 3000]}}_key.pem"
+2025-08-02 17:48:34,149 [INFO] - --- Next rotation cycle in 241 seconds ---
+2025-08-02 17:52:35,150 [INFO] - --- [SIMULATION MODE] Starting IP Rotation: 192.168.56.103 -> 192.168.56.101 ---
+2025-08-02 17:52:35,151 [INFO] - [SIMULATING] Flush IP 192.168.56.103 on interface eth0...
+2025-08-02 17:52:35,352 [INFO] - [OK] Simulated Flush of IP 192.168.56.103.
+2025-08-02 17:52:35,352 [INFO] - [SIMULATING] Assign IP 192.168.56.101 on interface eth0...
+2025-08-02 17:52:35,553 [INFO] - [OK] Simulated Assign of IP 192.168.56.101.
+2025-08-02 17:52:35,553 [INFO] - --- [OK] Simulated IP Rotation successful. New IP is 192.168.56.101 ---
+2025-08-02 17:52:35,553 [INFO] - IP rotation successful. New active IP is 192.168.56.101.
+2025-08-02 17:52:35,554 [INFO] - Updating DNS record for your.domain.com to point to 192.168.56.101...
+2025-08-02 17:52:35,554 [WARNING] - [SIMULATING] DNS update because API token is not set.
+2025-08-02 17:52:35,554 [INFO] - [OK] Simulated DNS update: your.domain.com -> 192.168.56.101
+2025-08-02 17:52:35,554 [INFO] - Rotating TLS certificate...
+2025-08-02 17:52:35,595 [ERROR] - TLS certificate generation failed: [Errno 22] Invalid argument: "certs\\{'rotation': {'base_interval': 300, 'jitter_range': 60, 'interface': 'eth0', 'subnet_mask': '/24', 'ip_pool': ['192.168.56.101', '192.168.56.102', '192.168.56.103']}, 'dns': {'provider': 'cloudflare', 'zone_id': 'YOUR_CLOUDFLARE_ZONE_ID', 'record_name': 'your.domain.com', 'proxied': False, 'ttl': 60, 'api_token': 'YOUR_CLOUDFLARE_API_TOKEN'}, 'tls': {'cert_dir': 'certs', 'validity_days': 90, 'common_names': ['web.prod.local', 'api.internal.net', 'data.storage.server'], 'organization_names': ['Acme Corp', 'Cyberdyne Systems', 'Stark Industries']}, 'honeypot': {'http_range': [8000, 9000], 'ssh_range': [2000, 3000]}}_key.pem"
+2025-08-02 17:52:35,595 [INFO] - --- Next rotation cycle in 240 seconds ---
+2025-08-02 17:53:40,971 [INFO] - --- Morph Net IP Flux Engine Starting ---
+2025-08-02 17:53:40,973 [WARNING] - API_TOKEN not found or not set in secrets.env. DNS updates will fail.
+2025-08-02 17:53:40,973 [INFO] - Configuration loaded successfully.
+2025-08-02 17:53:40,973 [INFO] - Deploying honeypot services...
+2025-08-02 17:53:40,974 [INFO] - Honeypot services launched in background.
+2025-08-02 17:53:40,974 [INFO] - Starting the main MTD scheduler...
+2025-08-02 17:53:40,974 [INFO] - [HTTP] Honeypot now listening on port 8322
+2025-08-02 17:53:40,974 [INFO] - [SSH] Honeypot now listening on port 2958
+2025-08-02 17:53:40,974 [INFO] - Initializing scheduler thread...
+2025-08-02 17:53:40,974 [INFO] - Scheduler started. Initial IP is assumed to be 192.168.56.101.
+2025-08-02 17:53:40,974 [INFO] - Scheduler is running in the background.
+2025-08-02 17:53:40,975 [INFO] - --- [SIMULATION MODE] Starting IP Rotation: 192.168.56.101 -> 192.168.56.103 ---
+2025-08-02 17:53:40,975 [INFO] - --- All services initialized. Monitoring in progress... ---
+2025-08-02 17:53:40,975 [INFO] - [SIMULATING] Flush IP 192.168.56.101 on interface eth0...
+2025-08-02 17:53:41,175 [INFO] - [OK] Simulated Flush of IP 192.168.56.101.
+2025-08-02 17:53:41,176 [INFO] - [SIMULATING] Assign IP 192.168.56.103 on interface eth0...
+2025-08-02 17:53:41,377 [INFO] - [OK] Simulated Assign of IP 192.168.56.103.
+2025-08-02 17:53:41,377 [INFO] - --- [OK] Simulated IP Rotation successful. New IP is 192.168.56.103 ---
+2025-08-02 17:53:41,377 [INFO] - IP rotation successful. New active IP is 192.168.56.103.
+2025-08-02 17:53:41,377 [INFO] - Updating DNS record for your.domain.com to point to 192.168.56.103...
+2025-08-02 17:53:41,378 [WARNING] - [SIMULATING] DNS update because API token is not set.
+2025-08-02 17:53:41,378 [INFO] - [OK] Simulated DNS update: your.domain.com -> 192.168.56.103
+2025-08-02 17:53:41,378 [INFO] - Rotating TLS certificate...
+2025-08-02 17:53:41,412 [INFO] - [OK] Generated new TLS cert (CN=data.storage.server). Expires: 2025-10-31
+2025-08-02 17:53:41,412 [INFO] - --- Next rotation cycle in 256 seconds ---
+2025-08-02 17:54:25,675 [INFO] - --- Morph Net IP Flux Engine Shutting Down ---
