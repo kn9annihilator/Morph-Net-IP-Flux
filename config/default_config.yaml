@@ -1,16 +1,32 @@
 rotation:
   base_interval: 300
   jitter_range: 60
-  interface: eth0
+  interface: "eth0"
+  subnet_mask: "/24"
   ip_pool:
-    - 192.168.56.101
-    - 192.168.56.102
-    - 192.168.56.103
+    - "192.168.56.101"
+    - "192.168.56.102"
+    - "192.168.56.103"
 
 dns:
-  provider: cloudflare
-  api_token: YOUR_CLOUDFLARE_API_TOKEN
-  zone_id: YOUR_CLOUDFLARE_ZONE_ID
-  record_name: your.domain.com
+  provider: "cloudflare"
+  zone_id: "YOUR_CLOUDFLARE_ZONE_ID"
+  record_name: "your.domain.com"
   proxied: false
+  ttl: 60
 
+tls:
+  cert_dir: "certs"
+  validity_days: 90
+  common_names:
+    - "web.prod.local"
+    - "api.internal.net"
+    - "data.storage.server"
+  organization_names:
+    - "Acme Corp"
+    - "Cyberdyne Systems"
+    - "Stark Industries"
+
+honeypot:
+  http_range: [8000, 9000]
+  ssh_range: [2000, 3000]

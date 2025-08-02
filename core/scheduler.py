@@ -1,103 +1,77 @@
-"""
-Module: core/scheduler.py
-
-Purpose:
-Controls timed rotation of IP addresses using jittered/random scheduling.
-Loads IP pool from config, selects new IPs, and invokes the IP rotation logic.
-Can be extended to integrate with DNS, logging services, and decoy infrastructure.
-"""
+# core/scheduler.py
 
 import time
 import random
 import logging
-import yaml
-from datetime import datetime
+import threading
+
+# We will import these functions, which will be refactored later
 from core.ip_manager import rotate_ip
+from core.dns_controller import update_dns_record
 from core.tls_manager import rotate_tls_cert
 
-
-# ---------------------------
-# Load Configuration
-# ---------------------------
-def load_config(path="config/default_config.yaml"):
-    with open(path, "r") as file:
-        return yaml.safe_load(file)
-
-# ---------------------------
-# Setup Logging
-# ---------------------------
-def setup_logger():
-    logging.basicConfig(
-        filename="logs/rotation.log",
-        level=logging.INFO,
-        format="%(asctime)s [%(levelname)s] %(message)s"
-    )
-
-# ---------------------------
-# Pick Next IP Address
-# ---------------------------
-def choose_new_ip(ip_pool, current_ip):
+def _perform_full_rotation(config: dict, current_ip: str) -> str:
+    """
+    Performs the full MTD rotation cycle: IP -> DNS -> TLS.
+    Returns the new IP on success, or the old IP on failure.
+    """
+    rotation_config = config.get("rotation", {})
+    ip_pool = rotation_config.get("ip_pool", [])
+    interface = rotation_config.get("interface", "eth0")
+    subnet_mask = rotation_config.get("subnet_mask", "/24")
+    
+    # 1. Choose a new IP different from the current one
     candidates = [ip for ip in ip_pool if ip != current_ip]
-    return random.choice(candidates) if candidates else current_ip
+    if not candidates:
+        logging.warning("No available IPs to rotate to. Skipping rotation cycle.")
+        return current_ip
+    new_ip = random.choice(candidates)
 
-# ---------------------------
-# Rotation Task
-# ---------------------------
-def perform_rotation(config, current_ip):
-    ip_pool = config["rotation"]["ip_pool"]
-    interface = config["rotation"]["interface"]
-
-    new_ip = choose_new_ip(ip_pool, current_ip)
-    success = rotate_ip(current_ip, new_ip, interface)
-
-    if success:
-        logging.info(f"IP rotation successful: {current_ip} ➜ {new_ip}")
+    # 2. Rotate the IP address. This is the most critical step.
+    if rotate_ip(current_ip, new_ip, interface, subnet_mask):
+        logging.info(f"IP rotation successful. New active IP is {new_ip}.")
+        
+        # 3. Update DNS record to point to the new IP.
+        # This now happens ONLY after a successful IP rotation.
+        logging.info(f"Updating DNS record for {config['dns']['record_name']} to point to {new_ip}...")
+        update_dns_record(config, new_ip) # We will refactor this function next
+        
+        # 4. Rotate TLS certificate to de-correlate identity
+        logging.info("Rotating TLS certificate...")
+        rotate_tls_cert(config) # We will refactor this function next
+        
+        # Return the new IP as the new current state
         return new_ip
     else:
-        logging.warning("IP rotation failed.")
+        # If rotate_ip failed, it already logged the error and attempted a rollback.
+        # We return the old IP to signify that the state has not changed.
+        logging.error("IP rotation failed. System state remains on the old IP.")
         return current_ip
 
-# ---------------------------
-# Main Scheduler Loop
-# ---------------------------
-def scheduler_loop():
-    setup_logger()
-    config = load_config()
-    base_interval = config["rotation"]["base_interval"]
-    jitter_range = config["rotation"]["jitter_range"]
-    ip_pool = config["rotation"]["ip_pool"]
-    current_ip = ip_pool[0]  # Starting IP
-
-    logging.info("Scheduler started.")
-
-    # Rotate TLS cert at startup
-    try:
-        cert_path, key_path = rotate_tls_cert()
-        logging.info(f"TLS certificate rotated at startup. Paths: {cert_path}, {key_path}")
-    except Exception as e:
-        logging.error(f"Failed to rotate TLS certificate at startup: {e}")
-
+def scheduler_loop(config: dict):
+    """The main scheduler loop that triggers MTD cycles."""
+    rotation_config = config.get("rotation", {})
+    base_interval = rotation_config.get("base_interval", 300)
+    jitter_range = rotation_config.get("jitter_range", 60)
+    
+    # Assume starting IP is the first in the pool.
+    # A more advanced version could detect the initial IP.
+    current_ip = rotation_config.get("ip_pool", ["127.0.0.1"])[0]
+    logging.info(f"Scheduler started. Initial IP is assumed to be {current_ip}.")
+    
     while True:
-        current_ip = perform_rotation(config, current_ip)
-
+        # Perform the full rotation logic
+        current_ip = _perform_full_rotation(config, current_ip)
+        
+        # Calculate the next wait time with jitter
         jitter = random.randint(-jitter_range, jitter_range)
-        wait_time = max(10, base_interval + jitter)
-        logging.info(f"Next rotation in {wait_time} seconds")
+        wait_time = max(10, base_interval + jitter) # Ensure wait time is at least 10s
+        logging.info(f"--- Next rotation cycle in {wait_time} seconds ---")
         time.sleep(wait_time)
 
-# ---------------------------
-# Start in Thread (for main.py)
-# ---------------------------
-def start_scheduler():
-    import threading
-    thread = threading.Thread(target=scheduler_loop, daemon=True)
+def start_scheduler(config: dict):
+    """Starts the scheduler loop in a non-blocking background thread."""
+    logging.info("Initializing scheduler thread...")
+    thread = threading.Thread(target=scheduler_loop, args=(config,), daemon=True)
     thread.start()
-
-# ---------------------------
-# Entry Point (for testing only)
-# ---------------------------
-if __name__ == "__main__":
-    try:
-        scheduler_loop()
-    except KeyboardInterrupt:
-        logging.info("Scheduler stopped by user.")
+    logging.info("Scheduler is running in the background.")

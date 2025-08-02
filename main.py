@@ -1,117 +1,80 @@
 # main.py
 
 import os
-import yaml
-import dotenv
-import threading
 import time
-from core.port_randomizer import randomize_ports
+import logging
+import yaml
+from dotenv import load_dotenv
 
-
-# Import project modules
-from core.ip_manager import rotate_ip
+# Import the functions from our refactored core modules
 from core.scheduler import start_scheduler
-from core.dns_controller import update_dns_record
 from core.honeypot_deployer import launch_honeypots
-from core.tls_manager import rotate_tls_cert
+# We will handle port_randomizer later; it's not critical for the core loop.
 
+def initialize():
+    """Loads configuration, sets up global logging, and creates directories."""
+    # 1. Create necessary directories if they don't exist
+    os.makedirs("logs", exist_ok=True)
+    os.makedirs("certs", exist_ok=True)
 
+    # 2. Setup global logging to print to console and file
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s [%(levelname)s] - %(message)s",
+        handlers=[
+            logging.FileHandler("logs/rotation.log"),
+            logging.StreamHandler() # This sends logs to the console
+        ]
+    )
+    logging.info("--- Morph Net IP Flux Engine Starting ---")
 
-# -----------------------------
-# Step 1: Load Configurations
-# -----------------------------
-
-def load_config():
-    """
-    Load configuration from YAML and environment files.
-    """
-    config_path = "config/default_config.yaml"
-    env_path = "config/secrets.env"
-
-    # Load environment variables
-    if os.path.exists(env_path):
-        dotenv.load_dotenv(env_path)
-
-    # Load YAML config
-    with open(config_path, "r") as file:
-        config = yaml.safe_load(file)
-    return config
-
-# -----------------------------
-# Step 2: Start Core Services
-# -----------------------------
-
-def init_ip_rotation(config):
-    """
-    Initialize IP rotation logic using config.
-    """
-    old_ip = config.get("ip_rotation", {}).get("old_ip", "192.168.1.100")
-    new_ip = config.get("ip_rotation", {}).get("new_ip", "192.168.1.101")
-    print(f"[+] Rotating IP from {old_ip} to {new_ip}...")
-    success = rotate_ip(old_ip, new_ip)
-    if success:
-        print("[✓] IP Rotation successful.")
-    else:
-        print("[!] IP Rotation failed.")
-
-def init_dns_update(config):
-    """
-    Trigger DNS update (stub logic).
-    """
-    domain = config.get("dns", {}).get("domain", "example.com")
-    new_ip = config.get("ip_rotation", {}).get("new_ip", "192.168.1.101")
-    ttl = config.get("dns", {}).get("ttl", 60)
-    update_dns_record(new_ip)
-    print(f"[✓] DNS record updated for {domain} -> {new_ip}")
-
-def init_scheduler():
-    """
-    Starts the system scheduler in a background thread.
-    """
-    print("[~] Launching scheduler...")
-    scheduler_thread = threading.Thread(target=start_scheduler, daemon=True)
-    scheduler_thread.start()
-    print("[✓] Scheduler running in background.")
-
-def init_honeypots():
-    """
-    Start honeypot services for HTTP and SSH decoys.
-    """
-    print("[~] Deploying honeypots...")
-    honeypot_thread = threading.Thread(target=launch_honeypots, daemon=True)
-    honeypot_thread.start()
-    print("[✓] Honeypots running in background.")
-
-# -----------------------------
-# Entrypoint
-# -----------------------------
+    # 3. Load configurations from YAML and .env
+    try:
+        with open("config/default_config.yaml", "r") as f:
+            config = yaml.safe_load(f)
+        
+        # Load secrets from .env file
+        load_dotenv("secrets.env")
+        api_token = os.getenv("API_TOKEN")
+        
+        if not api_token or api_token == "YOUR_CLOUDFLARE_API_TOKEN":
+            logging.warning("API_TOKEN not found or not set in secrets.env. DNS updates will fail.")
+        
+        # Inject the secret into the config dictionary for easy passing
+        if "dns" not in config: config["dns"] = {}
+        config["dns"]["api_token"] = api_token
+        
+        logging.info("Configuration loaded successfully.")
+        return config
+    except FileNotFoundError:
+        logging.critical("FATAL: config/default_config.yaml not found. Exiting.")
+        exit(1)
+    except Exception as e:
+        logging.critical(f"FATAL: Error loading configuration: {e}. Exiting.")
+        exit(1)
 
 def main():
-    print("\n[+] Morph Net IP Flux — Dynamic Defense Engine Starting...\n")
+    """Main entry point for the application."""
+    config = initialize()
 
-    port_map = randomize_ports()
-    print(f"[✓] Ports randomized: {port_map}")
+    # Deploy Honeypots in the background
+    logging.info("Deploying honeypot services...")
+    launch_honeypots(config)
 
+    # Start the main IP rotation scheduler in the background
+    logging.info("Starting the main MTD scheduler...")
+    start_scheduler(config)
 
+    logging.info("--- All services initialized. Monitoring in progress... ---")
+
+    # Keep the main thread alive to allow background threads to run
     try:
-        config = load_config()
-
-        # Initialize components
-        init_ip_rotation(config)
-        init_dns_update(config)
-        init_honeypots()
-        init_scheduler()
-
-        # Keep the main process alive
-        print("[✓] All services initialized. Monitoring in progress...\n")
         while True:
-            time.sleep(60)
-
+            time.sleep(1)
     except KeyboardInterrupt:
-        print("\n[!] Shutdown signal received. Exiting gracefully...\n")
-
-    except Exception as e:
-        print(f"[X] Fatal error occurred: {e}\n")
+        logging.info("--- Morph Net IP Flux Engine Shutting Down ---")
 
 if __name__ == "__main__":
+    # Before running, ensure you have the necessary packages installed:
+    # pip install python-dotenv PyYAML requests cryptography
     main()

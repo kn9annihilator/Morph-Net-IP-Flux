@@ -1,151 +1,95 @@
- # core/honeypot_deployer.py
+# core/honeypot_deployer.py
 
 import socket
 import threading
 import json
 import os
 import random
-import time
+import logging
 from datetime import datetime
 
-# ---------------------------
-# Configuration
-# ---------------------------
+# A lock to prevent race conditions when writing to the log file
+log_lock = threading.Lock()
 
-HTTP_PORT_RANGE = (8000, 9000)
-SSH_PORT_RANGE = (2200, 2300)
-LOG_FILE = "logs/honeypot_hits.json"
-
-# ---------------------------
-# Port Generator
-# ---------------------------
-
-def get_random_port(port_range):
-    """
-    Get a random available port within a given range.
-    """
-    while True:
-        port = random.randint(*port_range)
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
-            try:
-                sock.bind(("0.0.0.0", port))
-                return port
-            except OSError:
-                continue  # Try another port if unavailable
-
-# ---------------------------
-# Logging Function
-# ---------------------------
-
-def log_event(service_type, client_ip, client_port, decoy_port):
-    """
-    Log a honeypot hit with timestamp, IP, and port.
-    """
+def log_event(service_type: str, client_ip: str, client_port: int, decoy_port: int):
+    """Logs a honeypot hit to a JSON file in a thread-safe manner."""
     log_entry = {
-        "timestamp": datetime.utcnow().isoformat(),
+        "timestamp": datetime.utcnow().isoformat() + "Z",
         "service": service_type,
         "source_ip": client_ip,
         "source_port": client_port,
         "decoy_port": decoy_port
     }
-
-    os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
-    if not os.path.isfile(LOG_FILE):
-        with open(LOG_FILE, "w") as f:
-            json.dump([], f, indent=2)
-
-    with open(LOG_FILE, "r+") as f:
+    
+    log_file = "logs/honeypot_hits.json"
+    
+    # Use a lock to ensure only one thread can write to the file at a time
+    with log_lock:
         try:
-            data = json.load(f)
-        except json.JSONDecodeError:
-            data = []
-        data.append(log_entry)
-        f.seek(0)
-        json.dump(data, f, indent=2)
+            # Ensure directory exists
+            os.makedirs(os.path.dirname(log_file), exist_ok=True)
+            
+            # Read existing data
+            if os.path.exists(log_file) and os.path.getsize(log_file) > 0:
+                with open(log_file, "r") as f:
+                    data = json.load(f)
+            else:
+                data = []
+            
+            # Append new entry and write back
+            data.append(log_entry)
+            with open(log_file, "w") as f:
+                json.dump(data, f, indent=2)
+                
+        except (IOError, json.JSONDecodeError) as e:
+            logging.error(f"Error writing to honeypot log: {e}")
 
-# ---------------------------
-# Fake HTTP Server
-# ---------------------------
-
-def start_fake_http_server(port):
-    """
-    Starts a fake HTTP server that accepts any request and returns a generic response.
-    """
+def _start_decoy_server(port: int, service_type: str, banner: bytes):
+    """A generic handler to start a decoy TCP server on a given port."""
     def handler(conn, addr):
         try:
-            request = conn.recv(1024).decode(errors="ignore")
-            log_event("HTTP", addr[0], addr[1], port)
-            response = b"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n\r\nWelcome to MorphNetIPFlux."
-            conn.sendall(response)
-        except Exception:
-            pass
+            log_event(service_type, addr[0], addr[1], port)
+            conn.sendall(banner)
+        except socket.error as e:
+            logging.debug(f"Socket error on {service_type} honeypot: {e}")
         finally:
             conn.close()
 
-    def server():
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-            s.bind(("0.0.0.0", port))
-            s.listen(5)
-            print(f"[HTTP] Honeypot listening on port {port}")
-            while True:
-                conn, addr = s.accept()
-                threading.Thread(target=handler, args=(conn, addr), daemon=True).start()
-
-    threading.Thread(target=server, daemon=True).start()
-
-# ---------------------------
-# Fake SSH Server
-# ---------------------------
-
-def start_fake_ssh_server(port):
-    """
-    Starts a fake SSH server that sends a fake SSH banner and closes connection.
-    """
-    def handler(conn, addr):
+    def server_loop():
         try:
-            conn.sendall(b"SSH-2.0-OpenSSH_7.9p1 Debian-10\r\n")
-            log_event("SSH", addr[0], addr[1], port)
-        except Exception:
-            pass
-        finally:
-            conn.close()
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+                s.bind(("0.0.0.0", port))
+                s.listen(5)
+                logging.info(f"[{service_type}] Honeypot now listening on port {port}")
+                while True:
+                    conn, addr = s.accept()
+                    threading.Thread(target=handler, args=(conn, addr), daemon=True).start()
+        except OSError as e:
+            logging.error(f"Failed to bind {service_type} honeypot to port {port}: {e}")
 
-    def server():
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-            s.bind(("0.0.0.0", port))
-            s.listen(5)
-            print(f"[SSH] Honeypot listening on port {port}")
-            while True:
-                conn, addr = s.accept()
-                threading.Thread(target=handler, args=(conn, addr), daemon=True).start()
+    # Start the server loop in a background thread
+    threading.Thread(target=server_loop, daemon=True).start()
 
-    threading.Thread(target=server, daemon=True).start()
-
-# ---------------------------
-# Entrypoint
-# ---------------------------
-
-def launch_honeypots():
+def launch_honeypots(config: dict):
     """
     Launches fake HTTP and SSH servers on random decoy ports.
+    This function is non-blocking.
     """
-    http_port = get_random_port(HTTP_PORT_RANGE)
-    ssh_port = get_random_port(SSH_PORT_RANGE)
+    honeypot_config = config.get("honeypot", {})
+    http_range = honeypot_config.get("http_range", [8000, 9000])
+    ssh_range = honeypot_config.get("ssh_range", [2000, 3000])
 
-    start_fake_http_server(http_port)
-    start_fake_ssh_server(ssh_port)
+    # Get random ports for the decoys
+    http_port = random.randint(*http_range)
+    ssh_port = random.randint(*ssh_range)
 
-    # Keep the script alive (in real deploy, use a process manager)
-    try:
-        while True:
-            time.sleep(60)
-    except KeyboardInterrupt:
-        print("Honeypots terminated.")
+    # Define banners
+    http_banner = b"HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n<h1>Welcome</h1>"
+    ssh_banner = b"SSH-2.0-OpenSSH_8.2p1 Ubuntu-4ubuntu0.1\r\n"
 
-# ---------------------------
-# CLI Entry
-# ---------------------------
-
-if __name__ == "__main__":
-    launch_honeypots()
-
+    # Launch servers
+    _start_decoy_server(http_port, "HTTP", http_banner)
+    _start_decoy_server(ssh_port, "SSH", ssh_banner)
+    
+    logging.info("Honeypot services launched in background.")

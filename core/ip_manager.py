@@ -1,117 +1,84 @@
 # core/ip_manager.py
 
-"""
-Handles IP assignment and flushing on a network interface
-for Moving Target Defense, via shell scripts.
-"""
-
 import os
 import subprocess
 import logging
-from core.dns_controller import update_dns_record
 
+def _to_wsl_path(path: str) -> str:
+    """Converts a Windows path to a WSL-compatible path if necessary."""
+    if os.name == 'nt' and len(path) > 2 and path[1] == ':':
+        drive = path[0].lower()
+        rest_of_path = path[2:].replace('\\', '/')
+        return f"/mnt/{drive}{rest_of_path}"
+    return path.replace("\\", "/")
 
-# ---------------------------
-# Setup Constants
-# ---------------------------
-
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SHELL_DIR = os.path.join(BASE_DIR, "shell")
-LOG_FILE = os.path.join(BASE_DIR, "logs", "rotation.log")
-
-# ---------------------------
-# Setup Logging
-# ---------------------------
-
-logging.basicConfig(
-    filename=LOG_FILE,
-    level=logging.INFO,
-    format="%(asctime)s - %(levelname)s - %(message)s"
-)
-
-# ---------------------------
-# IP Assign Function
-# ---------------------------
-
-def assign_ip(ip_address: str, interface: str = "eth0") -> bool:
-    """
-    Assigns a new IP to a given network interface using shell script.
-    """
-    script_path = os.path.join(SHELL_DIR, "assign_ip.sh").replace("\\", "/")
-    if script_path[1:3] == ":/":  # e.g., D:/...
-        script_path = f"/mnt/{script_path[0].lower()}{script_path[2:]}"
-
-
-
+def _run_script(script_name: str, *args) -> bool:
+    """A robust helper to run a shell script and handle its output."""
     try:
-        subprocess.run(["bash", script_path, ip_address, interface], check=True)
-        logging.info(f"Assigned IP {ip_address} to interface {interface}")
-        return True
-    except subprocess.CalledProcessError as e:
-        logging.error(f"Failed to assign IP {ip_address} to {interface}: {str(e)}")
-        return False
-
-# ---------------------------
-# IP Flush Function
-# ---------------------------
-
-def flush_ip(ip_address: str, interface: str = "eth0") -> bool:
-    """
-    Flushes/removes an IP from the given network interface using shell script.
-    Uses WSL-safe paths for Git Bash/Windows compatibility.
-    """
-    script_path = os.path.join(SHELL_DIR, "flush_ip.sh")
-    script_path = os.path.abspath(script_path).replace("\\", "/")
-
-    # Convert Windows path to WSL-style if needed
-    if script_path[1:3] == ":/":
-        drive_letter = script_path[0].lower()
-        script_path = f"/mnt/{drive_letter}{script_path[2:]}"
-
-    try:
+        script_path = os.path.join(os.path.dirname(__file__), "..", "shell", script_name)
+        script_path = _to_wsl_path(script_path)
+        
+        cmd = ["bash", script_path, *args]
         result = subprocess.run(
-            ["bash", script_path, ip_address, interface],
-            check=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE
+            cmd, 
+            check=True, 
+            capture_output=True, 
+            text=True,
+            timeout=30 # Add a timeout for reliability
         )
-        logging.info(f"Flushed IP {ip_address} from interface {interface}")
+        if result.stdout:
+            logging.info(f"Output from {script_name}: {result.stdout.strip()}")
         return True
+    except subprocess.TimeoutExpired:
+        logging.error(f"Execution of {script_name} timed out.")
+        return False
     except subprocess.CalledProcessError as e:
-        logging.error(f"Flush IP stderr: {e.stderr.decode().strip()}")
-        logging.error(f"Failed to flush IP {ip_address} from {interface}: {str(e)}")
+        logging.error(f"Error executing {script_name}. Stderr: {e.stderr.strip()}")
         return False
 
-
-# ---------------------------
-# Rotate IP (Flush + Assign)
-# ---------------------------
-
-def rotate_ip(old_ip: str, new_ip: str, interface: str = "eth0") -> bool:
-    """
-    Flushes old IP and assigns new IP atomically.
-    """
-    logging.info(f"Rotating IP: {old_ip} → {new_ip}")
-    flushed = flush_ip(old_ip, interface)
-    assigned = assign_ip(new_ip, interface)
-
-    if flushed and assigned:
-        logging.info(f"IP rotation successful: {old_ip} → {new_ip}")
-        update_dns_record(new_ip)
-        return True
-
-    else:
-        logging.error(f"IP rotation failed: {old_ip} → {new_ip}")
-        return False
-
-# ---------------------------
-# Test Run
-# ---------------------------
-
-if __name__ == "__main__":
-    success = rotate_ip("192.168.1.100", "192.168.1.101")
+def assign_ip(ip_address: str, interface: str, subnet_mask: str) -> bool:
+    """Assigns a new IP to a given network interface."""
+    logging.info(f"[IP] Attempting to assign IP {ip_address} to interface {interface}...")
+    success = _run_script("assign_ip.sh", ip_address, interface, subnet_mask)
     if success:
-        print("IP rotation succeeded.")
+        # Replaced '✓' with '[OK]' for Windows compatibility
+        logging.info(f"[OK] Successfully assigned IP {ip_address}.")
     else:
-        print("IP rotation failed.")
+        logging.error(f"[!] Failed to assign IP {ip_address}.")
+    return success
 
+def flush_ip(ip_address: str, interface: str, subnet_mask: str) -> bool:
+    """Flushes an IP from the given network interface."""
+    logging.info(f"[IP] Attempting to flush IP {ip_address} from interface {interface}...")
+    success = _run_script("flush_ip.sh", ip_address, interface, subnet_mask)
+    if success:
+        # Replaced '✓' with '[OK]' for Windows compatibility
+        logging.info(f"[OK] Successfully flushed IP {ip_address}.")
+    else:
+        logging.error(f"[!] Failed to flush IP {ip_address}.")
+    return success
+
+def rotate_ip(old_ip: str, new_ip: str, interface: str, subnet_mask: str) -> bool:
+    """
+    Atomically rotates the IP by flushing the old and assigning the new.
+    Includes rollback logic for enhanced reliability.
+    Returns True on success, False on failure.
+    """
+    logging.info(f"--- Starting IP Rotation: {old_ip} -> {new_ip} ---")
+
+    if not flush_ip(old_ip, interface, subnet_mask):
+        logging.error("Rotation failed at 'flush' step. Aborting.")
+        return False
+
+    if assign_ip(new_ip, interface, subnet_mask):
+        # Replaced '✓' with '[OK]' for Windows compatibility
+        logging.info(f"--- [OK] IP Rotation successful. New IP is {new_ip} ---")
+        return True
+    else:
+        logging.error("Rotation failed at 'assign' step. Initiating rollback...")
+        # --- ROLLBACK LOGIC ---
+        if assign_ip(old_ip, interface, subnet_mask):
+            logging.warning(f"[OK] Rollback successful. Server is back on the old IP: {old_ip}.")
+        else:
+            logging.critical(f"[!] CRITICAL: Rollback FAILED. Network interface may be unconfigured!")
+        return False
