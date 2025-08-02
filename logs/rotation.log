@@ -368,3 +368,110 @@
 2025-08-02 11:27:20 - INFO - IP 192.168.56.101 not found on eth0. No action taken.
 2025-08-02 16:57:23,527 [INFO] - [OK] Successfully flushed IP 192.168.56.101.
 2025-08-02 16:57:23,528 [INFO] - [IP] Attempting to assign IP 192.168.56.103 to interface eth0...
+2025-08-02 16:57:53,539 [ERROR] - Execution of assign_ip.sh timed out.
+2025-08-02 16:57:53,540 [ERROR] - [!] Failed to assign IP 192.168.56.103.
+2025-08-02 16:57:53,540 [ERROR] - Rotation failed at 'assign' step. Initiating rollback...
+2025-08-02 16:57:53,541 [INFO] - [IP] Attempting to assign IP 192.168.56.101 to interface eth0...
+2025-08-02 16:58:23,559 [ERROR] - Execution of assign_ip.sh timed out.
+2025-08-02 16:58:23,560 [ERROR] - [!] Failed to assign IP 192.168.56.101.
+2025-08-02 16:58:23,561 [CRITICAL] - [!] CRITICAL: Rollback FAILED. Network interface may be unconfigured!
+2025-08-02 16:58:23,561 [ERROR] - IP rotation failed. System state remains on the old IP.
+2025-08-02 16:58:23,561 [INFO] - --- Next rotation cycle in 322 seconds ---
+2025-08-02 17:03:12,016 [INFO] - --- Morph Net IP Flux Engine Starting ---
+2025-08-02 17:03:12,019 [WARNING] - API_TOKEN not found or not set in secrets.env. DNS updates will fail.
+2025-08-02 17:03:12,019 [INFO] - Configuration loaded successfully.
+2025-08-02 17:03:12,019 [INFO] - Deploying honeypot services...
+2025-08-02 17:03:12,020 [INFO] - Honeypot services launched in background.
+2025-08-02 17:03:12,020 [INFO] - [HTTP] Honeypot now listening on port 8552
+2025-08-02 17:03:12,020 [INFO] - Starting the main MTD scheduler...
+2025-08-02 17:03:12,020 [INFO] - [SSH] Honeypot now listening on port 2104
+2025-08-02 17:03:12,021 [INFO] - Initializing scheduler thread...
+2025-08-02 17:03:12,021 [INFO] - Scheduler started. Initial IP is assumed to be 192.168.56.101.
+2025-08-02 17:03:12,021 [INFO] - Scheduler is running in the background.
+2025-08-02 17:03:12,021 [INFO] - --- Starting IP Rotation: 192.168.56.101 -> 192.168.56.102 ---
+2025-08-02 17:03:12,021 [INFO] - --- All services initialized. Monitoring in progress... ---
+2025-08-02 17:03:12,021 [INFO] - [IP] Attempting to flush IP 192.168.56.101 from interface eth0...
+2025-08-02 11:33:10 - INFO - IP 192.168.56.101 not found on eth0. No action taken.
+2025-08-02 17:03:12,195 [INFO] - [OK] Successfully flushed IP 192.168.56.101.
+2025-08-02 17:03:12,195 [INFO] - [IP] Attempting to assign IP 192.168.56.102 to interface eth0...
+2025-08-02 17:03:42,224 [ERROR] - Execution of assign_ip.sh timed out.
+2025-08-02 17:03:42,225 [ERROR] - [!] Failed to assign IP 192.168.56.102.
+2025-08-02 17:03:42,225 [ERROR] - Rotation failed at 'assign' step. Initiating rollback...
+2025-08-02 17:03:42,225 [INFO] - [IP] Attempting to assign IP 192.168.56.101 to interface eth0...
+2025-08-02 11:33:46 - ERROR - Failed to assign 192.168.56.101 to eth0
+2025-08-02 17:03:47,504 [ERROR] - Error executing assign_ip.sh. Stderr: sudo: a password is required
+2025-08-02 17:03:47,504 [ERROR] - [!] Failed to assign IP 192.168.56.101.
+2025-08-02 17:03:47,504 [CRITICAL] - [!] CRITICAL: Rollback FAILED. Network interface may be unconfigured!
+2025-08-02 17:03:47,504 [ERROR] - IP rotation failed. System state remains on the old IP.
+2025-08-02 17:03:47,504 [INFO] - --- Next rotation cycle in 333 seconds ---
+2025-08-02 17:10:41,438 [INFO] - --- Morph Net IP Flux Engine Starting ---
+2025-08-02 17:10:41,441 [WARNING] - API_TOKEN not found or not set in secrets.env. DNS updates will fail.
+2025-08-02 17:10:41,441 [INFO] - Configuration loaded successfully.
+2025-08-02 17:10:41,441 [INFO] - Deploying honeypot services...
+2025-08-02 17:10:41,442 [INFO] - Honeypot services launched in background.
+2025-08-02 17:10:41,442 [INFO] - [HTTP] Honeypot now listening on port 8340
+2025-08-02 17:10:41,442 [INFO] - Starting the main MTD scheduler...
+2025-08-02 17:10:41,442 [INFO] - [SSH] Honeypot now listening on port 2219
+2025-08-02 17:10:41,443 [INFO] - Initializing scheduler thread...
+2025-08-02 17:10:41,443 [INFO] - Scheduler started. Initial IP is assumed to be 192.168.56.101.
+2025-08-02 17:10:41,443 [INFO] - Scheduler is running in the background.
+2025-08-02 17:10:41,443 [INFO] - --- Starting IP Rotation: 192.168.56.101 -> 192.168.56.103 ---
+2025-08-02 17:10:41,443 [INFO] - --- All services initialized. Monitoring in progress... ---
+2025-08-02 17:10:41,443 [INFO] - [IP] Attempting to flush IP 192.168.56.101 from interface eth0...
+2025-08-02 11:40:40 - INFO - IP 192.168.56.101 not found on eth0. No action taken.
+2025-08-02 17:10:41,673 [INFO] - [OK] Successfully flushed IP 192.168.56.101.
+2025-08-02 17:10:41,673 [INFO] - [IP] Attempting to assign IP 192.168.56.103 to interface eth0...
+2025-08-02 17:11:11,695 [ERROR] - Execution of assign_ip.sh timed out.
+2025-08-02 17:11:11,697 [ERROR] - [!] Failed to assign IP 192.168.56.103.
+2025-08-02 17:11:11,697 [ERROR] - Rotation failed at 'assign' step. Initiating rollback...
+2025-08-02 17:11:11,697 [INFO] - [IP] Attempting to assign IP 192.168.56.101 to interface eth0...
+2025-08-02 17:11:41,718 [ERROR] - Execution of assign_ip.sh timed out.
+2025-08-02 17:11:41,719 [ERROR] - [!] Failed to assign IP 192.168.56.101.
+2025-08-02 17:11:41,719 [CRITICAL] - [!] CRITICAL: Rollback FAILED. Network interface may be unconfigured!
+2025-08-02 17:11:41,719 [ERROR] - IP rotation failed. System state remains on the old IP.
+2025-08-02 17:11:41,719 [INFO] - --- Next rotation cycle in 329 seconds ---
+2025-08-02 17:17:37,593 [INFO] - --- Morph Net IP Flux Engine Starting ---
+2025-08-02 17:17:37,596 [WARNING] - API_TOKEN not found or not set in secrets.env. DNS updates will fail.
+2025-08-02 17:17:37,596 [INFO] - Configuration loaded successfully.
+2025-08-02 17:17:37,596 [INFO] - Deploying honeypot services...
+2025-08-02 17:17:37,597 [INFO] - Honeypot services launched in background.
+2025-08-02 17:17:37,597 [INFO] - [SSH] Honeypot now listening on port 2996
+2025-08-02 17:17:37,597 [INFO] - Starting the main MTD scheduler...
+2025-08-02 17:17:37,598 [INFO] - [HTTP] Honeypot now listening on port 8910
+2025-08-02 17:17:37,598 [INFO] - Initializing scheduler thread...
+2025-08-02 17:17:37,598 [INFO] - Scheduler started. Initial IP is assumed to be 192.168.56.101.
+2025-08-02 17:17:37,598 [INFO] - Scheduler is running in the background.
+2025-08-02 17:17:37,598 [INFO] - --- Starting IP Rotation: 192.168.56.101 -> 192.168.56.102 ---
+2025-08-02 17:17:37,598 [INFO] - --- All services initialized. Monitoring in progress... ---
+2025-08-02 17:17:37,599 [INFO] - [IP] Attempting to flush IP 192.168.56.101 from interface eth0...
+2025-08-02 17:17:37,669 [ERROR] - Error executing flush_ip.sh. Stderr: /usr/bin/bash: /mnt/d/Projects/Morph Net IP Flux/core/../shell/flush_ip.sh: No such file or directory
+2025-08-02 17:17:37,669 [ERROR] - [!] Failed to flush IP 192.168.56.101.
+2025-08-02 17:17:37,669 [ERROR] - Rotation failed at 'flush' step. Aborting.
+2025-08-02 17:17:37,670 [ERROR] - IP rotation failed. System state remains on the old IP.
+2025-08-02 17:17:37,670 [INFO] - --- Next rotation cycle in 343 seconds ---
+2025-08-02 17:19:12,792 [INFO] - --- Morph Net IP Flux Engine Starting ---
+2025-08-02 17:19:12,794 [WARNING] - API_TOKEN not found or not set in secrets.env. DNS updates will fail.
+2025-08-02 17:19:12,794 [INFO] - Configuration loaded successfully.
+2025-08-02 17:19:12,795 [INFO] - Deploying honeypot services...
+2025-08-02 17:19:12,796 [INFO] - [HTTP] Honeypot now listening on port 8208
+2025-08-02 17:19:12,796 [INFO] - Honeypot services launched in background.
+2025-08-02 17:19:12,796 [INFO] - Starting the main MTD scheduler...
+2025-08-02 17:19:12,796 [INFO] - [SSH] Honeypot now listening on port 2870
+2025-08-02 17:19:12,796 [INFO] - Initializing scheduler thread...
+2025-08-02 17:19:12,797 [INFO] - Scheduler started. Initial IP is assumed to be 192.168.56.101.
+2025-08-02 17:19:12,797 [INFO] - Scheduler is running in the background.
+2025-08-02 17:19:12,797 [INFO] - --- Starting IP Rotation: 192.168.56.101 -> 192.168.56.102 ---
+2025-08-02 17:19:12,797 [INFO] - --- All services initialized. Monitoring in progress... ---
+2025-08-02 17:19:12,798 [INFO] - [IP] Attempting to flush IP 192.168.56.101 from interface eth0...
+2025-08-02 11:49:11 - INFO - IP 192.168.56.101 not found on eth0. No action taken.
+2025-08-02 17:19:12,923 [INFO] - [OK] Successfully flushed IP 192.168.56.101.
+2025-08-02 17:19:12,923 [INFO] - [IP] Attempting to assign IP 192.168.56.102 to interface eth0...
+2025-08-02 17:19:42,939 [ERROR] - Execution of assign_ip.sh timed out.
+2025-08-02 17:19:42,940 [ERROR] - [!] Failed to assign IP 192.168.56.102.
+2025-08-02 17:19:42,940 [ERROR] - Rotation failed at 'assign' step. Initiating rollback...
+2025-08-02 17:19:42,940 [INFO] - [IP] Attempting to assign IP 192.168.56.101 to interface eth0...
+2025-08-02 17:20:12,953 [ERROR] - Execution of assign_ip.sh timed out.
+2025-08-02 17:20:12,953 [ERROR] - [!] Failed to assign IP 192.168.56.101.
+2025-08-02 17:20:12,954 [CRITICAL] - [!] CRITICAL: Rollback FAILED. Network interface may be unconfigured!
+2025-08-02 17:20:12,954 [ERROR] - IP rotation failed. System state remains on the old IP.
+2025-08-02 17:20:12,954 [INFO] - --- Next rotation cycle in 339 seconds ---

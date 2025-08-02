@@ -15,7 +15,16 @@ def _to_wsl_path(path: str) -> str:
 def _run_script(script_name: str, *args) -> bool:
     """A robust helper to run a shell script and handle its output."""
     try:
-        script_path = os.path.join(os.path.dirname(__file__), "..", "shell", script_name)
+        # --- THIS IS THE CORRECTED PATH LOGIC ---
+        # Get the directory of the current Python script (core/)
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        # Build the path to the shell script
+        script_path = os.path.join(current_dir, '..', 'shell', script_name)
+        # Use os.path.abspath to resolve the '..' and create a clean, absolute path
+        script_path = os.path.abspath(script_path)
+        # --- END OF CORRECTION ---
+
+        # Now convert the clean, absolute path for WSL
         script_path = _to_wsl_path(script_path)
         
         cmd = ["bash", script_path, *args]
@@ -24,7 +33,7 @@ def _run_script(script_name: str, *args) -> bool:
             check=True, 
             capture_output=True, 
             text=True,
-            timeout=30 # Add a timeout for reliability
+            timeout=30
         )
         if result.stdout:
             logging.info(f"Output from {script_name}: {result.stdout.strip()}")
@@ -41,7 +50,6 @@ def assign_ip(ip_address: str, interface: str, subnet_mask: str) -> bool:
     logging.info(f"[IP] Attempting to assign IP {ip_address} to interface {interface}...")
     success = _run_script("assign_ip.sh", ip_address, interface, subnet_mask)
     if success:
-        # Replaced '✓' with '[OK]' for Windows compatibility
         logging.info(f"[OK] Successfully assigned IP {ip_address}.")
     else:
         logging.error(f"[!] Failed to assign IP {ip_address}.")
@@ -52,7 +60,6 @@ def flush_ip(ip_address: str, interface: str, subnet_mask: str) -> bool:
     logging.info(f"[IP] Attempting to flush IP {ip_address} from interface {interface}...")
     success = _run_script("flush_ip.sh", ip_address, interface, subnet_mask)
     if success:
-        # Replaced '✓' with '[OK]' for Windows compatibility
         logging.info(f"[OK] Successfully flushed IP {ip_address}.")
     else:
         logging.error(f"[!] Failed to flush IP {ip_address}.")
@@ -62,7 +69,6 @@ def rotate_ip(old_ip: str, new_ip: str, interface: str, subnet_mask: str) -> boo
     """
     Atomically rotates the IP by flushing the old and assigning the new.
     Includes rollback logic for enhanced reliability.
-    Returns True on success, False on failure.
     """
     logging.info(f"--- Starting IP Rotation: {old_ip} -> {new_ip} ---")
 
@@ -71,12 +77,10 @@ def rotate_ip(old_ip: str, new_ip: str, interface: str, subnet_mask: str) -> boo
         return False
 
     if assign_ip(new_ip, interface, subnet_mask):
-        # Replaced '✓' with '[OK]' for Windows compatibility
         logging.info(f"--- [OK] IP Rotation successful. New IP is {new_ip} ---")
         return True
     else:
         logging.error("Rotation failed at 'assign' step. Initiating rollback...")
-        # --- ROLLBACK LOGIC ---
         if assign_ip(old_ip, interface, subnet_mask):
             logging.warning(f"[OK] Rollback successful. Server is back on the old IP: {old_ip}.")
         else:
