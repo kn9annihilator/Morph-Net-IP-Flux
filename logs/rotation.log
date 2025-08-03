@@ -25,3 +25,30 @@
 2025-08-04 03:43:57,618 [INFO] - [OK] Generated new TLS cert. Expires: 2025-11-01
 2025-08-04 03:43:57,618 [INFO] - --- Next rotation cycle in 349 seconds ---
 2025-08-04 03:44:05,933 [INFO] - --- Morph Net IP Flux Engine Shutting Down ---
+2025-08-04 03:45:30,179 [INFO] - --- Morph Net IP Flux Engine Starting ---
+2025-08-04 03:45:30,184 [WARNING] - API_TOKEN not found or not set in secrets.env. DNS updates will fail.
+2025-08-04 03:45:30,184 [INFO] - Configuration loaded successfully.
+2025-08-04 03:45:30,184 [INFO] - Deploying honeypot services...
+2025-08-04 03:45:30,185 [INFO] - Honeypot services launched in background.
+2025-08-04 03:45:30,185 [INFO] - [HTTP] Honeypot now listening on port 8343
+2025-08-04 03:45:30,185 [INFO] - [SSH] Honeypot now listening on port 2041
+2025-08-04 03:45:30,185 [INFO] - Starting the main MTD scheduler...
+2025-08-04 03:45:30,186 [INFO] - Initializing scheduler thread...
+2025-08-04 03:45:30,186 [INFO] - Scheduler started. Initial IP is assumed to be 192.168.56.101.
+2025-08-04 03:45:30,186 [INFO] - Scheduler is running in the background.
+2025-08-04 03:45:30,186 [INFO] - --- [SIMULATION MODE] Starting IP Rotation: 192.168.56.101 -> 192.168.56.103 ---
+2025-08-04 03:45:30,187 [INFO] - --- All services initialized. Monitoring in progress... ---
+2025-08-04 03:45:30,187 [INFO] - [SIMULATING] Flush IP 192.168.56.101 on interface eth0...
+2025-08-04 03:45:30,387 [INFO] - [OK] Simulated Flush of IP 192.168.56.101.
+2025-08-04 03:45:30,388 [INFO] - [SIMULATING] Assign IP 192.168.56.103 on interface eth0...
+2025-08-04 03:45:30,589 [INFO] - [OK] Simulated Assign of IP 192.168.56.103.
+2025-08-04 03:45:30,590 [INFO] - --- [OK] Simulated IP Rotation successful. New IP is 192.168.56.103 ---
+2025-08-04 03:45:30,590 [INFO] - IP rotation successful. New active IP is 192.168.56.103.
+2025-08-04 03:45:30,591 [INFO] - Updating DNS record for your.domain.com to point to 192.168.56.103...
+2025-08-04 03:45:30,591 [WARNING] - [SIMULATING] DNS update because API token is not set.
+2025-08-04 03:45:30,592 [INFO] - [OK] Simulated DNS update: your.domain.com -> 192.168.56.103
+2025-08-04 03:45:30,592 [INFO] - Rotating TLS certificate...
+2025-08-04 03:45:30,592 [INFO] - Generating new TLS certificate with CN='data.storage.server' and O='Acme Corp'...
+2025-08-04 03:45:30,620 [INFO] - [OK] Generated new TLS cert. Expires: 2025-11-01
+2025-08-04 03:45:30,621 [INFO] - --- Next rotation cycle in 335 seconds ---
+2025-08-04 03:45:40,457 [INFO] - --- Morph Net IP Flux Engine Shutting Down ---

@@ -1,236 +1,208 @@
-![Status](https://img.shields.io/badge/status-in%20development-orange.svg)
-![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
-
-<div align="center">
-
 # Morph Net IP Flux
-Dynamic Moving Target Defense using Virtualized IP Rotation
-</div>
+> *You can't hit a target you can't see.*
 
-## Table of Contents
+![Stars](https://img.shields.io/github/stars/kn9annihilator/MorphNetIPFlux?style=social)
+![Last Commit](https://img.shields.io/github/last-commit/kn9annihilator/MorphNetIPFlux?color=brightgreen)
+![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20WSL-blue)
+![Framework](https://img.shields.io/badge/framework-Python%20%7C%20Bash-yellow)
+![Funny Badge](https://img.shields.io/badge/💀-Stay%20Invisible!-black)
+![License](https://img.shields.io/badge/license-MIT-red)
+
+---
+
+## 📜 Table of Contents
 - [Overview](#overview)
-- [Motivation](#motivation)
-- [Key Features](#key-features)
-- [Architecture](#architecture)
-- [Installation](#installation)
-- [Step by Step guide](#step-by-step-guide)
-- [Usage](#usage)
-- [Running the project](#running-the-project)
-- [Current Progress](#current-project-progress)
-- [License](#license)
-- [Author](#author)
+- [What's the Problem? The "Sitting Duck" Server](#whats-the-problem-the-sitting-duck-server)
+- [Our Solution: The "Ghost" Server](#our-solution-the-ghost-server)
+- [How It Works: The Core Features](#how-it-works-the-core-features)
+- [Architecture: The Blueprint](#architecture-the-blueprint)
+- [Real-World Deployment: The Stable Gateway](#real-world-deployment-the-stable-gateway)
+- [Installation & Setup](#️-installation--setup)
+  - [Prerequisites](#prerequisites)
+  - [Step-by-Step Setup](#step-by-step-setup)
+- [Running the Project](#-running-the-project)
+- [Usage Scenarios](#-usage-scenarios)
+- [Project Status](#-project-status)
+- [Testing](#-testing)
+- [🤝 Contributing](#-contributing)
+- [👤 Author](#-author)
+- [📝 License](#-license)
 
 ---
 
-## Overview
+## 🧠 Overview
 
-**Morph Net IP Flux** is a Python and Shell-based cybersecurity framework that leverages **Moving Target Defense (MTD)** to safeguard web servers and cloud systems from enumeration, reconnaissance, and targeted attacks. It achieves this by dynamically rotating public-facing IP addresses, deploying honeypots, and spoofing attacker reconnaissance through behavioral obfuscation.
-
----
-
-## Motivation
-
-Traditional IP-based protections are static and predictable, making them vulnerable to:
-- Automated scanning
-- Reconnaissance by APTs
-- IP-blacklisting circumvention
-- Reverse engineering and targeting
-
-This project was built to **break the attacker's kill chain at the earliest possible phase** — reconnaissance.
+**Morph Net IP Flux** is a Python and Bash-powered **Moving Target Defense (MTD)** framework designed to break the attacker's reconnaissance phase by continuously rotating IP addresses, TLS certificates, and DNS mappings. It transforms a web server into a moving, morphing ghost on the network.
 
 ---
 
-## Key Features
+## ❓ What's the Problem? The "Sitting Duck" Server
 
-- **Dynamic IP Rotation**: Randomly replaces active IP addresses at configurable intervals.
-- **Honeypot Deployment**: Launches lightweight HTTP and SSH decoy services to mislead attackers.
-- **TLS Certificate Rotation**: Auto-generates and rotates TLS certificates to defeat JA3 fingerprinting.
-- **Cloudflare DNS API Integration**: Seamless DNS record updates.
-- **Jitter-based Scheduler**: Obfuscates timing patterns to resist statistical detection.
-- **Multi-log System**: Logs every event (IP change, honeypot hit, attacker behavior, etc.)
-- **Pluggable Modules**: Modular architecture to plug in future network defenses.
+Imagine a fortress with a known location. Anyone can study it, map it, and plan a perfect breach. That's how traditional servers work—with static IPs attackers can probe for weeks.
+
+This early phase of cyber-attacks, called **reconnaissance**, is the most exploited. If attackers can’t recon, they can’t attack.
 
 ---
 
-## Architecture
-``` js
+## 🧩 Our Solution: The "Ghost" Server
 
-│
-├── core/ # Core logic modules (IP, DNS, Scheduler)
-│ ├── ip_manager.py
-│ ├── scheduler.py
-│ ├── port_manager.py
-│ ├── dns_controller.py
-│ ├── honeypot_deployer.py
-│ └── tls_manager.py
-│
-├── config/ # Config files
-│ ├── default_config.yaml
-│ ├── cloud_config.yaml
-│ └── secrets.env
-│
-├── shell/ # Shell scripts for IP management
-│ ├── assign_ip.sh
-│ ├── flush_ip.sh
-│ ├── port_knock.sh
-│ └── rotate_tls.sh
-│
-├── deploy/ # Docker/Kubernetes/Cloud deploy scripts
-│ ├── Dockerfile
-│ ├── docker-compose.yaml
-│ ├── k8s.yaml
-│ └── cloud_init.sh
-│
-├── integrations/ # Cloud/Proxy/API integrations
-│ ├── cloudflare_api.py
-│ ├── proxy_sync.py
-│ └── ELK_logger.py
-│
-├── redteam_sim/ # Red team recon simulation tools
-│ ├── scanner_emulator.py
-│ ├── behavior_recon.py
-│ └── nmap_scan.sh
-│
-├── docs/ # Documentation
-│ ├── README.md
-│ ├── threat_model.md
-│ ├── architecture.md
-│ └── research_refs.md
-│
-├── logs/ # Runtime logs
-│ ├── rotation.log
-│ ├── attack_trace.log
-│ └── honeypot_hits.json
-│
-├── tests/ # Unit & functional tests
-│ ├── test_ip_rotation.py
-│ ├── test_dns_behavior.py
-│ └── test_tls_rotation.py
-│
-├── main.py # Central entry point
-├── requirements.txt # Python dependencies
-├── setup.py # Packaging
-└── .gitignore
+Instead of building taller walls, **we make the server vanish**. Morph Net IP Flux constantly changes:
 
+- **Its Address** → via IP Rotation
+- **Its Name** → via DNS API sync
+- **Its Face** → via randomized TLS certificates
+
+Every time the attacker thinks they found you, you're already gone. Their intel is outdated by design.
+
+---
+
+## 🧰 How It Works: The Core Features
+
+| Feature                     | Description |
+|-----------------------------|-------------|
+| **Dynamic IP Rotation**     | Randomly assigns new IPs from a pool at jittered intervals |
+| **TLS Certificate Morphing**| Prevents JA3/JA3S fingerprinting with randomized certs |
+| **DNS Sync (Cloudflare)**   | Updates domain records instantly via API |
+| **Jitter-based Scheduler**  | Prevents timing predictability |
+| **Decoy Deployment**        | Honeypots confuse attackers & fake open ports |
+| **Multi-Log System**        | Tracks rotations, honeypot hits, and recon attempts |
+
+---
+
+## 🏗️ Architecture: The Blueprint
+
+```js
+│
+├── core/          # Brain: IP, DNS, Scheduler, TLS, Honeypots
+│   ├── ip_manager.py
+│   ├── scheduler.py
+│   ├── dns_controller.py
+│   ├── tls_manager.py
+│   ├── honeypot_deployer.py
+│
+├── config/        # Configs: Secrets, Intervals, Pools
+│   ├── default_config.yaml
+│   ├── cloud_config.yaml
+│   └── secrets.env
+│
+├── shell/         # OS-level scripts: IP assign, flush, TLS gen
+│   ├── assign_ip.sh
+│   ├── flush_ip.sh
+│   ├── rotate_tls.sh
+│
+├── deploy/        # Docker/K8s/Cloud deploy scripts
+│
+├── integrations/  # Cloudflare, Proxies, Log APIs
+│
+├── redteam_sim/   # Red team recon emulators (nmap, etc.)
+│
+├── logs/          # All runtime logs
+│
+├── tests/         # Unit & functional tests
+│
+├── main.py        # Launches the entire system
+├── requirements.txt
+└── setup.py
 ```
+## 🌐 Real-World Deployment: The Stable Gateway
+"Won’t rotating IPs break user access?"
 
+No. You deploy a Transparent Reverse Proxy as a fixed frontend. This stable proxy forwards requests to the MTD-powered server which lives on a rotating private network. Seamless to users. Hellish for hackers.
 
 ## ⚙️ Installation & Setup
-
-
 ### Prerequisites
 
-| Tool               | Version/Details        |
-|--------------------|------------------------|
-| Python             | 3.7+                   |
-| Git                | Latest                 |
-| Bash Shell         | WSL / Git Bash / Linux |
-| Tools              | iproute2, curl, openssl|
-| OS                 | Linux / WSL2 (Windows) |
+| Tool                     | Why it's needed |
+|-----------------------------|-------------|
+| **Python 3.7+**     | Core Language |
+| **Git**| Clone the Repository |
+| **Bash Shell**   | To execute shell scripts (WSL/Git Bash/Linux) |
+| **iproute2, curl**  | For IP handling and HTTP calls |
+| **OpenSSL**        | Generate and rotate certificates |
 
----
-
-### Step-by-Step Guide
-
-#### 1. Clone the Repository
-
-```bash
-git clone https://github.com/your-username/MorphNetIPFlux.git
-cd MorphNetIPFlux
+### Step-by-Step Setup
+1. Clone the Repository
+```git
+git clone https://github.com/kn9annihilator/Morph-Net-IP-Flux
+cd Morph-Net-IP-Flux
 ```
----
-
-2. Create a Virtual Environment
-Linux / WSL:
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-```
-
-Windows CMD:
-```bash
+2. Create & Activate Virtual Environment
+```git
 python -m venv .venv
+source .venv/bin/activate  
+```
+```git
+For Windows: 
 .venv\Scripts\activate
 ```
-
-#### 3. Install Dependencies
-
-``` bash
+3. Install Dependencies
+```bash
 pip install -r requirements.txt
 ```
+4. Configure the Engine
+```bash
+config/default_config.yaml: Set IP pool, timing, etc.
 
-
+secrets.env: Store API keys securely (copy from .env.example)
+```
+5. Run the Project!
+```git
+.venv/bin/python main.py  
+```
+Or just
+```git
+python main.py # if environment is activated
+```
 
 ## Running the Project
-Run the full system using:
-
-``` bash
-python main.py
+You should see live logs like:
+```js
+2025-08-04 03:45:30,179 [INFO] - --- Morph Net IP Flux Engine Starting ---
+2025-08-04 03:45:30,184 [WARNING] - API_TOKEN not found or not set in secrets.env. DNS updates will fail.
+2025-08-04 03:45:30,184 [INFO] - Configuration loaded successfully.
+2025-08-04 03:45:30,184 [INFO] - Deploying honeypot services...
+2025-08-04 03:45:30,185 [INFO] - Honeypot services launched in background.
+2025-08-04 03:45:30,185 [INFO] - [HTTP] Honeypot now listening on port 8343
+2025-08-04 03:45:30,185 [INFO] - [SSH] Honeypot now listening on port 2041
+2025-08-04 03:45:30,185 [INFO] - Starting the main MTD scheduler...
+2025-08-04 03:45:30,186 [INFO] - Initializing scheduler thread...
+2025-08-04 03:45:40,457 [INFO] - --- Morph Net IP Flux Engine Shutting Down ---
 ```
-You will see output such as:
+## Usage Scenarios
+* Teaching advanced Red vs Blue tactics
 
-``` js
-[+] Morph Net IP Flux — Dynamic Defense Engine Starting...
-[+] Rotating IP from 192.168.1.100 to 192.168.1.101...
-[✓] DNS record updated for example.com ➜ 192.168.1.101
-[✓] Honeypots running on decoy ports.
-[✓] Scheduler launched.
-All activity will be logged in logs/rotation.log.
-```
+* Simulating evasive C2 channels
 
-### Usage Scenarios
--Simulating evasive Command & Control (C2) networks
+* Research on Moving Target Defense (MTD)
 
--Teaching real-world Red vs Blue strategies
+* Obfuscating APIs or sensitive endpoints
 
--Research on MTD (Moving Target Defense)
+* Securing cloud servers from persistent recon
 
--Obfuscating traffic to hide high-value APIs
+# Project Status
+Currently a stable prototype.
 
--Defending critical infrastructure from advanced recon
+* Core MTD engine: working locally
 
-Testing
-Run unit tests:
+* Functional IP + DNS + TLS rotation
 
-```bash
+* Production cloud deployment support (under test)
+
+* Simulation mode enabled for safe testing
+
+## Testing
+Run Python unit tests:
+```js
 pytest tests/
 ```
-
-You may also test shell integrations separately:
-
-```bash
+Test Red Team emulation:
+```js
 bash redteam_sim/nmap_scan.sh
 ```
 
+🤝 Contributing
+This project is open to improvement. Feel free to fork, contribute, and raise issues. Academic usage is encouraged with attribution.
 
-## Current Project Progress
-This section shows the files that are working and also the part of the project which is having errors.
-The project is still under progress and woould be completed soom.
-
-![alt text](image.png)
-
-## References
-NIST Special Publication 800-160: Developing Cyber Resilient Systems
-
-JA3 TLS Fingerprinting: https://github.com/salesforce/ja3
-
-DHS Moving Target Defense Research
-
-Cloudflare API Docs
-
-OWASP C2 Guidance
-
-### Contributing
-This is an evolving research project. Contributions, forks, and academic usage are welcome. Please raise issues or submit pull requests.
-
-### License
-This project is licensed under the MIT License.
-See [LICENSE](#license) for more details. 
-
-
-Author | Krishna Narula
-## Connect with me
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Krishna%20Narula-blue?logo=linkedin&style=for-the-badge)](https://www.linkedin.com/in/krishnanarula/)
-
-
-
+👤 Author
+Krishna Narula
+Cybersecurity Researcher | MTD Enthusiast | Web App Tester
