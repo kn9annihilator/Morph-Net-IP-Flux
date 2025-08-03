@@ -16,17 +16,18 @@
 - [Our Solution: The "Ghost" Server](#our-solution-the-ghost-server)
 - [How It Works: The Core Features](#how-it-works-the-core-features)
 - [Architecture: The Blueprint](#architecture-the-blueprint)
-- [Real-World Deployment: The Stable Gateway](#real-world-deployment-the-stable-gateway)
-- [Installation & Setup](#️-installation--setup)
+- [Real-World Deployment: The Stable Gateway](#project-deployment-the-stable-gateway)
+- [Installation & Setup](#installation--setup)
   - [Prerequisites](#prerequisites)
   - [Step-by-Step Setup](#step-by-step-setup)
-- [Running the Project](#-running-the-project)
-- [Usage Scenarios](#-usage-scenarios)
-- [Project Status](#-project-status)
-- [Testing](#-testing)
-- [Contributing](#-contributing)
-- [Author](#-author)
-- [📝 License](#-license)
+- [Running the Project](#running-the-project)
+- [Usage Scenarios](#usage-scenarios)
+- [Project Status](#project-status)
+- [Testing](#testing)
+- [Contributing](#contributing)
+- [📝 License](#license)
+- [Author](#author)
+
 
 ---
 
@@ -131,8 +132,8 @@ cd Morph-Net-IP-Flux
 python -m venv .venv
 source .venv/bin/activate  
 ```
+For Windows:
 ```git
-For Windows: 
 .venv\Scripts\activate
 ```
 3. Install Dependencies
@@ -202,8 +203,10 @@ bash redteam_sim/nmap_scan.sh
 
 ## Contributing
 This project is open to improvement. Feel free to fork, contribute, and raise issues. Academic usage is encouraged with attribution.
+## License
 
 ## Author
 Krishna Narula
 Cybersecurity Researcher | MTD Enthusiast | Web App Tester
+
 [![Connect on LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin&style=flat-square)](https://www.linkedin.com/in/krishnanarula/)
