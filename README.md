@@ -1,8 +1,8 @@
 # Morph Net IP Flux
 > *You can't hit a target you can't see.*
 
-![Stars](https://img.shields.io/github/stars/kn9annihilator/MorphNetIPFlux?style=social)
-![Last Commit](https://img.shields.io/github/last-commit/kn9annihilator/MorphNetIPFlux?color=brightgreen)
+![Stars](https://img.shields.io/github/stars/kn9annihilator/Morph-Net-IP-Flux?style=social)
+![Last Commit](https://img.shields.io/github/last-commit/kn9annihilator/Morph-Net-IP-Flux?color=brightgreen)
 ![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20WSL-blue)
 ![Framework](https://img.shields.io/badge/framework-Python%20%7C%20Bash-yellow)
 ![Funny Badge](https://img.shields.io/badge/💀-Stay%20Invisible!-black)
@@ -24,19 +24,19 @@
 - [Usage Scenarios](#-usage-scenarios)
 - [Project Status](#-project-status)
 - [Testing](#-testing)
-- [🤝 Contributing](#-contributing)
-- [👤 Author](#-author)
+- [Contributing](#-contributing)
+- [Author](#-author)
 - [📝 License](#-license)
 
 ---
 
-## 🧠 Overview
+## Overview
 
 **Morph Net IP Flux** is a Python and Bash-powered **Moving Target Defense (MTD)** framework designed to break the attacker's reconnaissance phase by continuously rotating IP addresses, TLS certificates, and DNS mappings. It transforms a web server into a moving, morphing ghost on the network.
 
 ---
 
-## ❓ What's the Problem? The "Sitting Duck" Server
+## What's the Problem? The "Sitting Duck" Server
 
 Imagine a fortress with a known location. Anyone can study it, map it, and plan a perfect breach. That's how traditional servers work—with static IPs attackers can probe for weeks.
 
@@ -44,7 +44,7 @@ This early phase of cyber-attacks, called **reconnaissance**, is the most exploi
 
 ---
 
-## 🧩 Our Solution: The "Ghost" Server
+## Our Solution: The "Ghost" Server
 
 Instead of building taller walls, **we make the server vanish**. Morph Net IP Flux constantly changes:
 
@@ -56,7 +56,7 @@ Every time the attacker thinks they found you, you're already gone. Their intel 
 
 ---
 
-## 🧰 How It Works: The Core Features
+## How It Works: The Core Features
 
 | Feature                     | Description |
 |-----------------------------|-------------|
@@ -69,7 +69,7 @@ Every time the attacker thinks they found you, you're already gone. Their intel 
 
 ---
 
-## 🏗️ Architecture: The Blueprint
+## Architecture: The Blueprint
 
 ```js
 │
@@ -104,12 +104,12 @@ Every time the attacker thinks they found you, you're already gone. Their intel 
 ├── requirements.txt
 └── setup.py
 ```
-## 🌐 Real-World Deployment: The Stable Gateway
+## Project Deployment: The Stable Gateway
 "Won’t rotating IPs break user access?"
 
 No. You deploy a Transparent Reverse Proxy as a fixed frontend. This stable proxy forwards requests to the MTD-powered server which lives on a rotating private network. Seamless to users. Hellish for hackers.
 
-## ⚙️ Installation & Setup
+## Installation & Setup
 ### Prerequisites
 
 | Tool                     | Why it's needed |
@@ -200,9 +200,10 @@ Test Red Team emulation:
 bash redteam_sim/nmap_scan.sh
 ```
 
-🤝 Contributing
+## Contributing
 This project is open to improvement. Feel free to fork, contribute, and raise issues. Academic usage is encouraged with attribution.
 
-👤 Author
+## Author
 Krishna Narula
 Cybersecurity Researcher | MTD Enthusiast | Web App Tester
+[![Connect on LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin&style=flat-square)](https://www.linkedin.com/in/krishnanarula/)
