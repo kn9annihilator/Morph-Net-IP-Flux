@@ -7,3 +7,4 @@ rotated_tls_*.*
 logs/
 __pycache__/
 .env
+secrets.env
