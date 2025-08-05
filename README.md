@@ -81,6 +81,7 @@ Every time the attacker thinks they found you, you're already gone. Their intel 
 │   ├── tls_manager.py
 │   ├── honeypot_deployer.py
 │
+│── setup.py # CLI dashboard for Linux Terminal
 ├── config/        # Configs: Secrets, Intervals, Pools
 │   ├── default_config.yaml
 │   ├── cloud_config.yaml
@@ -103,7 +104,7 @@ Every time the attacker thinks they found you, you're already gone. Their intel 
 │
 ├── main.py        # Launches the entire system
 ├── requirements.txt
-└── setup.py
+
 ```
 ## Project Deployment: The Stable Gateway
 "Won’t rotating IPs break user access?"
@@ -139,6 +140,10 @@ For Windows:
 3. Install Dependencies
 ```bash
 pip install -r requirements.txt
+```
+or
+```bash
+.venv/Scripts/python.exe -m pip install -r requirements.txt
 ```
 4. Configure the Engine
 ```bash
