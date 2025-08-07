@@ -1,9 +1,10 @@
 # core/scheduler.py
-
+from core.status_manager import update_status
 import time
 import random
 import logging
 import threading
+
 
 # We will import these functions, which will be refactored later
 from core.ip_manager import rotate_ip
@@ -48,27 +49,49 @@ def _perform_full_rotation(config: dict, current_ip: str) -> str:
         logging.error("IP rotation failed. System state remains on the old IP.")
         return current_ip
 
+# In core/scheduler.py
+
 def scheduler_loop(config: dict):
     """The main scheduler loop that triggers MTD cycles."""
     rotation_config = config.get("rotation", {})
     base_interval = rotation_config.get("base_interval", 300)
     jitter_range = rotation_config.get("jitter_range", 60)
-    
-    # Assume starting IP is the first in the pool.
-    # A more advanced version could detect the initial IP.
+
     current_ip = rotation_config.get("ip_pool", ["127.0.0.1"])[0]
     logging.info(f"Scheduler started. Initial IP is assumed to be {current_ip}.")
-    
+
+    # Initial status update
+    total_rotations = 0
+    update_status({
+        "status": "Running",
+        "mode": "simulation", # Assuming simulation mode for now
+        "current_ip": current_ip,
+        "next_rotation_in": "Starting cycle...",
+        "total_rotations": total_rotations
+    })
+
     while True:
         # Perform the full rotation logic
-        current_ip = _perform_full_rotation(config, current_ip)
-        
+        new_ip = _perform_full_rotation(config, current_ip)
+        if new_ip != current_ip:
+            current_ip = new_ip
+            total_rotations += 1
+
         # Calculate the next wait time with jitter
         jitter = random.randint(-jitter_range, jitter_range)
-        wait_time = max(10, base_interval + jitter) # Ensure wait time is at least 10s
+        wait_time = max(10, base_interval + jitter)
         logging.info(f"--- Next rotation cycle in {wait_time} seconds ---")
-        time.sleep(wait_time)
 
+        # Update status before sleeping
+        update_status({
+            "status": "Waiting",
+            "mode": "simulation",
+            "current_ip": current_ip,
+            "next_rotation_in": f"{wait_time}s",
+            "total_rotations": total_rotations
+        })
+
+        time.sleep(wait_time)
 def start_scheduler(config: dict):
     """Starts the scheduler loop in a non-blocking background thread."""
     logging.info("Initializing scheduler thread...")

@@ -77,8 +77,8 @@ def make_layout() -> Layout:
 def create_header() -> Panel:
     """Creates the header panel with a stylized ASCII art title."""
     title_art = """
-███╗   ███╗ ██████╗ ██████╗ ██████╗ ██╗  ██╗     ███╗   ███╗███████╗████████╗
-████╗ ████║██╔═══██╗██╔══██╗██╔══██╗██║  ██║     ████╗  ███║██╔════╝╚══██╔══╝
+███╗   ███╗ ██████╗ ██████╗ ██████╗ ██╗  ██╗     ███╗   ██╗███████╗████████╗
+████╗ ████║██╔═══██╗██╔══██╗██╔══██╗██║  ██║     ████╗  ██║██╔════╝╚══██╔══╝
 ██╔████╔██║██║   ██║██████╔╝██████╔╝███████║     ██╔██╗ ██║█████╗     ██║   
 ██║╚██╔╝██║██║   ██║██╔══██╗██╔═══╝ ██╔══██║     ██║╚██╗██║██╔══╝     ██║   
 ██║ ╚═╝ ██║╚██████╔╝██║  ██║██║     ██║  ██║     ██║ ╚████║███████╗   ██║   
@@ -147,11 +147,19 @@ def run_dashboard():
             while True:
                 status = read_json_file(STATUS_FILE, default_value={})
                 
+                # Add an explicit check to ensure status is a dictionary.
+                # This makes the code more robust and satisfies the Pylance analyzer.
+                if not isinstance(status, dict):
+                    status = {}
+
                 next_rotation_str = status.get('next_rotation_in', '0s')
                 try:
                     # Extract number from string like "280s"
                     total_seconds = int(re.sub(r'\D', '', next_rotation_str)) if next_rotation_str else 1
-                    base_interval = int(re.sub(r'\D', '', status.get('base_interval', '300s'))) if status.get('base_interval') else 300
+                    
+                    # Safely get base_interval from the status dictionary
+                    base_interval_str = status.get('base_interval', '300s')
+                    base_interval = int(re.sub(r'\D', '', base_interval_str)) if base_interval_str else 300
                     
                     if status.get('status') == "Waiting":
                         completed = base_interval - total_seconds

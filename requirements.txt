@@ -2,3 +2,5 @@ PyYAML
 python-dotenv
 requests
 cryptography
+rich
+setuptools
