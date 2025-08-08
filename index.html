@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Enclave - Access Restricted</title>
+    <!-- Tailwind CSS for modern styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for a professional look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* A subtle background pattern */
+        .bg-grid {
+            background-image:
+                linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        /* Simple toggle switch styling */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #48bb78;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #48bb78;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white flex items-center justify-center min-h-screen bg-grid p-4">
+
+    <div class="max-w-2xl w-full mx-auto text-center p-8 bg-gray-800 bg-opacity-50 backdrop-blur-sm rounded-2xl border border-red-500/30 shadow-2xl">
+        
+        <!-- Warning Banner -->
+        <div class="p-3 mb-6 bg-yellow-500/10 border border-yellow-500/30 rounded-lg text-yellow-300 flex items-center justify-center text-sm">
+            <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8.257 3.099c.636-1.21 2.863-1.21 3.5 0l5.416 10.332a2.013 2.013 0 01-1.75 2.902H4.584a2.013 2.013 0 01-1.75-2.902L8.257 3.099zM10 13a1 1 0 110-2 1 1 0 010 2zm-1-3a1 1 0 001 1h0a1 1 0 001-1V8a1 1 0 00-2 0v2z" clip-rule="evenodd"></path></svg>
+            <span><strong>WARNING:</strong> This is a secure system. All access is monitored.</span>
+        </div>
+
+        <!-- Header Section -->
+        <div class="mb-6">
+            <svg class="w-16 h-16 mx-auto text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+            <h1 class="text-4xl font-black text-white mt-4 tracking-tighter">SECURE ENCLAVE 77B</h1>
+            <p class="text-red-300 mt-1">Authorized Access Only</p>
+        </div>
+
+        <!-- Status Section -->
+        <div class="bg-gray-900/50 p-6 rounded-lg border border-gray-700 mb-6">
+            <h2 class="text-lg font-bold text-left mb-4">System Integrity Status</h2>
+            <div class="flex items-center justify-between">
+                <span class="text-gray-400">Connection</span>
+                <span class="flex items-center text-green-400 font-bold">
+                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                    SECURE (TLS 1.3)
+                </span>
+            </div>
+            <div class="flex items-center justify-between mt-3">
+                <span class="text-gray-400">Perimeter Defense</span>
+                <span class="text-green-400 font-bold">ACTIVE</span>
+            </div>
+            <div class="flex items-center justify-between mt-3">
+                <span class="text-gray-400">Asset Protection</span>
+                <span class="text-green-400 font-bold">MORPH NET ENGAGED</span>
+            </div>
+        </div>
+
+        <!-- NEW: Admin Controls Section -->
+        <div class="bg-gray-900/50 p-6 rounded-lg border border-gray-700 text-left">
+            <h2 class="text-lg font-bold mb-4">Admin Controls (Read-Only)</h2>
+            
+            <!-- Network Settings -->
+            <div class="mb-4">
+                <p class="text-sm font-bold text-blue-300 mb-2">Network Rules</p>
+                <div class="flex items-center justify-between bg-gray-700/50 p-2 rounded-md">
+                    <span class="text-gray-300">Allow Inbound SSH (Port 22)</span>
+                    <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                        <input type="checkbox" name="toggle" id="toggle1" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-not-allowed" disabled/>
+                        <label for="toggle1" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-600 cursor-not-allowed"></label>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between bg-gray-700/50 p-2 rounded-md mt-2">
+                    <span class="text-gray-300">Allow Inbound HTTPS (Port 443)</span>
+                    <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                        <input type="checkbox" name="toggle" id="toggle2" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-not-allowed" checked disabled/>
+                        <label for="toggle2" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-600 cursor-not-allowed"></label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Authorization Settings -->
+            <div>
+                <p class="text-sm font-bold text-blue-300 mb-2">Authorization Policy</p>
+                <div class="bg-gray-700/50 p-2 rounded-md">
+                    <p class="text-xs text-gray-400">Access Role: <span class="font-mono text-yellow-400">Admin</span></p>
+                    <p class="text-xs text-gray-400 mt-1">MFA Status: <span class="font-mono text-green-400">Enabled</span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Information -->
+        <div class="mt-8 text-xs text-gray-500">
+            <p>This asset is protected by the Morph Net IP Flux defense system.</p>
+            <p id="timestamp">System Time: </p>
+        </div>
+
+    </div>
+
+    <script>
+        // Simple script to display a live-updating timestamp
+        const timestampElement = document.getElementById('timestamp');
+        function updateTimestamp() {
+            const now = new Date();
+            timestampElement.textContent = `System Time: ${now.toUTCString()}`;
+        }
+        setInterval(updateTimestamp, 1000);
+        updateTimestamp(); // Initial call
+    </script>
+
+</body>
+</html>
