@@ -1,0 +1,54 @@
+2025-08-12 11:57:40,500 [INFO] - --- Morph Net IP Flux Engine Starting ---
+2025-08-12 11:57:40,523 [WARNING] - API_TOKEN not found or not set in secrets.env. DNS updates will fail.
+2025-08-12 11:57:40,523 [INFO] - Configuration loaded successfully.
+2025-08-12 11:57:40,523 [INFO] - Deploying honeypot services...
+2025-08-12 11:57:40,525 [INFO] - [HTTP] Honeypot now listening on port 8502
+2025-08-12 11:57:40,525 [INFO] - Honeypot services launched in background.
+2025-08-12 11:57:40,525 [INFO] - [SSH] Honeypot now listening on port 2319
+2025-08-12 11:57:40,525 [INFO] - Starting the main MTD scheduler...
+2025-08-12 11:57:40,525 [INFO] - Initializing scheduler thread...
+2025-08-12 11:57:40,525 [INFO] - Scheduler started. Initial IP is assumed to be 192.168.56.101.
+2025-08-12 11:57:40,525 [INFO] - Scheduler is running in the background.
+2025-08-12 11:57:40,526 [INFO] - --- All services initialized. Monitoring in progress... ---
+2025-08-12 11:57:40,526 [INFO] - --- [SIMULATION MODE] Starting IP Rotation: 192.168.56.101 -> 192.168.56.103 ---
+2025-08-12 11:57:40,526 [INFO] - [SIMULATING] Flush IP 192.168.56.101 on interface eth0...
+2025-08-12 11:57:40,727 [INFO] - [OK] Simulated Flush of IP 192.168.56.101.
+2025-08-12 11:57:40,727 [INFO] - [SIMULATING] Assign IP 192.168.56.103 on interface eth0...
+2025-08-12 11:57:40,928 [INFO] - [OK] Simulated Assign of IP 192.168.56.103.
+2025-08-12 11:57:40,928 [INFO] - --- [OK] Simulated IP Rotation successful. New IP is 192.168.56.103 ---
+2025-08-12 11:57:40,929 [INFO] - IP rotation successful. New active IP is 192.168.56.103.
+2025-08-12 11:57:40,929 [INFO] - Updating DNS record for your.domain.com to point to 192.168.56.103...
+2025-08-12 11:57:40,929 [WARNING] - [SIMULATING] DNS update because API token is not set.
+2025-08-12 11:57:40,929 [INFO] - [OK] Simulated DNS update: your.domain.com -> 192.168.56.103
+2025-08-12 11:57:40,930 [INFO] - Rotating TLS certificate...
+2025-08-12 11:57:40,930 [INFO] - Generating new TLS certificate with CN='data.storage.server' and O='Stark Industries'...
+2025-08-12 11:57:40,988 [INFO] - [OK] Generated new TLS cert. Expires: 2025-11-10
+2025-08-12 11:57:40,988 [INFO] - --- Next rotation cycle in 305 seconds ---
+2025-08-12 12:00:00,293 [INFO] - --- Morph Net IP Flux Engine Shutting Down ---
+2025-08-12 12:01:13,192 [INFO] - --- Morph Net IP Flux Engine Starting ---
+2025-08-12 12:01:13,196 [WARNING] - API_TOKEN not found or not set in secrets.env. DNS updates will fail.
+2025-08-12 12:01:13,196 [INFO] - Configuration loaded successfully.
+2025-08-12 12:01:13,196 [INFO] - Deploying honeypot services...
+2025-08-12 12:01:13,197 [INFO] - Honeypot services launched in background.
+2025-08-12 12:01:13,197 [INFO] - Starting the main MTD scheduler...
+2025-08-12 12:01:13,197 [INFO] - Initializing scheduler thread...
+2025-08-12 12:01:13,197 [INFO] - Scheduler started. Initial IP is assumed to be 192.168.56.101.
+2025-08-12 12:01:13,197 [INFO] - Scheduler is running in the background.
+2025-08-12 12:01:13,197 [INFO] - [HTTP] Honeypot now listening on port 8472
+2025-08-12 12:01:13,197 [INFO] - [SSH] Honeypot now listening on port 2249
+2025-08-12 12:01:13,197 [INFO] - --- All services initialized. Monitoring in progress... ---
+2025-08-12 12:01:13,198 [INFO] - --- [SIMULATION MODE] Starting IP Rotation: 192.168.56.101 -> 192.168.56.103 ---
+2025-08-12 12:01:13,198 [INFO] - [SIMULATING] Flush IP 192.168.56.101 on interface eth0...
+2025-08-12 12:01:13,399 [INFO] - [OK] Simulated Flush of IP 192.168.56.101.
+2025-08-12 12:01:13,399 [INFO] - [SIMULATING] Assign IP 192.168.56.103 on interface eth0...
+2025-08-12 12:01:13,600 [INFO] - [OK] Simulated Assign of IP 192.168.56.103.
+2025-08-12 12:01:13,601 [INFO] - --- [OK] Simulated IP Rotation successful. New IP is 192.168.56.103 ---
+2025-08-12 12:01:13,601 [INFO] - IP rotation successful. New active IP is 192.168.56.103.
+2025-08-12 12:01:13,601 [INFO] - Updating DNS record for your.domain.com to point to 192.168.56.103...
+2025-08-12 12:01:13,602 [WARNING] - [SIMULATING] DNS update because API token is not set.
+2025-08-12 12:01:13,603 [INFO] - [OK] Simulated DNS update: your.domain.com -> 192.168.56.103
+2025-08-12 12:01:13,603 [INFO] - Rotating TLS certificate...
+2025-08-12 12:01:13,603 [INFO] - Generating new TLS certificate with CN='web.prod.local' and O='Cyberdyne Systems'...
+2025-08-12 12:01:13,644 [INFO] - [OK] Generated new TLS cert. Expires: 2025-11-10
+2025-08-12 12:01:13,645 [INFO] - --- Next rotation cycle in 255 seconds ---
+2025-08-12 12:04:22,257 [INFO] - --- Morph Net IP Flux Engine Shutting Down ---
