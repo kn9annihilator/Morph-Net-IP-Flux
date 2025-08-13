@@ -1,12 +1,14 @@
 rotation:
-  base_interval: 300
-  jitter_range: 60
+  base_interval: 60
+  jitter_range: 15
   interface: "eth0"
   subnet_mask: "/24"
   ip_pool:
     - "192.168.56.101"
     - "192.168.56.102"
     - "192.168.56.103"
+    - "192.168.56.104"
+    - "192.168.56.105"
 
 dns:
   provider: "cloudflare"
