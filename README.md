@@ -26,7 +26,7 @@
 - [Testing](#testing)
 - [Contributing](#contributing)
 - [📝 License](#license)
-- [Author](#author)
+- [Authors](#authors)
 
 
 ---
@@ -210,8 +210,14 @@ bash redteam_sim/nmap_scan.sh
 This project is open to improvement. Feel free to fork, contribute, and raise issues. Academic usage is encouraged with attribution.
 ## License
 
-## Author
+## Authors
 Krishna Narula
-Cybersecurity Researcher | MTD Enthusiast | Web App Tester
+Cybersecurity Researcher | MTD Enthusiast | Web App Tester\\
 
-[![Connect on LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin&style=flat-square)](https://www.linkedin.com/in/krishnanarula/)
+Tushar Sharma
+AI ML Researcher | MTD Developer and Researcher
+
+[![Connect with Krishna](https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin&style=flat-square)](https://www.linkedin.com/in/krishnanarula/)\\
+\\
+\\
+[![Connect with Tushar](https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin&style=flat-square)](https://www.linkedin.com/in/tusharssharma/)
