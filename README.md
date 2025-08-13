@@ -211,11 +211,11 @@ This project is open to improvement. Feel free to fork, contribute, and raise is
 ## License
 
 ## Authors
-Krishna Narula
-Cybersecurity Researcher | MTD Enthusiast | Web App Tester\\\\
+Krishna Narula\\
+Cybersecurity Researcher | MTD Enthusiast | Web App Tester\\
 
-Tushar Sharma
+Tushar Sharma\\
 AI ML Researcher | MTD Developer and Researcher
 
-[![Connect with Krishna](https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin&style=flat-square)](https://www.linkedin.com/in/krishnanarula/)\\\\
+[![Connect with Krishna](https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin&style=flat-square)](https://www.linkedin.com/in/krishnanarula/)\\
 [![Connect with Tushar](https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin&style=flat-square)](https://www.linkedin.com/in/tusharssharma/)
